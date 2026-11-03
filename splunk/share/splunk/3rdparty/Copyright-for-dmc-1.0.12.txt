@@ -1,0 +1,2 @@
+The dmc package is a tarball of a node_modules directory containing dependencies from cfg/bundles/dmc/package.json
+It does not have a licence file, each node_module has it's own licence file. This is a placeholder.

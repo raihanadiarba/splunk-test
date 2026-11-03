@@ -1,0 +1,43 @@
+<%!
+from splunk.appserver.mrsparkle.lib import util
+
+%>\
+<!doctype html>
+<!--[if lt IE 7]> <html lang="${i18n.current_lang()[0]|h}" class="no-js ie  lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>    <html lang="${i18n.current_lang()[0]|h}" class="no-js ie7 lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>    <html lang="${i18n.current_lang()[0]|h}" class="no-js ie8 lt-ie9"> <![endif]-->
+<!--[if IE 9]>    <html lang="${i18n.current_lang()[0]|h}" class="no-js ie9"> <![endif]-->
+<!--[if gt IE 9]><!--> <html lang="${i18n.current_lang()[0]|h}" class="no-js"> <!--<![endif]-->
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>${label | h}</title>
+    <meta name="description" content="listen to your data" />
+    <meta name="author" content="Splunk Inc." />
+    <meta name="viewport" content="width=1160, initial-scale=1.0" />
+    <link rel="shortcut icon" href="${util.getFaviconURL()}" />
+</head>
+<body class="locale-${i18n.current_lang()[0]|h}">
+    <%
+    config_qs = dict(autoload=1)
+    if hasattr(cherrypy.request, 'embed') and cherrypy.request.embed:
+        config_qs['embed'] = 1
+    %>
+    <script src="${make_url('/config', _qs=config_qs)}" crossorigin="use-credentials"></script>
+    <script src="${make_url('/static/js/i18n.js')}"></script>
+    <script src="${make_url('/i18ncatalog?autoload=1')}"></script>
+    <script>
+        __splunkd_partials__ = ${json_decode(splunkd)};
+        // Splunk Core requires common.js to be loaded for certain pages to load
+        window.LOAD_COMMON_JS = false;
+        // Apps do not ship themed page variants, so themed path lookup is disabled.
+        window.THEME_PAGE_PATH = false;
+        // The entry JS page: /static/app/<app>/pages/<page>.js (1-to-1 with the view name)
+        window.PAGE_PATH = "${make_url('/static/app/%s/pages/%s.js' % (app, page))}";
+        // Themed bootstrap CSS is a first-party concern; apps do not load it.
+        window.LOAD_THEMED_BOOTSTRAP = false;
+        window.PAGE_NAME = "${page}";
+    </script>
+    <script src="${make_url('/static/build/api/load_themed_page.js')}"></script>
+</body>
+</html>

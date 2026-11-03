@@ -1,0 +1,25 @@
+"use strict";(self.webpackChunk_splunk_admin_user_xp=self.webpackChunk_splunk_admin_user_xp||[]).push([[7145],{6965:(e,t,a)=>{a.d(t,{a:()=>d});var n=a(96540),r=a(39643),i=a.n(r),o=a(78967),l=a(99263);const c=(0,l.default)(i())`
+    margin-top: ${o.variables.spacingMedium};
+`,s=(0,l.default)(i())`
+    margin-top: ${o.variables.spacingSmall};
+    margin-bottom: ${o.variables.spacingLarge};
+`,d=({workflowTitle:e,heading:t})=>n.createElement(n.Fragment,null,e&&n.createElement(c,{level:6,variant:"title6"},e),n.createElement(s,{level:1,variant:"title1"},t))},32415:(e,t,a)=>{a.d(t,{s:()=>u});var n=a(96540),r=a(20259),i=a(70181),o=a.n(i),l=a(99263);const c=(0,r._)("Back"),s=(0,r._)("Continue"),d=l.default.div`
+    padding-top: 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    & > button {
+        flex: 0 1 auto;
+    }
+`,u=({disableBack:e,disableForward:t,backCaption:a=c,forwardCaption:r=s,onBack:i,onForward:l})=>n.createElement(d,{"data-testid":"screen-footer"},n.createElement(o(),{appearance:"secondary","data-testid":"back-button",label:a,disabled:e,onClick:i}),n.createElement(o(),{appearance:"primary","data-testid":"forward-button",label:r,disabled:t,onClick:l}))},66565:(e,t,a)=>{a.d(t,{s:()=>c});var n=a(96540),r=a(99263);const i=r.default.div`
+    max-width: ${({extendedBodyWidth:e})=>e?"1280px":"1120px"};
+    padding-right: ${e=>(({withHelper:e,extendedBodyWidth:t})=>t?"20px;":e?"0":"200px")(e)};
+    display: flex;
+`,o=r.default.div`
+    flex: 0 1 100%;
+`,l=r.default.aside`
+    margin-left: ${({extendedBodyWidth:e})=>e?"20px":"100px"};
+    flex: 0;
+`,c=({helper:e,extendedBodyWidth:t,children:a})=>n.createElement(i,{withHelper:!!e,extendedBodyWidth:t},n.createElement(o,null,a),e&&n.createElement(l,{extendedBodyWidth:t},e))},87145:(e,t,a)=>{a.r(t),a.d(t,{default:()=>x});var n=a(96540),r=a(56143),i=a.n(r),o=a(66565),l=a(6965),c=a(32415),s=a(8209),d=a(19838),u=a(57337),p=a(21036),f=a(7783),b=a(16791),m=a(23347),y=a(54993),E=a(37106),v=a(73224),g=a(81929),O=a(56124),w=a(8231),k=a(92336),C=a(91311);function h(e,t){var a=Object.keys(e);if(Object.getOwnPropertySymbols){var n=Object.getOwnPropertySymbols(e);t&&(n=n.filter((function(t){return Object.getOwnPropertyDescriptor(e,t).enumerable}))),a.push.apply(a,n)}return a}function _(e){for(var t=1;t<arguments.length;t++){var a=null!=arguments[t]?arguments[t]:{};t%2?h(Object(a),!0).forEach((function(t){T(e,t,a[t])})):Object.getOwnPropertyDescriptors?Object.defineProperties(e,Object.getOwnPropertyDescriptors(a)):h(Object(a)).forEach((function(t){Object.defineProperty(e,t,Object.getOwnPropertyDescriptor(a,t))}))}return e}function T(e,t,a){return(t=function(e){var t=function(e,t){if("object"!=typeof e||!e)return e;var a=e[Symbol.toPrimitive];if(void 0!==a){var n=a.call(e,t||"default");if("object"!=typeof n)return n;throw new TypeError("@@toPrimitive must return a primitive value.")}return("string"===t?String:Number)(e)}(e,"string");return"symbol"==typeof t?t:t+""}(t))in e?Object.defineProperty(e,t,{value:a,enumerable:!0,configurable:!0,writable:!0}):e[t]=a,e}const x=()=>{const{stepsState:e,providerData:t,updateProviderData:a,updateWorkflow:r}=(0,s.b)(),[h,T]=(0,n.useState)((()=>t.apiToken||"")),[x,R]=(0,n.useState)(null),S=(0,O._)(),[P,j]=(0,n.useState)(!1),[B,D]=(0,n.useState)(!1),N=(0,n.useCallback)((async()=>{D(!0);try{const n={name:t.providerName,sal_token:h,type:"aws_s3",subtype:"cisco_sal"},i=(0,y.XH)(await b.b.createItem({body:n}));if(!i)return void S({type:w.TOAST_TYPES.ERROR,message:u.O3.ERROR_GETTING_PROVIDER_DATA,autoDismiss:!1});await b.b.updateAcsPolicy({}),a((e=>_(_(_({},e),(0,E.i)(i)),{},{apiToken:h}))),r("defineProvider",{status:v.$.Success}),e.updateStepStatus(e.activeStepId,g.x.Done),e.moveForward()}catch(e){const t=e;S({type:w.TOAST_TYPES.ERROR,message:t.toString(),autoDismiss:!1})}finally{D(!1)}}),[t.providerName,h,a,r,e,S]),I=(0,n.useCallback)((async()=>{j(!0),R(null);try{const e=(0,y.XH)(await(0,k.B)({salToken:h}));if(!e)return void R(u.O3.CHECK_CONNECTION_ERROR);a((t=>_(_({},t),{},{config:(0,m.Q)(e)})))}catch(e){R(e.toString()||u.O3.CHECK_CONNECTION_ERROR),a((e=>_(_({},e),{},{config:null})))}finally{j(!1)}}),[h,a]);return n.createElement(o.s,null,n.createElement("div",null,n.createElement(l.a,{heading:u.O3.HEADING}),n.createElement(C.b,{mb:7},n.createElement(i(),null,u.O3.DESCRIPTION)),n.createElement(p.Z,{isBusy:B},n.createElement(d.y,{apiToken:h,setApiToken:T,viewMode:f.l.Create,apiTokenError:x,onTestConnection:I,isLoading:P,salConfiguration:t.config,isConnectionTestCalled:!!t.config,isConnectionBtnHidden:!h.length})),n.createElement(c.s,{onBack:e.moveBack,onForward:N,forwardCaption:u.sE.CREATE_PROVIDER,disableBack:B||P,disableForward:!t.config||P||B})))}}}]);
+//# sourceMappingURL=chunk.7145.96c88f980d2238284490.js.map

@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunk_splunk_admin_user_xp=self.webpackChunk_splunk_admin_user_xp||[]).push([[1430],{69604:(e,n,p)=>{p.r(n);var s=p(20259),_=p(72205);(0,p(16685).oh)({pageTitle:(0,s._)("Manage Indexes"),Component:_.pJ})}}]);
+//# sourceMappingURL=page_data_indexes_cloud.f5df90120573dacd4f2d.js.map

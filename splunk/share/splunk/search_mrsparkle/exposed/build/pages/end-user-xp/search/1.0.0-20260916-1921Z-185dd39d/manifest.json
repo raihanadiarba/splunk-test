@@ -1,0 +1,36 @@
+{
+  "id": "search",
+  "version": "1.0.0-20260916-1921Z-185dd39d",
+  "main": "index.js",
+  "apiVersion": "0.11.0",
+  "peerDependencies": {},
+  "envVars": {
+    "default": {
+      "authEndpoint": "https://auth.playground.scs.splunk.com",
+      "clientId": "0oa1pva8iqAGnBBjs0x7"
+    },
+    "px.playground.scs.splunk.com": {
+      "envName": "playground"
+    },
+    "px.staging.scs.splunk.com": {
+      "authEndpoint": "https://auth.staging.scs.splunk.com",
+      "clientId": "0oa8g2mkqnWi4Ndkx357"
+    },
+    "px.scs.splunk.com": {
+      "authEndpoint": "https://auth.scs.splunk.com",
+      "clientId": "0oa38kmfpviynQGAx4x7"
+    },
+    "px.scs.stg.splunkdc.net": {
+      "authEndpoint": "https://auth.scs.stg.splunkdc.net",
+      "clientId": "0oa14ayigk6COsvVA2p8"
+    },
+    "px.scs.lve.splunkdc.net": {
+      "authEndpoint": "https://auth.scs.lve.splunkdc.net",
+      "clientId": "0oaz06crfsLx3DUjt297"
+    },
+    "px.scs.stg.fed.splunkdc.net": {
+      "authEndpoint": "https://auth.scs.stg.fed.splunkdc.net",
+      "clientId": "0oa17o8dfaerdzroQ2p8"
+    }
+  }
+}

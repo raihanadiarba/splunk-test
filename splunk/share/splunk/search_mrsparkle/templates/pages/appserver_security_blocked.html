@@ -1,0 +1,32 @@
+<%!
+from splunk.appserver.mrsparkle.lib import util
+
+%>\
+<!doctype html>
+<html lang="${i18n.current_lang()[0]|h}" class="no-js">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>${_('Page Unavailable')}</title>
+    <meta name="viewport" content="width=1160, initial-scale=1.0" />
+    <link rel="shortcut icon" href="${util.getFaviconURL()}" />
+</head>
+<body class="locale-${i18n.current_lang()[0]|h}">
+    <%
+    config_qs = dict(autoload=1)
+    if hasattr(cherrypy.request, 'embed') and cherrypy.request.embed:
+        config_qs['embed'] = 1
+    %>
+    <script src="${make_url('/config', _qs=config_qs)}" crossorigin="use-credentials"></script>
+    <script src="${make_url('/static/js/i18n.js')}"></script>
+    <script src="${make_url('/i18ncatalog?autoload=1')}"></script>
+    <script>
+        % if hasattr(cherrypy.request, 'blocked_template_uri') and cherrypy.request.blocked_template_uri:
+        window.__BLOCKED_TEMPLATE_URI__ = "${cherrypy.request.blocked_template_uri | h}";
+        % endif
+        window.PAGE_PATH = "${make_url('/static/build/pages/end-user-xp/appserver_security_blocked.js')}";
+        window.PAGE_NAME = "appserver_security_blocked";
+    </script>
+    <script src="${make_url('/static/build/api/load_themed_page.js')}"></script>
+</body>
+</html>

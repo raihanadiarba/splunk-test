@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunk_splunk_admin_user_xp=self.webpackChunk_splunk_admin_user_xp||[]).push([[7808],{96906:(e,p,s)=>{s.r(p);var a=s(86802),n=s(67333);(0,s(16685).oh)({family:"prisma",pageTitle:n.KL.TITLE,Component:a.l})}}]);
+//# sourceMappingURL=page_datainputstats.ad558a3873e162438b52.js.map
