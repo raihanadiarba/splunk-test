@@ -1,0 +1,56 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",  
+    "$id": "https://cisco.com/splunk/audit/event.schema.json",  
+    "title": "Audit event",  
+    "description": "A general audit event. Contains metadata only.",
+    "type": "object",
+    "properties": {
+        "timestamp": {
+            "type": "string",
+            "regex": "[0-9]{2}-[0-9]{2}-[0-9]{4} [0-9]{2}:[0-9]{2}:[0-9]{2}.[0-9]{3}"
+        },
+        "source_ip": {
+            "description": "An ip of the client which sent the request for processing.",
+            "type": "string",
+            "anyOf": [ { "format": "ipv4" }, { "format": "ipv6" }]
+        },
+        "session_id": { 
+            "description": "A hash of the original session id, which correlates events from the same session.",
+            "type": "string" 
+        },
+        "correlation_id": {
+            "description": "An id of a single action within a session, usually associated with one REST call.",
+            "type": "string",
+            "format": "uuid"
+        },
+        "category": { 
+            "description": "Top level category of the auditable event.",
+            "enum": ["object", "system", "action", "check", "authn", "authz"] 
+        },
+        "action": { "type": "string" },
+        "actor": {
+            "description": "Identity of a persona who performed an action. Can by human user or technical account.",
+            "type": "object",
+            "properties": {
+                "name": { "type": "string" },
+                "roles": {
+                    "type": "array",
+                    "items": { "type": "string" }
+                }
+            },
+            "additionalProperties": false,
+            "required": ["name", "roles"]
+        },
+        "result": { "enum": ["success", "failure"] },
+        "uri": { 
+            "description": "Full URI of the REST call.",
+            "type": "string",
+            "format": "uri-reference"
+        },
+        "command": { 
+            "description": "Command with parameters used to initiate action. Valid for CLI initiated actions.",
+            "type": "string" 
+        }
+    },
+    "required": ["timestamp", "correlation_id", "category", "action", "actor", "result"]
+}

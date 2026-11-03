@@ -1,0 +1,40 @@
+{
+  "id": "dmx",
+  "version": "0.0.1-20260904-0402Z-df165ae6",
+  "main": "index.js",
+  "apiVersion": "0.11.0",
+  "peerDependencies": {},
+  "appName": "pxdmx",
+  "envVars": {
+    "default": {
+      "envName": "playground",
+      "authEndpoint": "https://auth.playground.scs.splunk.com",
+      "clientId": "0oa1pva8iqAGnBBjs0x7"
+    },
+    "px.staging.scs.splunk.com": {
+      "envName": "staging",
+      "authEndpoint": "https://auth.staging.scs.splunk.com",
+      "clientId": "0oa8g2mkqnWi4Ndkx357"
+    },
+    "px.scs.splunk.com": {
+      "envName": "production",
+      "authEndpoint": "https://auth.scs.splunk.com",
+      "clientId": "0oa38kmfpviynQGAx4x7"
+    },
+    "px.scs.stg.splunkdc.net": {
+      "envName": "il2stage",
+      "authEndpoint": "https://auth.scs.stg.splunkdc.net",
+      "clientId": "0oa14ayigk6COsvVA2p8"
+    },
+    "px.scs.lve.splunkdc.net": {
+      "envName": "il2prod",
+      "authEndpoint": "https://auth.scs.lve.splunkdc.net",
+      "clientId": "0oaz06crfsLx3DUjt297"
+    },
+    "px.scs.stg.fed.splunkdc.net": {
+      "envName": "il5stage",
+      "authEndpoint": "https://auth.scs.stg.fed.splunkdc.net",
+      "clientId": "0oa17o8dfaerdzroQ2p8"
+    }
+  }
+}

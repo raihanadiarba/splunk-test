@@ -1,0 +1,76 @@
+<form version="1.1" theme="dark">
+  <label>Secure Gateway Subscription Inspector</label>
+  <description>This dashboard is intended to help troubleshoot issues with search processing logic within Splunk Secure Gateway. To get started click on one of the subscription iterations.</description>
+  <fieldset submitButton="false">
+    <input type="time" token="time">
+      <label>Time Range</label>
+      <default>
+        <earliest>-15m</earliest>
+        <latest>now</latest>
+      </default>
+    </input>
+  </fieldset>
+  <row>
+    <panel>
+      <title>Subscription Iterations</title>
+      <table>
+        <search>
+          <query>index=_internal source=*secure* request_id=subscription-iteration* 
+| rex "subscription-iteration-(?&lt;iteration&gt;[0-9]+) "
+| eval iteration=strftime(iteration, "%Y-%m-%dT %H:%M:%S.%Z")
+| stats count by request_id, iteration 
+| sort -_time 
+| reverse</query>
+          <earliest>$time.earliest$</earliest>
+          <latest>$time.latest$</latest>
+          <refresh>30s</refresh>
+          <refreshType>delay</refreshType>
+        </search>
+        <option name="drilldown">row</option>
+        <option name="refresh.display">progressbar</option>
+        <fields>iteration</fields>
+        <drilldown>
+          <eval token="request_id">$row.request_id$</eval>
+        </drilldown>
+      </table>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <title>Current Active Searches Being Processed by SSG</title>
+      <table>
+        <title>Click On A Search To See Dispatch Status Of Search Job</title>
+        <search>
+          <query>index=_internal source=*secure* request_id=$request_id|s$ Processing pubsub subscription
+| rex "query=(?&lt;query&gt;[^\,]+)\,"
+| eval last_updated=strftime(last_updated, "%Y-%m-%dT %H:%M:%S.%Z")
+| eval next_update=strftime(next_update, "%Y-%m-%dT %H:%M:%S.%Z")
+| table dashboard_id, query, subscribers, search_id, base, owner,input_tokens, last_updated, next_update, sid, search_key</query>
+          <earliest>$time.earliest$</earliest>
+          <latest>$time.latest$</latest>
+        </search>
+        <option name="count">25</option>
+        <option name="drilldown">row</option>
+        <option name="refresh.display">progressbar</option>
+        <fields> dashboard_id, query, subscribers, base, search_id, owner,input_tokens, last_updated, next_update</fields>
+        <drilldown>
+          <eval token="sid">$row.sid$</eval>
+        </drilldown>
+      </table>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <title>Search Dispatch Status</title>
+      <table>
+        <search>
+          <query>|rest services/search/jobs/$sid|s$
+| table author, dispatchState, runDuration, doneProgress, isDone, eventCount, diskUsage, earliestTime, latestTime, sid</query>
+          <earliest>$time.earliest$</earliest>
+          <latest>$time.latest$</latest>
+        </search>
+        <option name="drilldown">none</option>
+      </table>
+    </panel>
+  </row>
+</form>

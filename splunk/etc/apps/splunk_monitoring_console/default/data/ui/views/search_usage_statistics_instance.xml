@@ -1,0 +1,4 @@
+<?xml version="1.0"?>
+<view template="splunk_monitoring_console:/template/smc_react/search_usage_statistics_instance.html" type="html">
+  <label>Search Usage Statistics: Instance</label>
+</view>

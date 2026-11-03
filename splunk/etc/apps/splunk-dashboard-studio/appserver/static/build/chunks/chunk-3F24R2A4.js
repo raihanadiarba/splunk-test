@@ -1,0 +1,2 @@
+/*! splunk-dashboard-studio v1.28.5 | UNLICENSED */
+import{f as t}from"./chunk-JHLB3KMN.js";var c=t(s=>{"use strict";Object.defineProperty(s,"__esModule",{value:!0});s.normalizeBoolean=a;function a(e){switch(typeof e=="string"?e.toLowerCase():e){case!0:case 1:case"1":case"yes":case"on":case"true":return!0;case!1:case 0:case"0":case"no":case"off":case"false":return!1;default:return}}});export{c as a};

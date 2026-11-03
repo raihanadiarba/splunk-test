@@ -1,0 +1,13 @@
+<endpoint name="authorization/policies" showAppContext="1" template="pages/page_from_package.html" packageName="admin-user-xp">
+    <header>Policies</header>
+    <capabilities>
+        <read>edit_auth_policies OR list_auth_policies</read>
+    </capabilities>
+    <menu name="auth_configurations">
+        <label>Policies</label>
+        <url>/manager/%(namespace)s/authorization/policies</url>
+        <order>90</order>
+        <description>Manage user policies.</description>
+        <id>auth_policies</id>
+    </menu>
+</endpoint>

@@ -1,0 +1,3 @@
+# Prevent normal users from sharing their preferences.
+[]
+access = read : [ * ], write : [ admin ]

@@ -1,0 +1,60 @@
+<%!
+from splunk.appserver.mrsparkle.lib import util
+
+app_name = cherrypy.request.path_info.split('/')[3]
+app_root = "/" + "/".join(["static","app",app_name])
+config_qs = dict(autoload=1)
+%>\
+<!DOCTYPE html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="x-ua-compatible" content="ie=edge" />
+        <title>${_('Loading...')}</title>
+        <link rel="shortcut icon" href="${util.getFaviconURL()}" />
+        <meta name="description" content="listen to your data" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <style>
+            body { margin: 0; }
+
+            /*  Fonts (Enterprise) */
+            /*  lifted from: https://cd.splunkdev.com/eui/splunkcore-web-ui/-/blob/develop/web_v2/search_mrsparkle/exposed/js/splunkjs/mvc/layoutview.html#L35 */
+            /*  ----------- */
+
+            /*  Regular */
+            @font-face {
+                font-family: 'Splunk Platform Sans';
+                
+                src: url("${make_url('/static/fonts/proxima-regular-webfont.woff')}") format('woff');
+                font-weight: normal;
+                font-style: normal;
+            }
+
+            /*  semibold */
+            @font-face {
+                font-family: 'Splunk Platform Sans';
+                src: url("${make_url('/static/fonts/proxima-semibold-webfont.woff')}") format('woff');
+                font-weight: 500;
+                font-style: normal;
+            }
+
+            /*  Bold */
+            @font-face {
+                font-family: 'Splunk Platform Sans';
+                src: url("${make_url('/static/fonts/proxima-bold-webfont.woff')}") format('woff');
+                font-weight: bold;
+                font-style: normal;
+            }
+        </style>
+    </head>
+
+    <body>
+        <script src="${make_url('/config', _qs=config_qs)}"></script>
+        <script src="${make_url('/static/js/i18n.js')}"></script>
+        <script src="${make_url('/i18ncatalog?autoload=1')}"></script>
+        <script>
+            __splunkd_partials__ = ${ json_decode(splunkd) };
+        </script>
+        <script type="module" src="${make_url('/static/app/%s/build/examples/%s.js' % (app_name, page))}"></script>
+    </body>
+</html>

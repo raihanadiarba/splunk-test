@@ -1,0 +1,4 @@
+<?xml version="1.0"?>
+<view template="splunk_monitoring_console:/template/partner._SPLUNKVERSION_.html" type="html">
+▎ <label>Partner Preview</label>
+</view>

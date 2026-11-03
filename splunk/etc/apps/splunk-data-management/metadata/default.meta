@@ -1,0 +1,7 @@
+# Application-level permissions
+[]
+access = read : [ admin, sc_admin, data_management_admin ], write : [ admin, sc_admin, data_management_admin ]
+export = none
+
+[views/dm-home]
+export = system

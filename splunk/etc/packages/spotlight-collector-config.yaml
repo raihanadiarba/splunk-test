@@ -1,0 +1,43 @@
+receivers:
+  otlp/otel_collector_internal:
+    protocols:
+      grpc:
+        endpoint: localhost:${env:SPOTLIGHT_INTERNAL_METRICS_PORT}
+        tls:
+          cert_file: ${env:SPLUNK_HOME}/var/packages/data/spotlight-collector/server.crt
+          key_file: ${env:SPLUNK_HOME}/var/packages/data/spotlight-collector/server.key
+
+processors:
+  batch:
+  filter:
+    metrics:
+      metric:
+          # You can modify this part to filter out unnecessary metrics
+          # more info: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/processor/filterprocessor/README.md
+          - 'IsMatch(name, "prometheus_sd_*")'
+
+exporters:
+  # Path defaults to  $SPLUNK_HOME/var/log/spotlight/spotlight_metrics.extension
+  # Note: changing this path may prevent diag/Rapid-Diag from collecting metrics
+  file:
+    rotation:
+      max_megabytes: 500
+      max_days: 30
+      max_backups: 2
+service:
+  pipelines:
+    metrics:
+      receivers: [otlp/otel_collector_internal, prometheus]
+      processors: [batch, filter]
+      exporters: [file]
+
+  telemetry:
+    metrics:
+      readers:
+        - periodic:
+            exporter:
+              otlp:
+                protocol: grpc
+                endpoint: https://localhost:${env:SPOTLIGHT_INTERNAL_METRICS_PORT}
+                certificate: ${env:SPLUNK_HOME}/var/packages/data/spotlight-collector/server.crt
+                

@@ -1,0 +1,6 @@
+<endpoint name="authentication/splunk/oauth/clients" showAppContext="1" template="pages/page_from_package.html" packageName="admin-user-xp">
+    <header>Splunk OAuth Clients</header>
+    <capabilities>
+        <read>list_splunk_oauth_clients</read>
+    </capabilities>
+</endpoint>

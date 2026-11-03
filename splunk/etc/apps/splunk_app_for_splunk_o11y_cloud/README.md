@@ -1,0 +1,1 @@
+<!-- ANY INFORMATION REQUIRED TO RUN splunk_app_for_splunk_o11y_cloud WILL GO HERE -->

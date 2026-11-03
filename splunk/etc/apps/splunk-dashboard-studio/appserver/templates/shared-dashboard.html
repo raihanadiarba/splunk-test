@@ -1,0 +1,47 @@
+<%!
+from splunk.appserver.mrsparkle.lib import util
+%>\
+<!doctype html>
+<html class="no-js" lang="">
+<head>
+    <title>Shared Dashboard</title>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="description" content="listen to your data" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="${util.getFaviconURL()}" />
+    <link id="enterprise-bootstrap-stylesheet" rel="stylesheet" type="text/css" href="${make_url('/static/build/css/bootstrap-enterprise.css')}" />
+    <style>
+        body {
+            background-color: var(--color-background-studio);
+        }
+    </style>
+</head>
+<body>
+    <%
+    config_qs = dict(autoload=1)
+    web_features_qs = dict(output_mode='json')
+    buildNumber = '11045583156'
+    app_cache = dict()
+    app_cache['splunk-dashboard-studio'] = buildNumber
+    app_cache['splunk_instrumentation'] = buildNumber
+    if hasattr(cherrypy.request, 'embed') and cherrypy.request.embed:
+        config_qs['embed'] = 1
+        try:
+            config_qs['oid'] = oid
+            web_features_qs['oid'] = oid
+        except:
+            pass
+    %>
+    ## This is loaded by a fetch in pages/shared-dashboard/index.jsx which is later used for the
+    ## redirection modal and configuring the charting library
+    <link rel="preload" href="${make_url('/splunkd/__raw/services/web-features', _qs=web_features_qs)}" as="fetch" crossorigin="use-credentials" />
+    <link rel="preload" href="${make_url('/splunkd/__raw/services/authentication/current-context')}" as="fetch" crossorigin="use-credentials" />
+    <link rel="preload" href="${make_url('/splunkd/__raw/services/orchestrator/v1/spl2/enabled')}" as="fetch" crossorigin="use-credentials" />
+    <script id="config-script" src="${make_url('/config', _qs=config_qs)}"></script>
+    <script id="i18n-script" src="${make_url('/static/js/i18n.js')}"></script>
+    <script id="i18n-catalog-script" src="${make_url('/i18ncatalog?autoload=1')}"></script>
+    <script id="splunkd-partials-script" type="module" src="${make_url('/static/app/splunk_instrumentation/build/pages/swa.js', __app_cache=app_cache)}" ></script>
+    <script type="module" src="${make_url('/static/app/splunk-dashboard-studio/build/shared-dashboard.js', __app_cache=app_cache)}"></script>
+</body>
+</html>

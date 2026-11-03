@@ -1,0 +1,172 @@
+<!--
+Both of the <dashboard> element's `styles` and `script` attribute search for
+files in `$SPLUNK_HOME/etc/<SPLUNK_APP_NAME>/appserver/static/*`
+
+Documentation link:
+https://docs.splunk.com/Documentation/Splunk/latest/Viz/PanelreferenceforSimplifiedXML#dashboard_or_form
+-->
+<dashboard isDashboard='false'
+           script='javascript/setup_page.js'
+           stylesheet='styles/setup_page.css'
+           hideTitle='true'
+           version='1.1'>
+    <label>Setup</label>
+    <row>
+        <panel>
+            <html>
+                <div id='main_container'>
+                    <h3>Audit Trail Settings</h3>
+                    <div>
+                        <div class='text'>
+                            <span>Enable Audit Trail Log v2: </span>
+                            <span style="margin-left: 10px;">
+                                <input id="v2_enable_input" type="checkbox" style="margin: 0px 0 0;"/>
+                            </span>
+                        </div>
+                        <div style="max-width: 700px; margin-top: 20px;">
+The Splunk Audit Trail Log v2 is a new audit log format that is consistent across all audit events, easy to search, filter, and sort. It addresses various deficiencies in the existing audit trail logs. This preview also introduces new audit trails that were never before available. It is important to mention that enabling v2 audit trail does not turn off the current logging in order to maintain backwards compatibility.
+                        </div>
+                        <div style="max-width: 700px; margin-top: 10px;">
+                            <i>
+Preview features are provided by Splunk to you “as is” without any warranties, maintenance and support, or service level commitments. Splunk makes this preview feature available in its sole discretion and may discontinue it at any time. Use of preview features is subject to the <a target="_blank" href="https://www.splunk.com/en_us/legal/splunk-general-terms.html">Splunk General Terms</a>.
+                            </i>
+                        </div>
+
+                        <br/>
+                        
+                        <!-- Save button will call the completeSetup() function
+                             within javascript/setup_page.js -->
+                        <button id='setup_button'>Save</button>
+                        <div class='success'>Saved successfully...</div>
+                        <div class='error'>Issue encountered during setup, details below:</div>
+                        <code id='error_details'></code>
+                    </div>
+                </div>
+
+            </html>
+        </panel>
+    </row>
+    <row>
+        <panel>
+            <html>
+                <style>
+                    /* Main panel container */
+                    .footer-panel-container {
+                        display: flex;
+                        justify-content: left;
+                        width: 100%;
+                    }
+
+
+                    .feedback {
+                        display: flex;
+                        align-items: center;
+                        justify-content: flex-start; /* Left stays on left, right on right */
+                        gap: 0.5rem;
+                    }
+
+                    /* Left Side: Nested SVG Icons */
+                    .footer-icon-container {
+                        position: relative;
+                        height: 80px;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        #width: 80%;
+                        flex-shrink: 0; /* Prevents shrinking */
+                    }
+
+                    .footer-small-icon {
+                        position: absolute;
+                        width: 30px; /* Smaller icon inside */
+                        height: 30px;
+                    }
+
+                    /* Right Side: Text and Buttons Container */
+                    .footer-text-container {
+                        flex: 1;
+                        display: flex;
+                        flex-direction: column;
+                        align-items: flex-start;
+                        margin-left: 2%; /* Controls spacing between icons and text */
+                    }
+
+                    /* Bold Title */
+                    .footer-bold-text {
+                        font-weight: bold;
+                        font-size: 16px;
+                        font-family: "Splunk Platform Sans", sans-serif;
+                    }
+
+                    /* Normal Text Line */
+                    .footer-normal-text {
+                        padding-top: 10px;
+                        font-size: 14px;
+                        font-family: "Splunk PLatform Sans", sans-serif;
+                        margin-bottom: 10px; /* Space before buttons */
+                    }
+
+                    /* Buttons Row */
+                    .footer-buttons-row {
+                        display: flex;
+                        gap: 10px; /* Space between buttons */
+                        margin-top: 10px;
+                    }
+
+                    /* Button Styles */
+                    .footer-button-alt {
+                        border: 1px solid;
+                        border-radius: 4px;
+                        padding: 8px 16px;
+                        font-size: 14px;
+                        font-family: "Splunk Platform Sans", sans-serif;
+                        cursor: pointer;
+                        background-color: transparent;
+                        display: flex;
+                        align-items: center;
+                        high: 32px;
+                    }
+                    .footer-button-alt:hover {
+                        text-decoration: none;
+                    }
+
+                    /* Right Button - Includes Icon */
+                    .footer-button-right {
+                        display: flex;
+                        align-items: center;
+                    }
+
+                    .footer-button-icon {
+                        width: 16px;
+                        height: 16px;
+                        margin-left: 8px; /* Space between text and icon */
+                    }
+                </style>
+
+                <div class="footer-panel-container">
+                    <!-- Left: Nested SVG Icons -->
+                    <div class="feedback">
+                        <div class="footer-icon-container">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="76" height="77" viewBox="0 0 76 77" fill="none">
+                                <circle cx="38" cy="38" r="38" fill="black" fill-opacity="0.1"></circle>
+                            </svg>
+                            <img class="footer-small-icon" data-static-app-path="/static/app/audit_trail/img/link_icon.svg" alt="Small Icon"/>
+                        </div>
+
+                        <!-- Right: Text and Buttons Container -->
+                        <div class="footer-text-container">
+                            <div class="footer-bold-text">Send us some feedback!</div>
+                            <div class="footer-normal-text">Do you have a suggestion? Did you find a bug? Let us know!</div>
+
+                            <!-- Buttons Row -->
+                            <div class="footer-buttons-row">
+                                <a href="https://ideas.splunk.com/" target="_blank" class="footer-button-alt">Go to Splunk Ideas</a>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </html>
+        </panel>
+    </row>
+</dashboard>

@@ -1,0 +1,97 @@
+# Application-level permissions
+
+[]
+access = read : [ * ], write : [ admin ]
+
+[savedsearches/DeploymentServerClients]
+access = read : [ admin, splunk-system-role ], write : [ admin ]
+
+[savedsearches/DeploymentServerClientsBasic]
+access = read : [ admin, splunk-system-role ], write : [ admin ]
+
+[savedsearches/DeploymentServerClientsByMachineType]
+access = read : [ admin, splunk-system-role ], write : [ admin ]
+
+[savedsearches/DeploymentServerAppEvents]
+access = read : [ admin, splunk-system-role ], write : [ admin ]
+
+[savedsearches/DeploymentServerRecentDownloads]
+access = read : [ admin, splunk-system-role ], write : [ admin ]
+
+[savedsearches/DeploymentServerEventsWithError]
+access = read : [ admin, splunk-system-role ], write : [ admin ]
+
+[savedsearches/DeploymentServerHasDeploymentErrorsPerAppAndServerclass]
+access = read : [ admin, splunk-system-role ], write : [ admin ]
+
+[savedsearches/DeploymentServerGetPhonehomedClients]
+access = read : [ admin, splunk-system-role ], write : [ admin ]
+
+[savedsearches/DeploymentServerClientById]
+access = read : [ admin, splunk-system-role ], write : [ admin ]
+
+[savedsearches/DeploymentServerGetClientsUri]
+access = read : [ admin, splunk-system-role ], write : [ admin ]
+
+[savedsearches/DeploymentServerGetPhonehomedClientsFromLookup]
+access = read : [ admin, splunk-system-role ], write : [ admin ]
+
+[savedsearches/DeploymentServerClientsFromLookup]
+access = read : [ admin, splunk-system-role ], write : [ admin ]
+
+[savedsearches/DeploymentServerCreateAgentsLookup]
+access = read : [ admin, splunk-system-role ], write : [ admin ]
+
+[savedsearches/DeploymentServerGetAgentsInfo]
+access = read : [ admin, splunk-system-role ], write : [ admin ]
+
+[savedsearches/DeploymentServerGetAgentsPhonehomes]
+access = read : [ admin, splunk-system-role ], write : [ admin ]
+
+[savedsearches/DeploymentServerGetAgentsApps]
+access = read : [ admin, splunk-system-role ], write : [ admin ]
+
+[savedsearches/AgentManagerFetchClients]
+access = read : [ _spl_role_for_sidecar_agent-manager, admin, splunk-system-role ], write : [ admin ]
+
+[savedsearches/AgentManagerAgentsWithError]
+access = read : [ _spl_role_for_sidecar_agent-manager, admin, splunk-system-role ], write : [ admin ]
+
+[savedsearches/AgentManagerAgentsOffline]
+access = read : [ _spl_role_for_sidecar_agent-manager, admin, splunk-system-role ], write : [ admin ]
+
+[savedsearches/AgentManagerAgentsUpdatedConfig]
+access = read : [ _spl_role_for_sidecar_agent-manager, admin, splunk-system-role ], write : [ admin ]
+
+[savedsearches/AgentManagerAgentVersion]
+access = read : [ _spl_role_for_sidecar_agent-manager, admin, splunk-system-role ], write : [ admin ]
+
+[savedsearches/AgentManagerAllAppsStatistics]
+access = read : [ _spl_role_for_sidecar_agent-manager, admin, splunk-system-role ], write : [ admin ]
+
+[savedsearches/AgentManagerAppStatistics]
+access = read : [ _spl_role_for_sidecar_agent-manager, admin, splunk-system-role ], write : [ admin ]
+
+[savedsearches/AgentManagerAveragePhIntervalForAllAgents]
+access = read : [ _spl_role_for_sidecar_agent-manager, admin, splunk-system-role ], write : [ admin ]
+
+[savedsearches/AgentManagerTelemetryDsCountInCluster]
+access = read : [ _spl_role_for_sidecar_agent-manager, admin, splunk-system-role ], write : [ admin ]
+
+[savedsearches/AgentManagerAppEventData]
+access = read : [ _spl_role_for_sidecar_agent-manager, admin, splunk-system-role ], write : [ admin ]
+
+[savedsearches/AgentManagerPhonehomeData]
+access = read : [ _spl_role_for_sidecar_agent-manager, admin, splunk-system-role ], write : [ admin ]
+
+[savedsearches/AgentManagerClientData]
+access = read : [ _spl_role_for_sidecar_agent-manager, admin, splunk-system-role ], write : [ admin ]
+
+[savedsearches/AgentManagerEventSummary]
+access = read : [ _spl_role_for_sidecar_agent-manager, admin, splunk-system-role ], write : [ admin ]
+
+[props]
+export = system
+
+[lookups]
+access = read : [ splunk-system-role ], write : [ admin ]

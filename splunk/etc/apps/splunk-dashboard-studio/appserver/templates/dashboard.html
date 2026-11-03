@@ -1,0 +1,92 @@
+<%
+from splunk.appserver.mrsparkle.lib import util
+import json
+import base64
+
+config_qs = dict(autoload=1)
+base64SplunkdString = base64.b64encode(json.dumps(splunkd, separators=(',', ':')).encode('utf-8')).decode('utf-8')
+%>\
+<!doctype html>
+<html class="no-js" lang="">
+<head>
+    <title>Dashboard</title>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="description" content="listen to your data" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="${util.getFaviconURL()}" />
+    <link id="bootstrap-stylesheet" rel="stylesheet" type="text/css"
+        href="${make_url(
+            '/static/build/css/bootstrap-%s.css'
+            % ('dark' if theme == 'dark' else 'light')
+            )}" />
+    <style>
+        #layout-header-container {
+            height: auto;
+        }
+
+        #layout-body-container {
+            min-width: 0;
+        }
+
+        #layout-header-container:not(.splunk-bar-shown) #layout-splunk-bar-fallback {
+            display: none;
+        }
+
+        #layout-header-container:not(.splunk-bar-shown) [data-view="views/shared/splunkbar/Master"] {
+            display: none;
+        }
+
+        #layout-header-container:not(.app-bar-shown) #layout-app-bar-fallback {
+            display: none;
+        }
+
+        #layout-header-container:not(.app-bar-shown) [data-view="views/shared/appbar/Master"] {
+            display: none;
+        }
+
+        [data-view="views/shared/splunkbar/Master"].modern-nav-splunk-bar-shown {
+            display: block;
+        }
+
+        [data-view="views/shared/appbar/Master"].modern-nav-app-bar-shown {
+            display: flex;
+        }
+
+        #splunk-nav-root.modern-nav-splunk-bar-shown {
+            display: block;
+        }
+
+        [data-view="views/shared/splunkbar/Master"].modern-nav-splunk-bar-hidden {
+            display: none;
+        }
+
+        [data-view="views/shared/appbar/Master"].modern-nav-app-bar-hidden {
+            display: none;
+        }
+
+        #splunk-nav-root.modern-nav-splunk-bar-hidden {
+            display: none;
+        }
+
+        #root-nav-menu a[data-test="nav-item"]:hover {
+            text-decoration: none;
+        }
+    </style>
+    ## This is loaded by a fetch in pages/dashboard/index.jsx which is later used for the
+    ## redirection modal and configuring the charting library
+    <link rel="preload" href="${make_url('/splunkd/__raw/services/web-features?output_mode=json')}" as="fetch" crossorigin="use-credentials" />
+    <link rel="preload" href="${make_url('/splunkd/__raw/services/authentication/current-context')}" as="fetch" crossorigin="use-credentials" />
+    <link rel="preload" href="${make_url('/splunkd/__raw/services/orchestrator/v1/spl2/enabled')}" as="fetch" crossorigin="use-credentials" />
+</head>
+<body>
+    <script id="config-script" src="${make_url('/config', _qs=config_qs)}"></script>
+    <script id="i18n-script" src="${make_url('/static/js/i18n.js')}"></script>
+    <script id="i18n-catalog-script" src="${make_url('/i18ncatalog?autoload=1')}"></script>
+    <script id="splunkd-partials-script">
+        __splunkd_partials__ = JSON.parse(atob("${base64SplunkdString}"));
+        window.DASHBOARD_THEME = ${json_decode(theme)};
+    </script>
+    <script type="module" src="${make_url('/static/app/splunk-dashboard-studio/build/%s.js' % (page))}"></script>
+</body>
+</html>

@@ -1,0 +1,37 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",  
+    "$id": "https://cisco.com/splunk/audit/authz.schema.json",  
+    "title": "Authorization",  
+    "description": "An authorization event.",
+    "$ref":"https://cisco.com/splunk/audit/event.schema.json",
+    "type": "object",
+    "properties": {
+        "data": {
+            "description":"Authorization event specific data.",
+            "type": "object",
+            "properties": {
+                "type": { 
+                    "description": "Type (method) of the authorization. Generally this will be capability check.",
+                    "type": "string" 
+                },
+                "reason" : { 
+                    "description": "Upon failure this is the eason for it (e.g. missing capability), upon success this can be empty or additional useful info.", 
+                    "type": "string" 
+                },
+                "attributes": {
+                    "description": "Additional attributes specific to a given authorization mentod.",
+                    "type": "object",
+                    "required_caps": {
+                        "description": "Required capabilities (for capability check type authorization).",
+                        "type": "array",
+                        "items": { "type": "string" }
+                    }
+                }
+             },
+            "additionalProperties": false,
+            "required": [ "type", "reason", "attributes" ]
+        }
+
+    }
+
+}

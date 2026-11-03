@@ -1,0 +1,54 @@
+{
+    "schemaVersion": "2.0.0",
+    "info": {
+        "title": "Splunk Observability Cloud",
+        "id": {
+            "group": null,
+            "name": "splunk_app_for_splunk_o11y_cloud",
+            "version": "1.7.5"
+        },
+        "author": [
+            {
+                "name": "Splunk",
+                "email": null,
+                "company": null
+            }
+        ],
+        "releaseDate": null,
+        "description": "A quick demo of the features available in the Splunk Observability suite.",
+        "classification": {
+            "intendedAudience": null,
+            "categories": [],
+            "developmentStatus": null
+        },
+        "commonInformationModels": null,
+        "license": {
+            "name": null,
+            "text": null,
+            "uri": null
+        },
+        "privacyPolicy": {
+            "name": null,
+            "text": null,
+            "uri": null
+        },
+        "releaseNotes": {
+            "name": null,
+            "text": null,
+            "uri": null
+        }
+    },
+    "dependencies": null,
+    "tasks": null,
+    "inputGroups": null,
+    "incompatibleApps": null,
+    "platformRequirements": null,
+    "supportedDeployments": [
+        "_standalone",
+        "_distributed",
+        "_search_head_clustering"
+    ],
+    "targetWorkloads": [
+        "_search_heads"
+    ]
+}

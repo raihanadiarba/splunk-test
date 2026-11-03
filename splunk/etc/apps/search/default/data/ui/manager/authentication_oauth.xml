@@ -1,0 +1,6 @@
+<endpoint name="authentication/providers/oauth" showAppContext="1" template="pages/page_from_package.html" packageName="admin-user-xp">
+    <header>OAuth 2.0</header>
+    <capabilities>
+        <read>edit_user</read>
+    </capabilities>
+</endpoint>

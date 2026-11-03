@@ -1,0 +1,434 @@
+#   Version 10.6.1.1
+#
+# Example 1
+# Matches all clients and includes all apps in the server class
+
+[global]
+whitelist.0=*
+# Note: whitelist.0=* at global level is inherited by serverClass and apps.
+# This is a default-deny filter (filterType=whitelist by default) that
+# matches whitelisted (and not blacklisted) agents.
+# Apps inherit this whitelist unless they override it.
+# whitelist matches all clients.
+[serverClass:AllApps]
+[serverClass:AllApps:app:*]
+# a server class that encapsulates all apps in the repositoryLocation
+
+
+# Example 2
+# Assign server classes based on dns names.
+
+[global]
+
+[serverClass:AppsForOps]
+whitelist.0=*.ops.yourcompany.com
+[serverClass:AppsForOps:app:unix]
+[serverClass:AppsForOps:app:SplunkLightForwarder]
+
+[serverClass:AppsForDesktops]
+filterType=blacklist
+# exclude everybody except the Windows desktop machines.
+blacklist.0=*
+whitelist.0=*.desktops.yourcompany.com
+[serverClass:AppsForDesktops:app:SplunkDesktop]
+# Note: AppsForDesktops uses filterType=blacklist with blacklist.0=* and
+# whitelist.0=*.desktops.yourcompany.com. This creates a default-allow
+# filter where only desktops match. This pattern is valid but can be
+# confusing. Consider using filterType=whitelist (default) with only
+# whitelist.0=*.desktops.yourcompany.com for clearer intent.
+
+# Example 3
+# Deploy server class based on machine types
+#
+# Important: Filter-triggered atomic override is level-dependent:
+# * At the app level: Defining machineTypesFilter
+#   clears inherited whitelist/blacklist from the parent
+#   serverClass. You must explicitly define whitelist at the app level.
+# * At the serverClass level: This filter doesn't clear whitelist/blacklist
+#   inherited from the global level.
+# * At the global level: This filter has no effect. They only work at
+#   serverClass or app level.
+
+[global]
+
+[serverClass:AppsByMachineType]
+# Ensure this server class is matched by all clients. It is important to
+# have a general filter here, and a more specific filter at the app level.
+# An app is matched _only_ if the server class it is contained in was
+# successfully matched!
+whitelist.0=*
+
+[serverClass:AppsByMachineType:app:SplunkDesktop]
+# Deploy this app only to Windows boxes.
+# Required: whitelist.0=* must be explicitly set when using machineTypesFilter.
+whitelist.0=*
+machineTypesFilter=windows-*
+
+[serverClass:AppsByMachineType:app:unix]
+# Deploy this app only to unix boxes - 32/64 bit.
+# Required: whitelist.0=* must be explicitly set when using machineTypesFilter.
+whitelist.0=*
+machineTypesFilter=linux-i686, linux-x86_64
+
+# Example 4
+# Specify app update exclusion list.
+
+[global]
+
+# The local/ subdirectory within every app will not be touched upon update.
+excludeFromUpdate=$app_root$/local
+
+[serverClass:MyApps]
+
+[serverClass:MyApps:app:SpecialCaseApp]
+# For the SpecialCaseApp, both the local/ and lookups/ subdirectories will
+# not be touched upon update.
+excludeFromUpdate=$app_root$/local,$app_root$/lookups
+
+# Example 5
+# Control client reloads/restarts
+
+[global]
+restartSplunkd=false
+restartSplunkWeb=true
+
+# For this serverclass, the deployment client attempts to only reload
+# the configuration files within the app. If it fails to reload ie if there's
+# a conf in the app that requires a restart, the admin must restart
+# the instance manually.
+[serverClass:ReloadOnly]
+issueReload=true
+
+# This is an example of a best-effort, reloadable serverClass. In other words,
+# the deployment client attempts to reload the app, but if any file requires
+# a restart, only then the deployment clients restarts.
+[serverClass:tryReloadThenRestart]
+issueReload=true
+restartIfNeeded=true
+
+# Example 6a
+# Use (allow list|deny list) text file import.
+[serverClass:MyApps]
+whitelist.from_pathname = etc/system/local/clients.txt
+
+# Example 6b
+# Use (allow list|deny list) CSV file import to read all values from the Client
+# field (ignoring all other fields).
+[serverClass:MyApps]
+whitelist.select_field = Client
+whitelist.from_pathname = etc/system/local/clients.csv
+
+# Example 6c
+# Use (allow list|deny list) CSV file import to read some values from the Client
+# field (ignoring all other fields) where ServerType is one of T1, T2, or
+# starts with dc.
+[serverClass:MyApps]
+whitelist.select_field = Client
+whitelist.from_pathname = etc/system/local/server_list.csv
+whitelist.where_field = ServerType
+whitelist.where_equals = T1, T2, dc*
+
+# Example 6d
+# Use (allow list|deny list) CSV file import to read some values from field 2
+# (ignoring all other fields) where field 1 is one of T1, T2, or starts with
+# dc.
+[serverClass:MyApps]
+whitelist.select_field = 2
+whitelist.from_pathname = etc/system/local/server_list.csv
+whitelist.where_field = 1
+whitelist.where_equals = T1, T2, dc*
+
+# Example 7
+# App-level blacklisting to exclude specific agents from specific apps
+#
+# Starting from Splunk Enterprise version 9.4.3, app-level filterType defaults
+# to "whitelist" (default-deny). To use blacklisting at the app level, you
+# must explicitly set both whitelist and blacklist, or set filterType to
+# blacklist.
+
+[global]
+
+[serverClass:MyServerClass]
+whitelist.0=*
+
+# Method 1: Explicit whitelist and blacklist at app level
+[serverClass:MyServerClass:app:app1]
+# app1 deployed to all agents in MyServerClass except the blacklisted one
+whitelist.0=*
+blacklist.0=416C9CE3-CFC3-40F2-A552-4FBE42FA83C0
+
+[serverClass:MyServerClass:app:app2]
+# app2 deployed to all agents in MyServerClass (inherits whitelist from
+# serverClass)
+
+# Method 2: Use filterType=blacklist at app level
+[serverClass:AnotherServerClass]
+whitelist.0=*
+
+[serverClass:AnotherServerClass:app:app3]
+# app3 deployed to all agents except blacklisted one
+# filterType=blacklist provides default-allow behavior
+filterType=blacklist
+blacklist.0=maintenance-host.example.com
+
+# Example 8
+# Understanding atomic override for whitelist/blacklist pairs
+#
+# When you override whitelist or blacklist at a child level, you must
+# explicitly define both to avoid clearing inherited values.
+
+[global]
+whitelist.0=*
+blacklist.0=maintenance-host.example.com
+
+# INCORRECT: Inherited blacklist is cleared
+[serverClass:WrongOverride]
+whitelist.0=*.ops.example.com
+# maintenance-host.example.com will now be included because inherited blacklist
+# was cleared when whitelist was overridden
+
+# CORRECT: Explicitly define both whitelist and blacklist
+[serverClass:CorrectOverride]
+whitelist.0=*.ops.example.com
+blacklist.0=maintenance-host.example.com
+# Both filters are explicitly set at this level
+
+[serverClass:CorrectOverride:app:*]
+
+# Example 9
+# Filter-triggered atomic override behavior (level-dependent)
+#
+# The behavior differs between serverClass and app levels:
+# * At the app level: Defining machineTypesFilter
+#   clears both whitelist and blacklist inherited from
+#   the parent serverClass. You must explicitly define whitelist/blacklist.
+# * At the serverClass level: This filter doesn't clear whitelist/blacklist
+#   inherited from the global level.
+# * At the global level: This filter has no effect.
+
+[global]
+
+# Scenario A: App inherits from serverClass - CORRECT
+[serverClass:ServerClassA]
+whitelist.0=*
+machineTypesFilter = linux-*
+
+[serverClass:ServerClassA:app:app1]
+# Inherits whitelist and filters from serverClass - works correctly
+
+# Scenario B: App overrides filter - INCORRECT (common mistake)
+[serverClass:ServerClassB]
+whitelist.0=*
+machineTypesFilter = windows-*
+
+[serverClass:ServerClassB:app:app2]
+# Setting machineTypesFilter clears inherited whitelist/blacklist
+# This app will not deploy to any agent
+machineTypesFilter = windows-x86_64
+
+# Scenario C: App overrides filter - CORRECT
+[serverClass:ServerClassC]
+whitelist.0=*
+machineTypesFilter = windows-*
+
+[serverClass:ServerClassC:app:app3]
+# Explicitly set whitelist when overriding filter
+whitelist.0=*
+machineTypesFilter = windows-x86_64
+
+# Scenario D: App overrides filter - CORRECT (alternative method)
+[serverClass:ServerClassD]
+whitelist.0=*
+machineTypesFilter = windows-*
+
+[serverClass:ServerClassD:app:app4]
+# Use filterType=blacklist for default-allow behavior
+filterType=blacklist
+machineTypesFilter = windows-x86_64
+
+# Example 10
+# FilterType inheritance between levels
+#
+# The filterType setting is inherited from parent levels unless explicitly
+# overridden. Be cautious when mixing filterType values between levels.
+
+[global]
+filterType=whitelist
+whitelist.0=*.example.com
+
+[serverClass:InheritsFilterType]
+# Inherits filterType=whitelist from global
+blacklist.0=maintenance.example.com
+# Works as expected: all *.example.com except maintenance.example.com
+
+[serverClass:OverridesFilterType]
+# Explicitly override filterType for this serverClass
+filterType=blacklist
+blacklist.0=*.test.example.com
+# Matches all agents except *.test.example.com
+
+[serverClass:OverridesFilterType:app:app1]
+# Inherits filterType=blacklist from parent serverClass
+# This app deployed to all agents except *.test.example.com
+
+[serverClass:OverridesFilterType:app:app2]
+# Explicitly override filterType for this specific app
+filterType=whitelist
+whitelist.0=prod.example.com
+# This app deployed only to prod.example.com
+
+# Caution: Mixing filterType between levels can be confusing
+# Recommendation: Set filterType at [global] level and avoid overriding
+# unless you have a specific need
+
+# Example 11
+# Migration pattern for Splunk Enterprise 9.4.3 and later deployments
+#
+# If you are upgrading from pre-9.4.3 and experience apps not deploying
+# after upgrade, use this pattern to restore functionality.
+
+[global]
+whitelist.0=*
+
+[serverClass:MyClass]
+# Primary matching at serverClass level
+whitelist.0=*.prod.example.com
+
+# Pre-9.4.3 pattern (CHANGED in 9.4.3+):
+# [serverClass:MyClass:app:app1]
+# blacklist.0=maintenance.prod.example.com
+# ^ This no longer works because implicit filterType changed to whitelist
+
+# Post-9.4.3 pattern (CORRECT) - Option 1: Explicit whitelist
+[serverClass:MyClass:app:app1]
+whitelist.0=*
+blacklist.0=maintenance.prod.example.com
+
+# Post-9.4.3 pattern (CORRECT) - Option 2: Explicit filterType
+[serverClass:MyClass:app:app2]
+filterType=blacklist
+blacklist.0=staging.prod.example.com
+
+# Post-9.4.3 pattern (CORRECT) - Option 3: Whitelist only
+[serverClass:MyClass:app:app3]
+# Deploy only to specific hosts
+whitelist.0=web1.prod.example.com
+whitelist.1=web2.prod.example.com
+
+# Example 12
+# Whitelist making a VIP - using filterType=blacklist with whitelist taking precedence
+#
+# This example demonstrates how whitelist takes precedence over blacklist when
+# filterType=blacklist is used. In blacklist mode (default-allow), the
+# whitelist acts as a "VIP pass" that allows access even if the agent is
+# blacklisted.
+
+[global]
+
+[serverClass:VIPOnly]
+filterType=blacklist
+# In blacklist mode, whitelist takes precedence over blacklist
+whitelist.0=0D747F9B-B4A6-4385-900F-63D44A63773C
+blacklist.0=*
+
+[serverClass:VIPOnly:app:app1]
+[serverClass:VIPOnly:app:app2]
+# Both apps deployed only to the whitelisted agent
+# The whitelist.0 acts as a VIP pass that takes precedence over blacklist.0=*
+
+# Example 13
+# Global filterType=blacklist is inherited by all levels
+#
+# This example shows that setting filterType at the global level applies
+# to all serverClasses and apps unless explicitly overridden.
+
+[global]
+filterType=blacklist
+# When filterType=blacklist and no whitelist/blacklist is defined,
+# all agents match by default (default-allow behavior)
+
+[serverClass:AllAgentsMatch]
+
+[serverClass:AllAgentsMatch:app:app1]
+[serverClass:AllAgentsMatch:app:app2]
+# Both apps deployed to all agents due to inherited filterType=blacklist
+
+# Example 14
+# Global filterType can be overridden at serverClass level
+#
+# This example demonstrates overriding filterType from global at the
+# serverClass level. The serverClass uses whitelist mode (default-deny)
+# while global uses blacklist mode (default-allow).
+
+[global]
+filterType=blacklist
+
+[serverClass:OverrideAtSC]
+# Explicitly override filterType for this serverClass
+filterType=whitelist
+whitelist.0=0D747F9B-B4A6-4385-900F-63D44A63773C
+
+[serverClass:OverrideAtSC:app:app1]
+[serverClass:OverrideAtSC:app:app2]
+# Both apps deployed only to the whitelisted agent
+# ServerClass overrides global filterType=blacklist with whitelist mode
+
+# Example 15
+# Global filterType can be overridden at app level
+#
+# This example shows that individual apps can override filterType from
+# global, allowing different apps in the same serverClass to use different
+# filtering strategies.
+
+[global]
+filterType=blacklist
+
+[serverClass:MixedApps]
+# Inherits filterType=blacklist from global
+# Matches all agents by default
+
+[serverClass:MixedApps:app:app1]
+# Override filterType for this specific app
+filterType=whitelist
+whitelist.0=1C8D93D6-C188-4602-A0D9-775F9C867C60
+# app1 deployed only to whitelisted agent (default-deny)
+
+[serverClass:MixedApps:app:app2]
+# Inherits filterType=blacklist from global
+# app2 deployed to all agents (default-allow)
+
+# Example 16
+# Global whitelist is inherited by serverClass and apps
+#
+# This example demonstrates that whitelist defined at global level is
+# inherited by all serverClasses and apps unless explicitly overridden.
+
+[global]
+whitelist.0=0D747F9B-B4A6-4385-900F-63D44A63773C
+
+[serverClass:InheritsFromGlobal]
+# Inherits whitelist from global
+# No need to redefine whitelist here
+
+[serverClass:InheritsFromGlobal:app:app1]
+[serverClass:InheritsFromGlobal:app:app2]
+# Both apps deployed only to the agent specified in global whitelist
+
+# Example 17
+# ServerClass whitelist overrides global whitelist (atomic override)
+#
+# This example shows atomic override behavior: when serverClass defines its
+# own whitelist, it completely replaces the global whitelist. This is the
+# atomic override behavior for whitelist/blacklist pairs.
+
+[global]
+whitelist.0=0D747F9B-B4A6-4385-900F-63D44A63773C
+
+[serverClass:OverridesGlobal]
+# This whitelist completely replaces the global whitelist
+whitelist.0=*
+
+[serverClass:OverridesGlobal:app:app1]
+[serverClass:OverridesGlobal:app:app2]
+# Both apps deployed to all agents
+# Global whitelist is ignored because serverClass defined its own

@@ -1,0 +1,11 @@
+[Desktop Entry]
+X-AppImage-Arch=x86_64
+X-AppImage-Version=1.0.0
+X-AppImage-Name=chromium
+Name=chromium
+Exec=usr/lib/chromium/headless_shell
+Icon=application-vnd.appimage
+Type=Application
+Terminal=false
+Categories=Utility;
+Comment=

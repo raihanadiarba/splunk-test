@@ -1,0 +1,24 @@
+<%! app_name = "splunk_pipeline_builders" %><!DOCTYPE html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="x-ua-compatible" content="ie=edge" />
+        <link rel="stylesheet" href="/en-US/splunkd/__raw/servicesNS/nobody/${app_name}/static/global.css" />
+        <title>Data Management</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+    </head>
+
+    <body>
+        <script src="${make_url('/config?autoload=1')}" crossorigin="use-credentials"></script>
+        <script src="${make_url('/static/js/i18n.js')}"></script>
+        <script src="${make_url('/i18ncatalog?autoload=1')}"></script>
+        <% app_assets_path="/static/app/" + app_name %>
+        <% page_path=app_assets_path + "/pages/" + page + ".js" %>
+        <script>
+            __splunkd_partials__ = ${json_decode(splunkd)};
+            __app_assets_path__ = "${make_url(app_assets_path)}";
+        </script>        
+        <script src="${make_url(page_path)}"></script>
+    </body>
+</html>

@@ -1,0 +1,27 @@
+"""
+Module with workflows
+"""
+from agent.workflows.workflow_base import WorkflowStageBase, WorkflowBase, \
+    OneCommandWorkflowStageBase
+from agent.workflows.deploy_workflow import DeployWorkflow
+from agent.workflows.instance_workflow import InstanceWorkflow
+from agent.workflows.topology_workflow import TopologyWorkflow
+from agent.workflows.instance_delete_workflow import InstanceDeleteWorkflow
+from agent.workflows.dmc_enabler_workflow import DMCEnablerWorkflow
+from agent.workflows.cancel_pending_changes_workflow import CancelPendingChangesWorkflow
+from agent.workflows.external_apps_discovery_workflow import ExternalAppsDiscoveryWorkflow
+from agent.workflows.appinspect_workflow import AppInspectWorkflow
+from agent.workflows.notification_workflow import NotificationWorkflow
+
+assert InstanceWorkflow
+assert TopologyWorkflow
+assert WorkflowStageBase
+assert WorkflowBase
+assert OneCommandWorkflowStageBase
+assert InstanceDeleteWorkflow
+assert DeployWorkflow
+assert DMCEnablerWorkflow
+assert CancelPendingChangesWorkflow
+assert ExternalAppsDiscoveryWorkflow
+assert AppInspectWorkflow
+assert NotificationWorkflow

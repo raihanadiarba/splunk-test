@@ -1,0 +1,4 @@
+<?xml version="1.0"?>
+<view template="splunk-data-management:/templates/index.html" type="html" isDashboard="False">
+    <label>Data Management</label>
+</view>

@@ -1,0 +1,175 @@
+<dashboard version="1.1" theme="dark">
+  <label>SAML Troubleshooting Dashboard</label>
+  <description>Dashboard to help troubleshoot SAML setup issues with Splunk Secure Gateway</description>
+  <search id="test_jwt">
+    <query>| rest services/ssg/registration/test_jwt dashboard_format=true </query>
+    <earliest>-24h@h</earliest>
+    <latest>now</latest>
+  </search>
+  <row>
+    <panel>
+      <single>
+        <search>
+          <query>| makeresults | eval x = "Test JWT Integration" | fields x</query>
+          <earliest>-24h@h</earliest>
+          <latest>now</latest>
+        </search>
+        <option name="drilldown">none</option>
+      </single>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <title>Are JWT Tokens Enabled</title>
+      <single>
+        <search>
+          <query>|rest services/ssg/registration/tokens_enabled dashboard_format=true
+| fields tokens_enabled
+| eval are_tokens_enabled=if( tokens_enabled="1","Yes","No" )
+| eval range=if(are_tokens_enabled="Yes", "low", "severe")
+| table are_tokens_enabled, range</query>
+          <earliest>-15m</earliest>
+          <latest>now</latest>
+        </search>
+        <option name="drilldown">none</option>
+        <option name="rangeColors">["0x53a051","0x0877a6","0xf8be34","0xf1813f","0xdc4e41"]</option>
+        <option name="refresh.display">progressbar</option>
+      </single>
+    </panel>
+    <panel>
+      <title>JWT Token Test</title>
+      <single>
+        <search base="test_jwt">
+          <query>
+| fields JWT
+| eval result=if(isnull(JWT), "Failed", "Success")
+| eval range=if(result="Success", "low", "severe")
+| table  result, range</query>
+        </search>
+        <option name="drilldown">none</option>
+        <option name="refresh.display">progressbar</option>
+      </single>
+    </panel>
+    <panel>
+      <title>Token Expiry</title>
+      <single>
+        <search>
+          <query>| rest services/ssg/registration/test_jwt dashboard_format=true 
+| fields token_expiration
+| eval result=if(isnull(token_expiration), "Error Occured", token_expiration)
+| eval range=if(result="Error Occured", "severe", "low")
+| table  result, range</query>
+          <earliest>-24h@h</earliest>
+          <latest>now</latest>
+        </search>
+        <option name="drilldown">none</option>
+        <option name="refresh.display">progressbar</option>
+      </single>
+    </panel>
+    <panel>
+      <title>Error Type</title>
+      <single>
+        <search base="test_jwt">
+          <query>
+| fields error_type, message
+| eval is_error = if(isnull(error_type), "false", "true")
+| eval msg = if(is_error=="true", error_type, "No Error")
+| eval range=if(msg="No Error", "low", "severe")
+| table msg, range, is_error</query>
+        </search>
+        <option name="drilldown">none</option>
+        <option name="refresh.display">progressbar</option>
+      </single>
+    </panel>
+    <panel>
+      <title>Error Message</title>
+      <table>
+        <search base="test_jwt">
+          <query>
+| fields error_type, message
+| eval is_error = if(isnull(message), "false", "true")
+| eval msg = if(is_error=="true", message, "No Error")
+| table msg</query>
+        </search>
+        <option name="drilldown">none</option>
+        <option name="refresh.display">progressbar</option>
+      </table>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <single>
+        <search>
+          <query>| makeresults | eval x = "Validate SAML Configuration" | fields x</query>
+          <earliest>-24h@h</earliest>
+          <latest>now</latest>
+        </search>
+        <option name="drilldown">none</option>
+      </single>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <title>SAML Setup Checks</title>
+      <table>
+        <search>
+          <query>|rest services/ssg/registration/correct_saml_setup dashboard_format=true
+| fields attributeQueryRequestSigned, attributeQueryResponseSigned, attributeQuerySoapUsername, idpAttributeQueryUrl, scriptPath, scriptTimeout, getUserInfoTtl, useAuthExtForTokenAuthOnly,scriptFunctions, scriptSecureArguments, SAML
+| eval attributeQueryRequestSigned=if(attributeQueryRequestSigned=0, "false", "true")
+| eval attributeQueryResponseSigned=if(attributeQueryResponseSigned=0, "false", "true")
+| eval attributeQuerySoapUsername=if(attributeQuerySoapUsername=0, "false", "true")
+| eval idpAttributeQueryUrl=if(idpAttributeQueryUrl=0, "false", "true")
+| eval scriptPath=if(scriptPath=0, "false", "true")
+| eval scriptTimeout=if(scriptTimeout=0, "false", "true")
+| eval getUserInfoTtl=if(getUserInfoTtl=0, "false", "true")
+| eval useAuthExtForTokenAuthOnly=if(useAuthExtForTokenAuthOnly=0, "false", "true")
+| eval scriptFunctions=if(scriptFunctions=0, "false", "true")
+| eval scriptSecureArguments=if(scriptSecureArguments=0, "false", "true")
+| eval SAML=if(SAML=0, "false", "true")</query>
+          <earliest>-24h@h</earliest>
+          <latest>now</latest>
+        </search>
+        <option name="drilldown">none</option>
+        <option name="refresh.display">progressbar</option>
+      </table>
+    </panel>
+  </row>
+   <row>
+    <panel>
+      <single>
+        <search>
+          <query>| makeresults | eval x = "SAML Error Logs" | fields x</query>
+          <earliest>-24h@h</earliest>
+          <latest>now</latest>
+        </search>
+        <option name="drilldown">none</option>
+      </single>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <title>SAML Provider Errors</title>
+      <event>
+        <search>
+          <query>index=_internal sourcetype=splunkd ERROR AuthenticationProviderSAML</query>
+          <earliest>-24h@h</earliest>
+          <latest>now</latest>
+        </search>
+        <option name="list.drilldown">none</option>
+        <option name="refresh.display">progressbar</option>
+      </event>
+    </panel>
+    <panel>
+      <title>User Management Errors</title>
+      <event>
+        <search>
+          <query>index=_internal sourcetype=splunkd ERROR UserManagerPro</query>
+          <earliest>-24h@h</earliest>
+          <latest>now</latest>
+        </search>
+        <option name="list.drilldown">none</option>
+        <option name="refresh.display">progressbar</option>
+      </event>
+    </panel>
+  </row>
+</dashboard>

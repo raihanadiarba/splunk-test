@@ -1,0 +1,165 @@
+#   Version 10.6.1.1
+#
+# You can configure Splunk Web features for your custom application.
+#
+# To use one or more of these configurations, copy the configuration block into
+# the web-features.conf file located in $SPLUNK_HOME/etc/system/local/. You must restart
+# Splunk software after you make changes to this setting to enable configurations.
+#
+# For more information on configuration files, including precedence, search for
+# "Use Splunk Web to manage configuration files" in the Admin Manual in the Splunk Docs.
+
+[feature:dashboards_csp]
+enable_dashboards_external_content_restriction = true
+enable_dashboards_redirection_restriction = true
+dashboards_trusted_domain.splunk = *.splunk.com
+dashboards_trusted_domain.example = www.example.com
+
+[feature:c3_base_urls]
+waitlist_base_url = staging.cloud.cisco.com
+tenants_base_url = api.staging.cloud.cisco.com
+
+[feature:new_search_experience]
+enable_new_search_admin = true
+enable_new_search_user = false
+
+[feature:new_data_management_experience]
+enable_new_data_management_home = true
+enable_new_data_management_link = true
+
+[feature:manager_xml_pages]
+enable_element_overlay_usage = false
+
+[feature:modern-nav]
+enable_nav_vnext = false
+
+[feature:page_migration]
+enable_data_transforms_lookups_vnext = true
+enable_fields_vnext = true
+enable_data_ui_views_vnext = true
+enable_advancedsearch_vnext = true
+enable_ui_vnext = true
+enable_tags_vnext = true
+enable_server_settings_vnext = true
+enable_data_ui_workflow-actions_vnext = true
+enable_data_ui_times_vnext = true
+enable_data_props_sourcetype-rename_vnext = true
+enable_data_transforms_extractions_vnext = true
+enable_data_props_fieldaliases_vnext = true
+enable_data_props_lookups_vnext = true
+enable_data_props_extractions_vnext = true
+enable_data_props_calcfields_vnext = true
+enable_alerts_vnext = false
+enable_job_manager_vnext = false
+enable_authoverview_vnext = false
+enable_lookups_vnext = true
+enable_lookup_geoip_vnext = false
+enable_data_lookup-table-files_vnext = false
+enable_login_page_settings_vnext = false
+enable_bulkreassign_vnext = false
+enable_data_ui_nav_vnext = true
+enable_authentication_providers_LDAP_vnext = true
+enable_admin_LDAP-groups_vnext = true
+enable_authorization_tokens_vnext = true
+enable_authorization_fieldfilters_vnext = true
+enable_duo_mfa_vnext = false
+enable_admin_alert_actions_vnext = true
+enable_global_banner_vnext = true
+enable_messages_vnext = true
+enable_permissions_vnext = true
+enable_saml_vnext = true
+enable_data_indexes_cloud_vnext = true
+enable_admin_directory_vnext = true
+enable_data_macros_vnext = true
+enable_saved_eventtypes_vnext = true
+enable_admin_commandsconf_vnext = true
+enable_federation_page_vnext = false
+enable_saved_searches_advancededit_vnext = true
+enable_authentication_changepassword_vnext = true
+
+[feature:dashboard_inputs_localization]
+enable_dashboard_inputs_localization = false
+
+[feature:share_job]
+enable_share_job_control = true
+
+[feature:search_auto_format]
+enable_autoformatted_comments = false
+
+[feature:ui_prefs_optimizations]
+optimize_ui_prefs_performance = true
+
+[feature:splunk_web_optimizations]
+enable_app_bar_performance_optimizations = true
+bypass_app_bar_performance_optimizations_apps = "search"
+enable_search_bar_performance_optimizations = true
+enable_saved_search_pageload_optimization = true
+enable_messages_list_performance_optimizations = true
+
+[feature:spotlight_search]
+enable_spotlight_search = true
+
+[feature:search_sidebar]
+enable_sidebar_preview = true
+
+[feature:field_filters]
+enable_field_filters_ui = true
+
+[feature:authentication_oauth]
+enable_authentication_oauth_ui = true
+
+[feature:identity_sidecar_scim]
+enabled = true
+
+[feature:system_namespace_redirection]
+enable_system_namespace_redirection = true
+
+[feature:ip_allowlist]
+enable_ipv6_validations = true
+
+[feature:dynamic_feature_flagging]
+enable_dynamic_ui_updates = true
+feature_flag_service_url = example.splunk.com
+
+[feature:appserver]
+python.version = latest
+
+[feature:federated_search]
+enable_ipv6_validations = true
+enable_s3_modernization = true
+enable_legacy_fss3_ui = false
+
+[feature:federated_analytics]
+enable_fa_asl = false
+
+[feature:knowledge_object_favorites]
+enable_dashboards_favorites = true
+enable_reports_favorites = true
+
+[feature:search_ai_assistant]
+enable_search_ai_assistant = true
+admin_search_ai_assistant_allowed = true
+
+[feature:pendo]
+enable_pendo = true
+
+[feature:scoped_capabilities]
+enable_scoped_capabilities_ui = false
+
+[feature:spl2]
+enable_spl2 = true
+
+[feature:splunk_oauth_clients]
+enable_splunk_oauth_clients_ui = false
+
+[feature:splunk_service_credentials]
+enable_splunk_service_credentials_ui = true
+
+[feature:cron_schedule_restrictions]
+enable_cron_schedule_restrictions_ui = true
+
+[feature:hec_mdl_raw_datasets]
+enable_hec_mdl_raw_datasets_ui = true
+
+[feature:guided_data_inputs]
+gdi_web_service_home = https://guides.splunk.com/v1

@@ -1,0 +1,28 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",  
+    "$id": "https://cisco.com/splunk/audit/action.schema.json",  
+    "title": "Action",  
+    "description": "An event representing an action taken by the system, which does not change persistent state. For example a search execution.",
+    "$ref":"https://cisco.com/splunk/audit/event.schema.json",
+    "type": "object",
+    "properties": {
+        "data": {
+            "description":"Action event specific data.",
+            "type": "object",
+            "properties": {
+                "type": { 
+                    "description": "Action type - e.g. 'search'",
+                    "type": "string" 
+                },
+                "attributes": {
+                    "description": "Additional attributes specific to a given action.",
+                    "type": "object"
+                }
+             },
+            "additionalProperties": false,
+            "required": [ "type", "attributes" ]
+        }
+
+    }
+
+}

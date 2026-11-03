@@ -1,0 +1,80 @@
+[]
+access = read : [ * ], write : [ admin, sc_admin ]
+
+[alert_actions/ssg_mobile_alert]
+export = system
+
+[alerts]
+export = system
+
+[restmap]
+export = system
+
+[props]
+export = system
+
+[views/secure_gateway_status_dashboard]
+access = read : [ admin, sc_admin ], write : [ admin, sc_admin ]
+
+[views/recent_ssg_dashboard_activity]
+access = read : [ admin, sc_admin ], write : [ admin, sc_admin ]
+
+[views/test_dashboard_single_value]
+
+[views/request_tracing_dashboard]
+access = read : [ admin, sc_admin ], write : [ admin, sc_admin ]
+
+[views/ssg_e2e_wss_test]
+access = read : [ admin, sc_admin ], write : [ admin, sc_admin ]
+
+[views/kvstore_dashboard_client]
+access = read : [ admin, sc_admin ], write : [ admin, sc_admin ]
+
+[views/subscription_tracing_dashboard]
+access = read : [ admin, sc_admin ], write : [ admin, sc_admin ]
+
+[views/subscription_search_inspector]
+access = read : [ admin, sc_admin ], write : [ admin, sc_admin ]
+
+[views/saml_troubleshooting_dashboard]
+access = read : [ admin, sc_admin ], write : [ admin, sc_admin ]
+
+[views/administration]
+access = read : [ admin, sc_admin ], write : [ admin, sc_admin ]
+
+[views/app_selection]
+access = read : [ admin, sc_admin ], write : [ admin, sc_admin ]
+
+[collections/meta]
+access = read : [ admin, sc_admin ], write : [ admin, sc_admin ]
+
+[collections/kvstore_change_history]
+access = read : [ admin, sc_admin ], write : [ admin, sc_admin ]
+
+[collections/deeplink_dashboard]
+access = read : [ admin, sc_admin ], write : [ admin, sc_admin ]
+
+[collections/mobile_alerts]
+access = read : [ admin, sc_admin ], write : [ admin, sc_admin ]
+
+[collections/alert_recipient_devices]
+access = read : [ admin, sc_admin ], write : [ admin, sc_admin ]
+
+[commands/checkssgmobilehttps]
+export = system
+owner = nobody
+
+[commands/checkssgmobilewss]
+export = system
+owner = nobody
+
+[commands/checkssgmobileasync]
+export = system
+owner = nobody
+
+[commands/ssgpstree]
+export = system
+owner = nobody
+
+[manager]
+export = system

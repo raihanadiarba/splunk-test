@@ -1,0 +1,40 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",  
+    "$id": "https://cisco.com/splunk/audit/authn.schema.json",  
+    "title": "Authentication",  
+    "description": "An authentication event.",
+    "$ref":"https://cisco.com/splunk/audit/event.schema.json",
+    "type": "object",
+    "properties": {
+        "data": {
+            "description":"Authentication event specific data.",
+            "type": "object",
+            "properties": {
+                "user": { 
+                    "description": "Authenticated user. Typically same as 'actor'.",
+                    "type": "string" 
+                },
+                "type": { 
+                    "description": "Type (method) of the authentication. This can be 'basic', 'SAML', 'LDAP', 'Duo', etc",
+                    "type": "string" 
+                },
+                "user_agent": { 
+                    "description": "Software used to send resuest - browser, curl, Splunk, etc",
+                    "type": "string" 
+                },
+                "reason" : { 
+                    "description": "Upon failure this is the eason for it (e.g. bad credentials), upon success this can be set to empty or additional useful info.", 
+                    "type": "string" 
+                },
+                "attributes": {
+                    "description": "Additional attributes specific to a given authentication mentod.",
+                    "type": "object"
+                }
+             },
+            "additionalProperties": false,
+            "required": [ "user", "type", "attributes", "user_agent", "reason" ]
+        }
+
+    }
+
+}

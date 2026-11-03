@@ -1,0 +1,22 @@
+
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <title>Overview (Beta)</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+    <link rel="shortcut icon" href="${make_url('/static/img/favicon.ico', appendcachebust=true)}" />
+  </head>
+  <body>
+    <script src="${make_url('/config?autoload=1', appendcachebust=true)}" crossorigin="use-credentials" ></script>
+    <script src="${make_url('/static/js/i18n.js', appendcachebust=true)}"></script>
+    <script src="${make_url('/i18ncatalog?autoload=1', appendcachebust=true)}"></script>
+    <script>
+      __splunkd_partials__ = ${json_decode(splunkd)};
+    </script>
+
+    <script src="${make_url('/static/app/splunk_monitoring_console/js/overview.js', appendcachebust=true)}"></script>
+  </body>
+</html>

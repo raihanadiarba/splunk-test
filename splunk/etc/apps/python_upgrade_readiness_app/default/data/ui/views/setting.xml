@@ -1,0 +1,10 @@
+<dashboard version="1.1" hideEdit="true">
+  <label>Upgrade Readiness App</label>
+  <row>
+  	<panel>
+  		<html>
+  			<p>New upgrade checks for future releases of Splunk platform are in the Monitoring Consoles in Splunk Cloud Platform and Splunk Enterprise. The Upgrade Readiness App has been removed from Splunk platform. For more information, see <a href="/help?location=learnmore.URA.banner.EOL" target="_blank">Upgrade Readiness documentation</a>.</p>  			
+  		</html>
+  	</panel>
+  </row>
+</dashboard>

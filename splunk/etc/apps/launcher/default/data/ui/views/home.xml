@@ -1,0 +1,4 @@
+<?xml version="1.0"?>
+<view template="pages/page_from_package.html" type="html" packageName="end-user-xp">
+    <label>Home</label>
+</view>

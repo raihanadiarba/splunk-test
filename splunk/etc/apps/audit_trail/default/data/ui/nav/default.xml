@@ -1,0 +1,8 @@
+<nav search_view="search">
+    <view name="search"/>
+    <view name="audit_trail_home" default="true"/>
+    <view name="activities_per_user_audit"/>
+    <view name="knowledge_objects_audit"/>
+    <view name="setup_page"/>
+</nav>
+

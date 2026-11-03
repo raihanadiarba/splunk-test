@@ -1,0 +1,20 @@
+<!-- Version 4.0 -->
+<module>
+	<pipeline name="exec" type="startup">
+		<processor name="exec" plugin="execprocessor">
+			<config>
+			</config>
+		</processor>
+				
+		<processor name="exec_xmlprocessor" plugin="xmlextractionprocessor">
+			<config>
+			</config>
+		</processor>
+
+		<processor name="sendOut" plugin="queueoutputprocessor">
+			<config>
+				<queueName>parsingQueue</queueName>
+			</config>
+		</processor>
+	</pipeline>
+</module>

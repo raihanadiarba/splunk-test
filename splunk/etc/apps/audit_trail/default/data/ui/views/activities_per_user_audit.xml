@@ -1,0 +1,1137 @@
+<dashboard version="2" theme="dark">
+    <label>Audit Trail Dashboard / Users</label>
+    <description></description>
+    <definition><![CDATA[
+{
+	"title": "Audit Trail Dashboard / Users",
+	"description": "",
+	"inputs": {
+		"input_0m4aAr88": {
+			"context": {
+				"formattedConfig": {
+					"number": {
+						"prefix": ""
+					}
+				},
+				"formattedStatics": ">statics | formatByType(formattedConfig)",
+				"statics": [
+					[
+						"Any",
+						"Mozilla",
+						"n/a",
+						"unknown"
+					],
+					[
+						"*",
+						"Mozilla",
+						"n/a",
+						"unknown"
+					]
+				],
+				"label": ">primary | seriesByName(\"useragent\") | renameSeries(\"label\") | formatByType(formattedConfig)",
+				"value": ">primary | seriesByName(\"useragent\") | renameSeries(\"value\") | formatByType(formattedConfig)"
+			},
+			"dataSources": {
+				"primary": "ds_LwcvAxAb"
+			},
+			"options": {
+				"defaultValue": [
+					"Mozilla",
+					"unknown",
+					"n/a"
+				],
+				"items": ">frame(label, value) | prepend(formattedStatics) | objects()",
+				"token": "ms_user_agents"
+			},
+			"title": "Login user agent(s)",
+			"type": "input.multiselect"
+		},
+		"input_8cPLfS0W": {
+			"context": {
+				"formattedConfig": {
+					"number": {
+						"prefix": ""
+					}
+				},
+				"formattedStatics": ">statics | formatByType(formattedConfig)",
+				"statics": [
+					[
+						"Any"
+					],
+					[
+						"*"
+					]
+				],
+				"label": ">primary | seriesByName(\"object_name\") | renameSeries(\"label\") | formatByType(formattedConfig)",
+				"value": ">primary | seriesByName(\"object_name\") | renameSeries(\"value\") | formatByType(formattedConfig)"
+			},
+			"dataSources": {
+				"primary": "ds_eSukAtNI"
+			},
+			"options": {
+				"defaultValue": [
+					"*"
+				],
+				"items": ">frame(label, value) | prepend(formattedStatics) | objects()",
+				"token": "ms_object_names"
+			},
+			"title": "Context(s)",
+			"type": "input.multiselect"
+		},
+		"input_PYpDbVm3": {
+			"context": {
+				"formattedConfig": {
+					"number": {
+						"prefix": ""
+					}
+				},
+				"formattedStatics": ">statics | formatByType(formattedConfig)",
+				"statics": [
+					[
+						"Any"
+					],
+					[
+						"*"
+					]
+				],
+				"label": ">primary | seriesByName(\"app\") | renameSeries(\"label\") | formatByType(formattedConfig)",
+				"value": ">primary | seriesByName(\"app\") | renameSeries(\"value\") | formatByType(formattedConfig)"
+			},
+			"dataSources": {
+				"primary": "ds_oUwKmA5u"
+			},
+			"options": {
+				"defaultValue": [
+					"*"
+				],
+				"items": ">frame(label, value) | prepend(formattedStatics) | objects()",
+				"token": "ms_app_names"
+			},
+			"title": "App(s)",
+			"type": "input.multiselect"
+		},
+		"input_T7BIJ7Pm": {
+			"dataSources": {
+				"primary": "ds_x2TEDIbr"
+			},
+			"options": {
+				"defaultValue": [
+					"*"
+				],
+				"items": ">frame(label, value) | prepend(formattedStatics) | objects()",
+				"token": "ms_actions"
+			},
+			"title": "Action(s)",
+			"type": "input.multiselect",
+			"context": {
+				"formattedConfig": {
+					"number": {
+						"prefix": ""
+					}
+				},
+				"formattedStatics": ">statics | formatByType(formattedConfig)",
+				"statics": [
+					[
+						"Any"
+					],
+					[
+						"*"
+					]
+				],
+				"label": ">primary | seriesByName(\"user_action\") | renameSeries(\"label\") | formatByType(formattedConfig)",
+				"value": ">primary | seriesByName(\"user_action\") | renameSeries(\"value\") | formatByType(formattedConfig)"
+			}
+		},
+		"input_V8goUdiM": {
+			"context": {
+				"formattedConfig": {
+					"number": {
+						"prefix": ""
+					}
+				},
+				"formattedStatics": ">statics | formatByType(formattedConfig)",
+				"statics": [
+					[
+						"Any"
+					],
+					[
+						"*"
+					]
+				],
+				"label": ">primary | seriesByName(\"user\") | renameSeries(\"label\") | formatByType(formattedConfig)",
+				"value": ">primary | seriesByName(\"user\") | renameSeries(\"value\") | formatByType(formattedConfig)"
+			},
+			"dataSources": {
+				"primary": "ds_DUABMnxY"
+			},
+			"options": {
+				"items": ">frame(label, value) | prepend(formattedStatics) | objects()",
+				"token": "ms_user_names",
+				"defaultValue": [
+					"*"
+				]
+			},
+			"title": "User(s)",
+			"type": "input.multiselect"
+		},
+		"input_WAwuApNh": {
+			"options": {
+				"defaultValue": "-7d@h,now",
+				"token": "time"
+			},
+			"title": "Time range",
+			"type": "input.timerange"
+		},
+		"input_n59hT3WT": {
+			"options": {
+				"defaultValue": "*",
+				"token": "text_token"
+			},
+			"title": "SPL condition(s)",
+			"type": "input.text"
+		},
+		"input_yLyZgaC5": {
+			"context": {
+				"formattedConfig": {
+					"number": {
+						"prefix": ""
+					}
+				},
+				"formattedStatics": ">statics | formatByType(formattedConfig)",
+				"statics": [
+					[
+						"Any"
+					],
+					[
+						"*"
+					]
+				],
+				"label": ">primary | seriesByName(\"host\") | renameSeries(\"label\") | formatByType(formattedConfig)",
+				"value": ">primary | seriesByName(\"host\") | renameSeries(\"value\") | formatByType(formattedConfig)"
+			},
+			"dataSources": {
+				"primary": "ds_fTyQF8LC"
+			},
+			"options": {
+				"defaultValue": [
+					"*"
+				],
+				"items": ">frame(label, value) | prepend(formattedStatics) | objects()",
+				"token": "ms_host_names"
+			},
+			"title": "Host(s)",
+			"type": "input.multiselect"
+		},
+		"input_3yYi4vGy": {
+			"options": {
+				"items": [
+					{
+						"label": "No",
+						"value": "no"
+					},
+					{
+						"label": "Yes",
+						"value": "yes"
+					}
+				],
+				"defaultValue": "no",
+				"token": "dd_augment_action"
+			},
+			"title": "Add context to timeline",
+			"type": "input.dropdown"
+		}
+	},
+	"defaults": {
+		"dataSources": {
+			"ds.search": {
+				"options": {
+					"queryParameters": {}
+				}
+			}
+		}
+	},
+	"visualizations": {
+		"viz_4gLfdNAZ": {
+			"dataSources": {
+				"primary": "ds_AXgjIFgY"
+			},
+			"eventHandlers": [
+				{
+					"options": {
+						"tokens": [
+							{
+								"key": "row.name.value",
+								"token": "ms_object_names"
+							}
+						]
+					},
+					"type": "drilldown.setToken"
+				}
+			],
+			"showLastUpdated": false,
+			"showProgressBar": true,
+			"title": "Context(s)",
+			"type": "splunk.pie"
+		},
+		"viz_FTCFDEzH": {
+			"dataSources": {
+				"primary": "ds_EkqGpKKc_ds_34ljSSqf_ds_WY4obnmU"
+			},
+			"eventHandlers": [
+				{
+					"options": {
+						"tokens": [
+							{
+								"key": "row.host.value",
+								"token": "ms_host_names"
+							}
+						]
+					},
+					"type": "drilldown.setToken"
+				}
+			],
+			"showLastUpdated": false,
+			"showProgressBar": true,
+			"title": "Host(s)",
+			"type": "splunk.pie"
+		},
+		"viz_FZih8hXD": {
+			"dataSources": {
+				"primary": "ds_OOnwhUDc"
+			},
+			"eventHandlers": [
+				{
+					"type": "drilldown.setToken",
+					"options": {
+						"tokens": [
+							{
+								"key": "row.app.value",
+								"token": "ms_app_names"
+							}
+						]
+					}
+				}
+			],
+			"options": {
+				"columnFormat": {
+					"count": {
+						"width": 30
+					}
+				},
+				"drilldown": "cell",
+				"count": 8
+			},
+			"showProgressBar": true,
+			"title": "Apps",
+			"type": "splunk.table"
+		},
+		"viz_VC5BEx25": {
+			"dataSources": {
+				"primary": "ds_wVOevxkK_ds_AXgjIFgY"
+			},
+			"eventHandlers": [
+				{
+					"type": "drilldown.setToken",
+					"options": {
+						"tokens": [
+							{
+								"key": "row.context.value",
+								"token": "ms_object_names"
+							}
+						]
+					}
+				}
+			],
+			"options": {
+				"drilldown": "cell",
+				"showInternalFields": false,
+				"columnFormat": {
+					"context": {
+                        "width": 700
+                    }
+				},
+				"count": 8
+			},
+			"showProgressBar": true,
+			"title": "",
+			"type": "splunk.table"
+		},
+		"viz_WvdnTwBR": {
+			"dataSources": {
+				"primary": "ds_WY4obnmU"
+			},
+			"eventHandlers": [
+				{
+					"options": {
+						"tokens": [
+							{
+								"key": "row.user.value",
+								"token": "ms_user_names"
+							}
+						]
+					},
+					"type": "drilldown.setToken"
+				}
+			],
+			"options": {
+				"columnFormat": {
+					"count": {
+						"width": 30
+					}
+				},
+				"count": 8
+			},
+			"showProgressBar": true,
+			"title": "",
+			"type": "splunk.table",
+			"showLastUpdated": false
+		},
+		"viz_aILjq6jc": {
+			"dataSources": {
+				"primary": "ds_2bG53cci_ds_EkqGpKKc_ds_34ljSSqf_ds_WY4obnmU"
+			},
+			"eventHandlers": [
+				{
+					"options": {
+						"tokens": [
+							{
+								"key": "row.object_type.value",
+								"token": "ms_object_types"
+							}
+						]
+					},
+					"type": "drilldown.setToken"
+				}
+			],
+			"options": {
+				"seriesColors": [
+					"#FF677B",
+					"#FFA476",
+					"#DD9900",
+					"#99B100",
+					"#008C80",
+					"#0051B5",
+					"#7B56DB",
+					"#009CEB",
+					"#00CDAF",
+					"#CB2196",
+					"#813193",
+					"#FF6ACE",
+					"#AE8CFF",
+					"#00689D",
+					"#00490A",
+					"#465D00",
+					"#9D6300",
+					"#F6540B",
+					"#FF969E",
+					"#E47BFE"
+				]
+			},
+			"showLastUpdated": false,
+			"showProgressBar": true,
+			"title": "Login user agent(s)",
+			"type": "splunk.pie"
+		},
+		"viz_jJX71ybc": {
+			"dataSources": {
+				"primary": "ds_eKo8k29O_ds_WY4obnmU"
+			},
+			"eventHandlers": [
+				{
+					"options": {
+						"tokens": [
+							{
+								"key": "row.user.value",
+								"token": "ms_user_names"
+							}
+						]
+					},
+					"type": "drilldown.setToken"
+				}
+			],
+			"showLastUpdated": false,
+			"showProgressBar": true,
+			"title": "Distinct user(s)",
+			"type": "splunk.singlevalue"
+		},
+		"viz_u0J839pR": {
+			"dataSources": {
+				"primary": "ds_SG2pKPV7_ds_slbguYLS_ds_EkqGpKKc_ds_34ljSSqf_ds_WY4obnmU"
+			},
+			"eventHandlers": [
+				{
+					"type": "drilldown.setToken",
+					"options": {
+						"tokens": [
+							{
+								"key": "row.useragent.value",
+								"token": "ms_user_agents"
+							}
+						]
+					}
+				}
+			],
+			"showLastUpdated": false,
+			"showProgressBar": true,
+			"title": "",
+			"type": "splunk.table",
+			"options": {
+				"columnFormat": {
+					"count": {
+						"width": 30
+					}
+				},
+				"count": 8
+			}
+		},
+		"viz_UDaNf0MI": {
+			"dataSources": {
+				"primary": "ds_yX0sUuiQ_ds_0LBHfs3r"
+			},
+			"eventHandlers": [],
+			"options": {
+				"legendDisplay": "bottom",
+				"xAxisTitleVisibility": "hide",
+				"yAxisTitleVisibility": "hide"
+			},
+			"showLastUpdated": false,
+			"showProgressBar": true,
+			"title": "Activities timeline",
+			"type": "splunk.column"
+		},
+		"viz_tXPCk9WN": {
+			"dataSources": {
+				"primary": "ds_eWH0mViw_ds_WY4obnmU"
+			},
+			"eventHandlers": [
+				{
+					"type": "drilldown.setToken",
+					"options": {
+						"tokens": [
+							{
+								"key": "row.action.value",
+								"token": "ms_actions"
+							}
+						]
+					}
+				}
+			],
+			"options": {
+				"columnFormat": {
+					"count": {
+						"width": 30
+					}
+				},
+				"count": 8
+			},
+			"showProgressBar": true,
+			"title": "Action(s)",
+			"type": "splunk.table",
+			"showLastUpdated": false
+		},
+		"viz_5EikTgSW": {
+			"dataSources": {
+				"primary": "ds_XvxGTFs0_ds_AXgjIFgY"
+			},
+			"eventHandlers": [
+				{
+					"type": "drilldown.setToken",
+					"options": {
+						"tokens": [
+							{
+								"key": "row.user.value",
+								"token": "ms_users"
+							}
+						]
+					}
+				}
+			],
+			"showLastUpdated": false,
+			"showProgressBar": true,
+			"title": "Users and actions",
+			"type": "splunk.linkgraph",
+			"options": {
+				"nodeWidth": 220,
+				"showValueCounts": false
+			}
+		},
+		"viz_0yVOacxL": {
+			"dataSources": {
+				"primary": "ds_uplRMfgR_ds_OOnwhUDc"
+			},
+			"eventHandlers": [
+				{
+					"options": {
+						"tokens": [
+							{
+								"key": "row.appname.value",
+								"token": "ms_app_names"
+							}
+						]
+					},
+					"type": "drilldown.setToken"
+				}
+			],
+			"showLastUpdated": false,
+			"showProgressBar": true,
+			"title": "Distinct app(s)",
+			"type": "splunk.singlevalue"
+		},
+		"viz_BicnhG3j": {
+			"context": {
+				"actionColumnFormatEditorConfig": {
+					"string": {
+						"unitPosition": "after"
+					}
+				},
+				"actionRowColorsEditorConfig": [
+					{
+						"match": "delete",
+						"value": "#D41F1F"
+					},
+					{
+						"match": "update",
+						"value": "#118832"
+					}
+				]
+			},
+			"dataSources": {
+				"primary": "ds_BKJ013Yc_ds_nQAbGEMe"
+			},
+			"eventHandlers": [],
+			"options": {
+				"columnFormat": {
+					"action": {
+						"data": "> table | seriesByName(\"action\") | formatByType(actionColumnFormatEditorConfig)",
+						"rowColors": "> table | seriesByName(\"action\") | matchValue(actionRowColorsEditorConfig)",
+						"width": 146
+					},
+					"event": {
+						"width": 1150
+					},
+					"name": {
+						"width": 300
+					},
+					"time": {
+						"width": 250
+					},
+					"user": {
+						"width": 150
+					}
+				},
+				"fontSize": "large",
+				"overflow-y": "scroll",
+				"overflow-x": "hidden"
+			},
+			"showLastUpdated": false,
+			"showProgressBar": true,
+			"title": "Activities",
+			"type": "splunk.table"
+		},
+		"viz_IQswgbde": {
+			"dataSources": {
+				"primary": "ds_BOYrM8sc_ds_uplRMfgR_ds_OOnwhUDc"
+			},
+			"eventHandlers": [
+				{
+					"options": {
+						"tokens": [
+							{
+								"key": "row.appname.value",
+								"token": "ms_app_names"
+							}
+						]
+					},
+					"type": "drilldown.setToken"
+				}
+			],
+			"showLastUpdated": false,
+			"showProgressBar": true,
+			"title": "Failed logins",
+			"type": "splunk.singlevalue",
+			"options": {
+				"majorColor": "#dc4e41"
+			}
+		},
+		"viz_T8DEJLv3": {
+			"dataSources": {
+				"primary": "ds_B9ZY1Wof_ds_BOYrM8sc_ds_uplRMfgR_ds_OOnwhUDc"
+			},
+			"eventHandlers": [
+				{
+					"options": {
+						"tokens": [
+							{
+								"key": "row.appname.value",
+								"token": "ms_app_names"
+							}
+						]
+					},
+					"type": "drilldown.setToken"
+				}
+			],
+			"showLastUpdated": false,
+			"showProgressBar": true,
+			"title": "All logins",
+			"type": "splunk.singlevalue",
+			"containerOptions": {},
+			"options": {
+				"majorColor": "#53a051"
+			},
+			"description": "include the failed logins"
+		}
+	},
+	"dataSources": {
+		"ds_0LBHfs3r": {
+			"name": "activities by user",
+			"options": {
+				"extend": "ds_sxu2HJOI",
+				"query": " | timechart count by user"
+			},
+			"type": "ds.chain"
+		},
+		"ds_1dnRSxiQ_ds_KtFg8oQ2": {
+			"name": "Object Creation By Type - Pie chart search copy 1",
+			"options": {
+				"enableSmartSources": true,
+				"extend": "ds_sxu2HJOI",
+				"query": "| search object_action = create | chart count by object_type"
+			},
+			"type": "ds.chain"
+		},
+		"ds_2bG53cci_ds_EkqGpKKc_ds_34ljSSqf_ds_WY4obnmU": {
+			"name": "Logins By User Agent - Chart search",
+			"options": {
+				"extend": "ds_sxu2HJOI",
+				"query": "| search NOT useragent = \"n/a\" AND NOT useragent=\"unknown\"\n| stats count by useragent"
+			},
+			"type": "ds.chain"
+		},
+		"ds_AXgjIFgY": {
+			"name": "Activity By Object",
+			"options": {
+				"extend": "ds_sxu2HJOI",
+				"query": "| stats count by object_name"
+			},
+			"type": "ds.chain"
+		},
+		"ds_EkqGpKKc_ds_34ljSSqf_ds_WY4obnmU": {
+			"name": "Activity By Host - Chart search",
+			"options": {
+				"extend": "ds_sxu2HJOI",
+				"query": " | eval fields=split(host,\".\") | eval host=mvindex(fields,0) |  stats count by host"
+			},
+			"type": "ds.chain"
+		},
+		"ds_KtFg8oQ2": {
+			"name": "Object Creation By Type - Pie chart search",
+			"options": {
+				"enableSmartSources": true,
+				"extend": "ds_sxu2HJOI",
+				"query": "| search object_action = create | chart count by object_type"
+			},
+			"type": "ds.chain"
+		},
+		"ds_OOnwhUDc": {
+			"name": "Activity By App - Table search",
+			"options": {
+				"extend": "ds_sxu2HJOI",
+				"query": "| stats count by app"
+			},
+			"type": "ds.chain"
+		},
+		"ds_SG2pKPV7_ds_slbguYLS_ds_EkqGpKKc_ds_34ljSSqf_ds_WY4obnmU": {
+			"name": "Logins By User Agent - Table search",
+			"options": {
+				"extend": "ds_sxu2HJOI",
+				"query": "| search NOT useragent = \"n/a\" AND NOT useragent=\"unknown\"\n| stats count by useragent"
+			},
+			"type": "ds.chain"
+		},
+		"ds_WY4obnmU": {
+			"name": "Activity By User - Table search",
+			"options": {
+				"extend": "ds_sxu2HJOI",
+				"query": "| stats count by user"
+			},
+			"type": "ds.chain"
+		},
+		"ds_eKo8k29O_ds_WY4obnmU": {
+			"name": "Activity By User - Chart search",
+			"options": {
+				"extend": "ds_sxu2HJOI",
+				"query": "| stats dc(user)"
+			},
+			"type": "ds.chain"
+		},
+		"ds_nQAbGEMe": {
+			"name": "events",
+			"options": {
+				"extend": "ds_sxu2HJOI",
+				"query": "|  eval action=user_action\n| sort -_time,\n|  eval event=orig_body\n|  eval name=object_name\n|  eval time=strftime(_time,\"%Y-%m-%d  %H:%M:%S.%Q\")\n|  fields time, user, action, name, event\n|  fields - _time"
+			},
+			"type": "ds.chain"
+		},
+		"ds_slbguYLS_ds_EkqGpKKc_ds_34ljSSqf_ds_WY4obnmU": {
+			"name": "Activity By Host - Table search",
+			"options": {
+				"extend": "ds_sxu2HJOI",
+				"query": " |  stats count by host"
+			},
+			"type": "ds.chain"
+		},
+		"ds_sxu2HJOI": {
+			"name": "ds_baseSelection",
+			"options": {
+				"query": "| savedsearch audit_trail_users_query ss_user_names=\"$ms_user_names$\" ss_host_names=\"$ms_host_names$\" ss_text=$text_token|s$\n```Tags may have mnulti values: {[0]='tag_1' [1]='tag_2'}- split it to separate events```\n| eval tagnames=split(replace(object_name, \"\\[[0-9]*\\]=\",\"\"), \"' '\") |  mvexpand tagnames | eval object_name=ltrim(rtrim(tagnames,\"'}\"),\"{'\")\n```raw attributes (redundant)```\n| search user IN ($ms_user_names$)\n| search host IN ($ms_host_names$)\n```calculated attributes```\n| search user_action IN ($ms_actions$)\n| search object_name IN ($ms_object_names$)\n| search app IN ($ms_app_names$)\n| search useragent IN ($ms_user_agents$)\n\n",
+				"queryParameters": {
+					"earliest": "$time.earliest$",
+					"latest": "$time.latest$"
+				}
+			},
+			"type": "ds.search"
+		},
+		"ds_uplRMfgR_ds_OOnwhUDc": {
+			"name": "Activity By App - Chart search",
+			"options": {
+				"extend": "ds_sxu2HJOI",
+				"query": "| stats dc(app)"
+			},
+			"type": "ds.chain"
+		},
+		"ds_wVOevxkK_ds_AXgjIFgY": {
+			"name": "Activity By Object - table search",
+			"options": {
+				"extend": "ds_sxu2HJOI",
+				"query": "|  eval context=object_name\n| stats count by context"
+			},
+			"type": "ds.chain"
+		},
+		"ds_yX0sUuiQ_ds_0LBHfs3r": {
+			"name": "activities by action",
+			"options": {
+				"extend": "ds_sxu2HJOI",
+				"query": " | eval the_action=IF(\"$dd_augment_action$\" == \"yes\", ex_user_action, user_action)\n | timechart count by the_action"
+			},
+			"type": "ds.chain"
+		},
+		"ds_Af3ExPjS_ds_eKo8k29O_ds_WY4obnmU": {
+			"name": "Distinct stacks",
+			"options": {
+				"extend": "ds_sxu2HJOI",
+				"query": "| stats dc(stack)"
+			},
+			"type": "ds.chain"
+		},
+		"ds_bkO5kv5T_ds_WY4obnmU": {
+			"name": "Activity By Stack - Table Search",
+			"options": {
+				"extend": "ds_sxu2HJOI",
+				"query": "| stats count by stack"
+			},
+			"type": "ds.chain"
+		},
+		"ds_eWH0mViw_ds_WY4obnmU": {
+			"name": "Activities - Table search",
+			"options": {
+				"extend": "ds_sxu2HJOI",
+				"query": "| eval action=user_action\n| stats count by action"
+			},
+			"type": "ds.chain"
+		},
+		"ds_XvxGTFs0_ds_AXgjIFgY": {
+			"name": "Users And Action",
+			"options": {
+				"extend": "ds_sxu2HJOI",
+				"query": "|  eval action=user_action\n|  dedup user, action\n|  table user, action \n"
+			},
+			"type": "ds.chain"
+		},
+		"ds_x2TEDIbr": {
+			"type": "ds.chain",
+			"options": {
+				"extend": "ds_sxu2HJOI",
+				"query": "|  table user_action \n|  dedup user_action"
+			},
+			"name": "List of Actions"
+		},
+		"ds_LwcvAxAb": {
+			"type": "ds.chain",
+			"options": {
+				"query": "|  table useragent \n|  dedup useragent",
+				"extend": "ds_sxu2HJOI"
+			},
+			"name": "List Of Useragents"
+		},
+		"ds_eSukAtNI": {
+			"type": "ds.chain",
+			"options": {
+				"extend": "ds_sxu2HJOI",
+				"query": "|  table object_name \n|  dedup object_name\n| eval object_name=if(match(object_name, \".*[\\s\\(\\)].*\"), \"\\\"\" . object_name . \"\\\"\", object_name)"
+			},
+			"name": "List of Object Names"
+		},
+		"ds_DUABMnxY": {
+			"type": "ds.chain",
+			"options": {
+				"extend": "ds_sxu2HJOI",
+				"query": "|  table user \n|  dedup user"
+			},
+			"name": "List of Users"
+		},
+		"ds_oUwKmA5u": {
+			"type": "ds.chain",
+			"options": {
+				"extend": "ds_sxu2HJOI",
+				"query": "|  table app \n|  dedup app"
+			},
+			"name": "List of Apps"
+		},
+		"ds_fTyQF8LC": {
+			"type": "ds.chain",
+			"options": {
+				"extend": "ds_sxu2HJOI",
+				"query": "|  table host \n|  dedup host"
+			},
+			"name": "Search_1"
+		},
+		"ds_ir6wOG8o_ds_eKo8k29O_ds_WY4obnmU": {
+			"name": "Activity By User - Chart search copy 1",
+			"options": {
+				"extend": "ds_sxu2HJOI",
+				"query": "| stats dc(user)"
+			},
+			"type": "ds.chain"
+		},
+		"ds_BKJ013Yc_ds_nQAbGEMe": {
+			"name": "events copy 1",
+			"options": {
+				"extend": "ds_sxu2HJOI",
+				"query": "|  eval action=user_action\n| sort -_time,\n|  eval event=orig_body\n|  eval name=object_name\n|  eval time=strftime(_time,\"%Y-%m-%d  %H:%M:%S.%Q\")\n|  fields time, user, action, name, event\n|  fields - _time\n| fields - _mkv_child"
+			},
+			"type": "ds.chain"
+		},
+		"ds_BOYrM8sc_ds_uplRMfgR_ds_OOnwhUDc": {
+			"name": "Failed Logins - Single Value",
+			"options": {
+				"extend": "ds_sxu2HJOI",
+				"query": "| search user_action=\"login_attempt\" AND NOT info=\"succeeded\" \n|  stats count"
+			},
+			"type": "ds.chain"
+		},
+		"ds_B9ZY1Wof_ds_BOYrM8sc_ds_uplRMfgR_ds_OOnwhUDc": {
+			"name": "All Logins - Single Value",
+			"options": {
+				"extend": "ds_sxu2HJOI",
+				"query": "| search user_action=\"login_attempt\" \n|  stats count "
+			},
+			"type": "ds.chain"
+		}
+	},
+	"layout": {
+		"tabs": {
+			"items": [
+				{
+					"layoutId": "layout_1",
+					"label": "Overview"
+				},
+				{
+					"layoutId": "layout_VYHINhpE",
+					"label": "Activity log"
+				}
+			]
+		},
+		"layoutDefinitions": {
+			"layout_1": {
+				"type": "absolute",
+				"options": {
+					"backgroundColor": "transparent",
+					"display": "fit-to-width",
+					"height": 1350,
+					"width": 2000
+				},
+				"structure": [
+					{
+						"item": "viz_FTCFDEzH",
+						"position": {
+							"h": 430,
+							"w": 490,
+							"x": 1500,
+							"y": 820
+						},
+						"type": "block"
+					},
+					{
+						"item": "viz_4gLfdNAZ",
+						"position": {
+							"h": 430,
+							"w": 590,
+							"x": 0,
+							"y": 820
+						},
+						"type": "block"
+					},
+					{
+						"item": "viz_jJX71ybc",
+						"position": {
+							"h": 250,
+							"w": 200,
+							"x": 530,
+							"y": 270
+						},
+						"type": "block"
+					},
+					{
+						"item": "viz_WvdnTwBR",
+						"position": {
+							"h": 250,
+							"w": 400,
+							"x": 730,
+							"y": 270
+						},
+						"type": "block"
+					},
+					{
+						"item": "viz_FZih8hXD",
+						"position": {
+							"h": 280,
+							"w": 400,
+							"x": 730,
+							"y": 530
+						},
+						"type": "block"
+					},
+					{
+						"item": "viz_VC5BEx25",
+						"position": {
+							"h": 430,
+							"w": 900,
+							"x": 590,
+							"y": 820
+						},
+						"type": "block"
+					},
+					{
+						"item": "viz_aILjq6jc",
+						"position": {
+							"h": 250,
+							"w": 490,
+							"x": 1500,
+							"y": 270
+						},
+						"type": "block"
+					},
+					{
+						"item": "viz_u0J839pR",
+						"position": {
+							"h": 290,
+							"w": 490,
+							"x": 1500,
+							"y": 520
+						},
+						"type": "block"
+					},
+					{
+						"item": "viz_UDaNf0MI",
+						"position": {
+							"x": 530,
+							"y": 0,
+							"w": 1460,
+							"h": 260
+						},
+						"type": "block"
+					},
+					{
+						"item": "viz_tXPCk9WN",
+						"position": {
+							"x": 0,
+							"y": 420,
+							"w": 520,
+							"h": 390
+						},
+						"type": "block"
+					},
+					{
+						"item": "viz_5EikTgSW",
+						"position": {
+							"x": 0,
+							"y": 0,
+							"w": 520,
+							"h": 410
+						},
+						"type": "block"
+					},
+					{
+						"item": "viz_0yVOacxL",
+						"position": {
+							"x": 530,
+							"y": 530,
+							"w": 200,
+							"h": 280
+						},
+						"type": "block"
+					},
+					{
+						"item": "viz_IQswgbde",
+						"position": {
+							"x": 1140,
+							"y": 270,
+							"w": 350,
+							"h": 250
+						},
+						"type": "block"
+					},
+					{
+						"item": "viz_T8DEJLv3",
+						"position": {
+							"x": 1140,
+							"y": 530,
+							"w": 350,
+							"h": 280
+						},
+						"type": "block"
+					}
+				]
+			},
+			"layout_VYHINhpE": {
+				"type": "grid",
+				"structure": [
+					{
+						"item": "viz_BicnhG3j",
+						"type": "block",
+						"position": {
+							"x": 0,
+							"y": 0,
+							"w": 1200,
+							"h": 770
+						}
+					}
+				]
+			}
+		},
+		"globalInputs": [
+			"input_n59hT3WT",
+			"input_V8goUdiM",
+			"input_T7BIJ7Pm",
+			"input_8cPLfS0W",
+			"input_PYpDbVm3",
+			"input_yLyZgaC5",
+			"input_0m4aAr88",
+			"input_3yYi4vGy",
+			"input_WAwuApNh"
+		],
+		"options": {
+			"submitButton": true,
+			"submitOnDashboardLoad": true
+		}
+	}
+}
+    ]]></definition>
+    <meta type="hiddenElements"><![CDATA[
+{
+	"hideEdit": true,
+	"hideOpenInSearch": false,
+	"hideExport": true
+}
+    ]]></meta>
+</dashboard>

@@ -1,0 +1,4 @@
+<?xml version="1.0"?>
+<view template="splunk_pipeline_builders:/templates/index.html" type="html" isDashboard="False">
+	<label>Edge Processors</label>
+</view>

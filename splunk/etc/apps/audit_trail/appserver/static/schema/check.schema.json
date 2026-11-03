@@ -1,0 +1,24 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",  
+    "$id": "https://cisco.com/splunk/audit/check.schema.json",  
+    "title": "Check",  
+    "description": "An event representing verification made by the system - e.g. quota check.",
+    "$ref":"https://cisco.com/splunk/audit/event.schema.json",
+    "type": "object",
+    "properties": {
+        "data": {
+            "description":"Verification event specific data.",
+            "type": "object",
+            "properties": {
+                "attributes": {
+                    "description": "Additional attributes specific to a given verification performed.",
+                    "type": "object"
+                }
+             },
+            "additionalProperties": false,
+            "required": [ "attributes" ]
+        }
+
+    }
+
+}

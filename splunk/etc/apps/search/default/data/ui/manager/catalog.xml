@@ -1,0 +1,9 @@
+<endpoint name="catalog" template="pages/system.html" showOnSearchHeadCluster="1">
+    <menu name="knowledge_configurations">
+        <label>Catalog</label>
+        <url>/app/%(namespace)s/catalog</url>
+        <description>Explore datasets, promote raw Machine Data Lake datasets into a searchable state, and track the status of dataset promotion jobs.</description>
+        <order>5</order>
+        <id>catalog</id>
+    </menu>
+</endpoint>

@@ -1,0 +1,13 @@
+/*!
+  * $script.js JS loader & dependency manager
+  * https://github.com/ded/script.js
+  * (c) Dustin Diaz 2014 | License MIT
+  */
+
+/*!
+ * Copyright © 2018 Splunk Inc.
+ * SPLUNK CONFIDENTIAL – Use or disclosure of this material in whole or
+ * in part without a valid written license from Splunk Inc. is PROHIBITED.
+ */
+
+/*! http://mths.be/fromcodepoint v0.1.0 by @mathias */

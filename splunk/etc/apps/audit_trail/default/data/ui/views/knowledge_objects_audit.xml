@@ -1,0 +1,1041 @@
+
+<dashboard version="2" theme="dark">
+    <label>Audit Trail Dashboard / Objects Modifications</label>
+    <description>Users and Knowledge Objects creations / updates / deletions.</description>
+    <definition><![CDATA[
+{
+	"dataSources": {
+		"ds_KtFg8oQ2": {
+			"type": "ds.chain",
+			"options": {
+				"extend": "ds_sxu2HJOI",
+				"query": "| search object_action = create | chart count by object_type",
+				"enableSmartSources": true
+			},
+			"name": "Object Creation By Type - Pie chart search"
+		},
+		"ds_0LBHfs3r": {
+			"type": "ds.chain",
+			"options": {
+				"extend": "ds_sxu2HJOI",
+				"query": " | timechart count "
+			},
+			"name": "Object Updates By Type - Pie chart search"
+		},
+		"ds_WY4obnmU": {
+			"type": "ds.chain",
+			"options": {
+				"extend": "ds_sxu2HJOI",
+				"query": "| stats count by user"
+			},
+			"name": "Activity By User - Table search"
+		},
+		"ds_OOnwhUDc": {
+			"type": "ds.chain",
+			"options": {
+				"extend": "ds_sxu2HJOI",
+				"query": "| stats count by appname | rename appname as app"
+			},
+			"name": "Activity By App - Table search"
+		},
+		"ds_AXgjIFgY": {
+			"type": "ds.chain",
+			"options": {
+				"extend": "ds_sxu2HJOI",
+				"query": "| stats count by name"
+			},
+			"name": "Activity By Object - Table search"
+		},
+		"ds_sxu2HJOI": {
+			"type": "ds.search",
+			"options": {
+				"queryParameters": {
+					"earliest": "$time.earliest$",
+					"latest": "$time.latest$"
+				},
+				"query": "| savedsearch audit_trail_knowledge_objects_query\n| search object_action IN ($ms_actions$)\n|  search object_type IN ($ms_object_types$)\n|  search name IN ($ms_object_names$)\n|  search user IN ($ms_user_names$)\n|  search appname IN ($ms_app_names$)\n|  search host IN ($ms_host_names$)\n|  search orig_body=$text_token|s$"
+			},
+			"name": "ds_baseSelection"
+		},
+		"ds_nQAbGEMe": {
+			"type": "ds.chain",
+			"options": {
+				"extend": "ds_sxu2HJOI",
+				"query": "|  eval action=object_action \n|  eval app=IF(appname=\"-missing-\",\"-\",appname)\n|  eval type=object_type\n| sort -_time,\n|  eval event=orig_body\n|  eval time=strftime(_time,\"%Y-%m-%d  %H:%M:%S.%Q\")\n|  fields time, user, action, name, event\n|  fields - _time"
+			},
+			"name": "Activities"
+		},
+		"ds_eKo8k29O_ds_WY4obnmU": {
+			"type": "ds.chain",
+			"options": {
+				"extend": "ds_sxu2HJOI",
+				"query": "| stats count by user"
+			},
+			"name": "Activity By User - Chart search"
+		},
+		"ds_uplRMfgR_ds_OOnwhUDc": {
+			"type": "ds.chain",
+			"options": {
+				"extend": "ds_sxu2HJOI",
+				"query": "| stats count by appname"
+			},
+			"name": "Activity By App - Chart search"
+		},
+		"ds_EkqGpKKc_ds_34ljSSqf_ds_WY4obnmU": {
+			"type": "ds.chain",
+			"options": {
+				"extend": "ds_sxu2HJOI",
+				"query": " |  stats count by host"
+			},
+			"name": "Activity By Host - Chart search"
+		},
+		"ds_1dnRSxiQ_ds_KtFg8oQ2": {
+			"type": "ds.chain",
+			"options": {
+				"extend": "ds_sxu2HJOI",
+				"query": "| search object_action = create | chart count by object_type",
+				"enableSmartSources": true
+			},
+			"name": "Object Creation By Type - Pie chart search copy 1"
+		},
+		"ds_wVOevxkK_ds_AXgjIFgY": {
+			"type": "ds.chain",
+			"options": {
+				"extend": "ds_sxu2HJOI",
+				"query": "| stats count by name"
+			},
+			"name": "Activity By Object - Table search copy 1"
+		},
+		"ds_slbguYLS_ds_EkqGpKKc_ds_34ljSSqf_ds_WY4obnmU": {
+			"type": "ds.chain",
+			"options": {
+				"extend": "ds_sxu2HJOI",
+				"query": " |  stats count by host"
+			},
+			"name": "Activity By Host - Table search"
+		},
+		"ds_2bG53cci_ds_EkqGpKKc_ds_34ljSSqf_ds_WY4obnmU": {
+			"type": "ds.chain",
+			"options": {
+				"extend": "ds_sxu2HJOI",
+				"query": " |  stats count by object_type"
+			},
+			"name": "Activity By Type - Chart search"
+		},
+		"ds_SG2pKPV7_ds_slbguYLS_ds_EkqGpKKc_ds_34ljSSqf_ds_WY4obnmU": {
+			"type": "ds.chain",
+			"options": {
+				"extend": "ds_sxu2HJOI",
+				"query": " |  stats count by object_type | rename object_type as type"
+			},
+			"name": "Activity By Type - Table search"
+		},
+		"ds_4IlbgBew": {
+			"type": "ds.chain",
+			"options": {
+				"query": "| table name\n| dedup name\n| eval name=if(match(name, \".*[\\s\\(\\)].*\"), \"\\\"\" . name . \"\\\"\", name)",
+				"extend": "ds_sxu2HJOI"
+			},
+			"name": "List of objects names"
+		}
+	},
+	"visualizations": {
+		"viz_ojU9o0Oe": {
+			"type": "splunk.area",
+			"dataSources": {
+				"primary": "ds_0LBHfs3r"
+			},
+			"eventHandlers": [],
+			"title": "Timeline",
+			"showProgressBar": true,
+			"cornerRadius": [
+				5,
+				5,
+				0,
+				0
+			],
+			"containerOptions": {},
+			"showLastUpdated": false,
+			"options": {
+				"legendDisplay": "off",
+				"xAxisTitleVisibility": "hide"
+			}
+		},
+		"viz_WvdnTwBR": {
+			"type": "splunk.table",
+			"options": {
+				"drilldown": "cell",
+				"count": 3,
+				"columnFormat": {
+					"object_type": {
+						"width": 90
+					},
+					"appname": {
+						"width": 90
+					},
+					"user": {
+						"width": 233
+					}
+				}
+			},
+			"dataSources": {
+				"primary": "ds_WY4obnmU"
+			},
+			"eventHandlers": [
+				{
+					"type": "drilldown.setToken",
+					"options": {
+						"tokens": [
+							{
+								"token": "ms_user_names",
+								"key": "row.user.value"
+							}
+						]
+					}
+				}
+			],
+			"title": "",
+			"showProgressBar": true,
+			"cornerRadius": [
+				0,
+				0,
+				5,
+				5
+			]
+		},
+		"viz_FZih8hXD": {
+			"type": "splunk.table",
+			"options": {
+				"drilldown": "cell",
+				"columnFormat": {
+					"count": {
+                        "width": 30
+                    }
+				},
+				"count": 3
+			},
+			"dataSources": {
+				"primary": "ds_OOnwhUDc"
+			},
+			"eventHandlers": [
+				{
+					"type": "drilldown.setToken",
+					"options": {
+						"tokens": [
+							{
+								"token": "ms_app_names",
+								"key": "row.appname.value"
+							}
+						]
+					}
+				}
+			],
+			"title": "",
+			"showProgressBar": true,
+			"cornerRadius": [
+				0,
+				0,
+				5,
+				5
+			]
+		},
+		"viz_4gLfdNAZ": {
+			"type": "splunk.pie",
+			"dataSources": {
+				"primary": "ds_AXgjIFgY"
+			},
+			"eventHandlers": [
+				{
+					"type": "drilldown.setToken",
+					"options": {
+						"tokens": [
+							{
+								"token": "ms_object_names",
+								"key": "row.name.value"
+							}
+						]
+					}
+				}
+			],
+			"title": "Name(s)",
+			"showProgressBar": true,
+			"cornerRadius": [
+				5,
+				0,
+				0,
+				5
+			],
+			"containerOptions": {},
+			"showLastUpdated": false
+		},
+		"viz_6FMhU41W": {
+			"type": "splunk.table",
+			"dataSources": {
+				"primary": "ds_nQAbGEMe"
+			},
+			"eventHandlers": [],
+			"title": "Activities",
+			"showProgressBar": true,
+			"containerOptions": {},
+			"showLastUpdated": false,
+			"context": {
+				"actionColumnFormatEditorConfig": {
+					"string": {
+						"unitPosition": "after"
+					}
+				},
+				"actionRowColorsEditorConfig": [
+					{
+						"match": "delete",
+						"value": "#D41F1F"
+					},
+					{
+						"match": "update",
+						"value": "#118832"
+					}
+				]
+			},
+			"cornerRadius": [
+				5,
+				5,
+				5,
+				5
+			],
+			"options": {
+				"columnFormat": {
+					"action": {
+						"data": "> table | seriesByName(\"action\") | formatByType(actionColumnFormatEditorConfig)",
+						"rowColors": "> table | seriesByName(\"action\") | matchValue(actionRowColorsEditorConfig)",
+						"width": 100
+					},
+					"time": {
+						"width": 250
+					},
+					"user": {
+						"width": 150
+					},
+					"name": {
+						"width": 300
+					},
+					"event": {
+						"width": 1150
+					}
+				},
+				"fontSize": "large"
+			}
+		},
+		"viz_jJX71ybc": {
+			"type": "splunk.pie",
+			"dataSources": {
+				"primary": "ds_eKo8k29O_ds_WY4obnmU"
+			},
+			"eventHandlers": [
+				{
+					"type": "drilldown.setToken",
+					"options": {
+						"tokens": [
+							{
+								"token": "ms_user_names",
+								"key": "row.user.value"
+							}
+						]
+					}
+				}
+			],
+			"title": "User(s)",
+			"showProgressBar": true,
+			"containerOptions": {},
+			"showLastUpdated": false,
+			"cornerRadius": [
+				5,
+				5,
+				0,
+				0
+			],
+			"options": {
+				"seriesColors": [
+					"#FF677B",
+					"#FFA476",
+					"#DD9900",
+					"#99B100",
+					"#008C80",
+					"#0051B5",
+					"#7B56DB",
+					"#009CEB",
+					"#00CDAF",
+					"#CB2196",
+					"#813193",
+					"#FF6ACE",
+					"#AE8CFF",
+					"#00689D",
+					"#00490A",
+					"#465D00",
+					"#9D6300",
+					"#F6540B",
+					"#FF969E",
+					"#E47BFE"
+				]
+			}
+		},
+		"viz_caAWiK8D": {
+			"type": "splunk.pie",
+			"options": {
+				"seriesColors": [
+					"#FF677B",
+					"#FFA476",
+					"#DD9900",
+					"#99B100",
+					"#008C80",
+					"#0051B5",
+					"#7B56DB",
+					"#009CEB",
+					"#00CDAF",
+					"#CB2196",
+					"#813193",
+					"#FF6ACE",
+					"#AE8CFF",
+					"#00689D",
+					"#00490A",
+					"#465D00",
+					"#9D6300",
+					"#F6540B",
+					"#FF969E",
+					"#E47BFE"
+				]
+			},
+			"dataSources": {
+				"primary": "ds_uplRMfgR_ds_OOnwhUDc"
+			},
+			"eventHandlers": [
+				{
+					"type": "drilldown.setToken",
+					"options": {
+						"tokens": [
+							{
+								"token": "ms_app_names",
+								"key": "row.appname.value"
+							}
+						]
+					}
+				}
+			],
+			"title": "App(s)",
+			"showProgressBar": true,
+			"containerOptions": {},
+			"showLastUpdated": false,
+			"cornerRadius": [
+				5,
+				5,
+				0,
+				0
+			]
+		},
+		"viz_FTCFDEzH": {
+			"type": "splunk.pie",
+			"dataSources": {
+				"primary": "ds_EkqGpKKc_ds_34ljSSqf_ds_WY4obnmU"
+			},
+			"eventHandlers": [
+				{
+					"type": "drilldown.setToken",
+					"options": {
+						"tokens": [
+							{
+								"token": "ms_host_names",
+								"key": "row.host.value"
+							}
+						]
+					}
+				}
+			],
+			"title": "Host(s)",
+			"showProgressBar": true,
+			"containerOptions": {},
+			"showLastUpdated": false,
+			"cornerRadius": [
+				5,
+				5,
+				0,
+				0
+			],
+			"options": {
+				"seriesColors": [
+					"#FF677B",
+					"#FFA476",
+					"#DD9900",
+					"#99B100",
+					"#008C80",
+					"#0051B5",
+					"#7B56DB",
+					"#009CEB",
+					"#00CDAF",
+					"#CB2196",
+					"#813193",
+					"#FF6ACE",
+					"#AE8CFF",
+					"#00689D",
+					"#00490A",
+					"#465D00",
+					"#9D6300",
+					"#F6540B",
+					"#FF969E",
+					"#E47BFE"
+				]
+			}
+		},
+		"viz_VC5BEx25": {
+			"type": "splunk.table",
+			"options": {
+				"drilldown": "cell",
+				"showInternalFields": false,
+				"columnFormat": {
+                    "name": {
+                        "width": 700
+                    }
+                }
+			},
+			"dataSources": {
+				"primary": "ds_wVOevxkK_ds_AXgjIFgY"
+			},
+			"eventHandlers": [
+				{
+					"type": "drilldown.setToken",
+					"options": {
+						"tokens": [
+							{
+								"token": "ms_object_names",
+								"key": "row.name.value"
+							}
+						]
+					}
+				}
+			],
+			"title": "",
+			"showProgressBar": true,
+			"cornerRadius": [
+				0,
+				5,
+				5,
+				0
+			]
+		},
+		"viz_hC1y1jIc": {
+			"type": "splunk.table",
+			"dataSources": {
+				"primary": "ds_slbguYLS_ds_EkqGpKKc_ds_34ljSSqf_ds_WY4obnmU"
+			},
+			"eventHandlers": [
+				{
+					"type": "drilldown.setToken",
+					"options": {
+						"tokens": [
+							{
+								"token": "ms_host_names",
+								"key": "row.host.value"
+							}
+						]
+					}
+				}
+			],
+			"title": "",
+			"showProgressBar": true,
+			"containerOptions": {},
+			"showLastUpdated": false,
+			"cornerRadius": [
+				0,
+				0,
+				5,
+				5
+			],
+			"options": {
+				"count": 3,
+				"columnFormat": {
+                    "count": {
+                        "width": 30
+                    }
+                }
+			}
+		},
+		"viz_aILjq6jc": {
+			"type": "splunk.pie",
+			"dataSources": {
+				"primary": "ds_2bG53cci_ds_EkqGpKKc_ds_34ljSSqf_ds_WY4obnmU"
+			},
+			"eventHandlers": [
+				{
+					"type": "drilldown.setToken",
+					"options": {
+						"tokens": [
+							{
+								"token": "ms_object_types",
+								"key": "row.object_type.value"
+							}
+						]
+					}
+				}
+			],
+			"title": "Type(s)",
+			"showProgressBar": true,
+			"containerOptions": {},
+			"showLastUpdated": false,
+			"cornerRadius": [
+				5,
+				5,
+				0,
+				0
+			],
+			"options": {
+				"seriesColors": [
+					"#FF677B",
+					"#FFA476",
+					"#DD9900",
+					"#99B100",
+					"#008C80",
+					"#0051B5",
+					"#7B56DB",
+					"#009CEB",
+					"#00CDAF",
+					"#CB2196",
+					"#813193",
+					"#FF6ACE",
+					"#AE8CFF",
+					"#00689D",
+					"#00490A",
+					"#465D00",
+					"#9D6300",
+					"#F6540B",
+					"#FF969E",
+					"#E47BFE"
+				]
+			}
+		},
+		"viz_u0J839pR": {
+			"type": "splunk.table",
+			"dataSources": {
+				"primary": "ds_SG2pKPV7_ds_slbguYLS_ds_EkqGpKKc_ds_34ljSSqf_ds_WY4obnmU"
+			},
+			"eventHandlers": [
+				{
+					"type": "drilldown.setToken",
+					"options": {
+						"tokens": [
+							{
+								"token": "ms_object_types",
+								"key": "row.object_type.value"
+							}
+						]
+					}
+				}
+			],
+			"title": "",
+			"showProgressBar": true,
+			"containerOptions": {},
+			"showLastUpdated": false,
+			"cornerRadius": [
+				0,
+				0,
+				5,
+				5
+			],
+			"options": {
+				"count": 3,
+				"columnFormat": {
+                    "count": {
+                        "width": 30
+                    }
+                }
+			}
+		}
+	},
+	"inputs": {
+		"input_n59hT3WT": {
+			"type": "input.text",
+			"options": {
+				"token": "text_token",
+				"defaultValue": "*"
+			},
+			"title": "SPL condition(s)"
+		},
+		"input_T7BIJ7Pm": {
+			"options": {
+				"items": [
+					{
+						"label": "Create",
+						"value": "create"
+					},
+					{
+						"label": "Update",
+						"value": "update"
+					},
+					{
+						"label": "Delete",
+						"value": "delete"
+					}
+				],
+				"token": "ms_actions",
+				"defaultValue": [
+					"create",
+					"update",
+					"delete"
+				]
+			},
+			"title": "Action(s)",
+			"type": "input.multiselect",
+			"dataSources": {}
+		},
+		"input_0m4aAr88": {
+			"options": {
+				"items": ">frame(label, value) | prepend(formattedStatics) | objects()",
+				"defaultValue": [
+					"*"
+				],
+				"token": "ms_object_types"
+			},
+			"title": "Type(s)",
+			"type": "input.multiselect",
+			"dataSources": {
+				"primary": "ds_sxu2HJOI"
+			},
+			"context": {
+				"formattedConfig": {
+					"number": {
+						"prefix": ""
+					}
+				},
+				"formattedStatics": ">statics | formatByType(formattedConfig)",
+				"statics": [
+					[
+						"Any"
+					],
+					[
+						"*"
+					]
+				],
+				"label": ">primary | seriesByName(\"object_type\") | renameSeries(\"label\") | formatByType(formattedConfig)",
+				"value": ">primary | seriesByName(\"object_type\") | renameSeries(\"value\") | formatByType(formattedConfig)"
+			}
+		},
+		"input_8cPLfS0W": {
+			"options": {
+				"items": ">frame(label, value) | prepend(formattedStatics) | objects()",
+				"defaultValue": [
+					"*"
+				],
+				"token": "ms_object_names"
+			},
+			"title": "Name(s)",
+			"type": "input.multiselect",
+			"dataSources": {
+				"primary": "ds_4IlbgBew"
+			},
+			"context": {
+				"formattedConfig": {
+					"number": {
+						"prefix": ""
+					}
+				},
+				"formattedStatics": ">statics | formatByType(formattedConfig)",
+				"statics": [
+					[
+						"Any"
+					],
+					[
+						"*"
+					]
+				],
+				"label": ">primary | seriesByName(\"name\") | renameSeries(\"label\") | formatByType(formattedConfig)",
+				"value": ">primary | seriesByName(\"name\") | renameSeries(\"value\") | formatByType(formattedConfig)"
+			}
+		},
+		"input_V8goUdiM": {
+			"options": {
+				"items": ">frame(label, value) | prepend(formattedStatics) | objects()",
+				"defaultValue": [
+					"*"
+				],
+				"token": "ms_user_names"
+			},
+			"title": "User(s)",
+			"type": "input.multiselect",
+			"dataSources": {
+				"primary": "ds_sxu2HJOI"
+			},
+			"context": {
+				"formattedConfig": {
+					"number": {
+						"prefix": ""
+					}
+				},
+				"formattedStatics": ">statics | formatByType(formattedConfig)",
+				"statics": [
+					[
+						"Any"
+					],
+					[
+						"*"
+					]
+				],
+				"label": ">primary | seriesByName(\"user\") | renameSeries(\"label\") | formatByType(formattedConfig)",
+				"value": ">primary | seriesByName(\"user\") | renameSeries(\"value\") | formatByType(formattedConfig)"
+			}
+		},
+		"input_PYpDbVm3": {
+			"options": {
+				"items": ">frame(label, value) | prepend(formattedStatics) | objects()",
+				"defaultValue": [
+					"*"
+				],
+				"token": "ms_app_names"
+			},
+			"title": "App(s)",
+			"type": "input.multiselect",
+			"dataSources": {
+				"primary": "ds_sxu2HJOI"
+			},
+			"context": {
+				"formattedConfig": {
+					"number": {
+						"prefix": ""
+					}
+				},
+				"formattedStatics": ">statics | formatByType(formattedConfig)",
+				"statics": [
+					[
+						"Any"
+					],
+					[
+						"*"
+					]
+				],
+				"label": ">primary | seriesByName(\"appname\") | renameSeries(\"label\") | formatByType(formattedConfig)",
+				"value": ">primary | seriesByName(\"appname\") | renameSeries(\"value\") | formatByType(formattedConfig)"
+			}
+		},
+		"input_yLyZgaC5": {
+			"options": {
+				"items": ">frame(label, value) | prepend(formattedStatics) | objects()",
+				"defaultValue": [
+					"*"
+				],
+				"token": "ms_host_names"
+			},
+			"title": "Host(s)",
+			"type": "input.multiselect",
+			"dataSources": {
+				"primary": "ds_sxu2HJOI"
+			},
+			"context": {
+				"formattedConfig": {
+					"number": {
+						"prefix": ""
+					}
+				},
+				"formattedStatics": ">statics | formatByType(formattedConfig)",
+				"statics": [
+					[
+						"Any"
+					],
+					[
+						"*"
+					]
+				],
+				"label": ">primary | seriesByName(\"host\") | renameSeries(\"label\") | formatByType(formattedConfig)",
+				"value": ">primary | seriesByName(\"host\") | renameSeries(\"value\") | formatByType(formattedConfig)"
+			}
+		},
+		"input_WAwuApNh": {
+			"type": "input.timerange",
+			"options": {
+				"token": "time",
+				"defaultValue": "-7d@h,now"
+			},
+			"title": "Time range"
+		}
+	},
+	"title": "Audit Trail Dashboard / Objects Modifications",
+	"description": "Users and Knowledge Objects creations / updates / deletions.",
+	"defaults": {
+		"dataSources": {
+			"ds.search": {
+				"options": {
+					"queryParameters": {}
+				}
+			}
+		}
+	},
+	"layout": {
+		"tabs": {
+			"items": [
+				{
+					"layoutId": "layout_1",
+					"label": "Overview"
+				},
+				{
+					"layoutId": "layout_TLv2IQya",
+					"label": "Activity log"
+				}
+			]
+		},
+		"layoutDefinitions": {
+			"layout_1": {
+				"type": "absolute",
+				"options": {
+					"height": 1430,
+					"width": 2000,
+					"display": "fit-to-width",
+					"backgroundColor": "transparent"
+				},
+				"structure": [
+					{
+						"item": "viz_FTCFDEzH",
+						"type": "block",
+						"position": {
+							"x": 1000,
+							"y": 290,
+							"w": 490,
+							"h": 300
+						}
+					},
+					{
+						"item": "viz_4gLfdNAZ",
+						"type": "block",
+						"position": {
+							"x": 0,
+							"y": 830,
+							"w": 1070,
+							"h": 500
+						}
+					},
+					{
+						"item": "viz_ojU9o0Oe",
+						"type": "block",
+						"position": {
+							"x": 0,
+							"y": 10,
+							"w": 1990,
+							"h": 260
+						}
+					},
+					{
+						"item": "viz_jJX71ybc",
+						"type": "block",
+						"position": {
+							"x": 0,
+							"y": 290,
+							"w": 490,
+							"h": 300
+						}
+					},
+					{
+						"item": "viz_WvdnTwBR",
+						"type": "block",
+						"position": {
+							"x": 0,
+							"y": 610,
+							"w": 490,
+							"h": 200
+						}
+					},
+					{
+						"item": "viz_caAWiK8D",
+						"type": "block",
+						"position": {
+							"x": 500,
+							"y": 290,
+							"w": 490,
+							"h": 300
+						}
+					},
+					{
+						"item": "viz_FZih8hXD",
+						"type": "block",
+						"position": {
+							"x": 500,
+							"y": 610,
+							"w": 490,
+							"h": 200
+						}
+					},
+					{
+						"item": "viz_VC5BEx25",
+						"type": "block",
+						"position": {
+							"x": 1070,
+							"y": 830,
+							"w": 920,
+							"h": 500
+						}
+					},
+					{
+						"item": "viz_hC1y1jIc",
+						"type": "block",
+						"position": {
+							"x": 1000,
+							"y": 610,
+							"w": 490,
+							"h": 200
+						}
+					},
+					{
+						"item": "viz_aILjq6jc",
+						"type": "block",
+						"position": {
+							"x": 1500,
+							"y": 290,
+							"w": 490,
+							"h": 300
+						}
+					},
+					{
+						"item": "viz_u0J839pR",
+						"type": "block",
+						"position": {
+							"x": 1500,
+							"y": 610,
+							"w": 490,
+							"h": 200
+						}
+					}
+				]
+			},
+			"layout_TLv2IQya": {
+				"type": "grid",
+				"structure": [
+					{
+						"item": "viz_6FMhU41W",
+						"type": "block",
+						"position": {
+							"x": 0,
+							"y": 0,
+							"w": 1200,
+							"h": 770
+						}
+					}
+				]
+			}
+		},
+		"globalInputs": [
+			"input_n59hT3WT",
+			"input_0m4aAr88",
+			"input_8cPLfS0W",
+			"input_V8goUdiM",
+			"input_PYpDbVm3",
+			"input_yLyZgaC5",
+			"input_T7BIJ7Pm",
+			"input_WAwuApNh"
+		],
+		"options": {
+			"submitButton": true,
+			"submitOnDashboardLoad": true
+		}
+	}
+}
+    ]]></definition>
+    <meta type="hiddenElements"><![CDATA[
+{
+	"hideEdit": true,
+	"hideOpenInSearch": false,
+	"hideExport": true
+}
+    ]]></meta>
+</dashboard>

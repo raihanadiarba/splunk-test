@@ -1,0 +1,11 @@
+Metadata-Version: 2.1
+Name: splunkupgrade
+Version: 2.2.4
+Summary: 
+Author: Luca Stoppa
+Author-email: lstoppa@splunk.com
+Requires-Python: ==3.9.17
+Classifier: Programming Language :: Python :: 3
+Requires-Dist: packaging (>=21.3,<22.0)
+Requires-Dist: retry2 (>=0.9.4,<0.10.0)
+Requires-Dist: splunk-sdk (==2.0.2)

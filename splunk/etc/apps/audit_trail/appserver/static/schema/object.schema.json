@@ -1,0 +1,56 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",  
+    "$id": "https://cisco.com/splunk/audit/object.schema.json",  
+    "title": "Object configuration change",  
+    "description": "A change to the configuration with limited scope, usually a knowledge object.",
+    "$ref":"https://cisco.com/splunk/audit/event.schema.json",
+    "type": "object",
+    "properties": {
+        "data": {
+            "description":"Object configuration change specific data.",
+            "type": "object",
+            "properties": {
+                "type": { 
+                    "description": "Type of the object changed. It is assumed that there are many instances per type. For example saved searches.",
+                    "type": "string" 
+                },
+                "name": { 
+                    "description": "Name of the object instance changed. For example name of a dashboard.",
+                    "type": "string" 
+                },
+                "acl": { 
+                    "description": "Access control lists to the object modified.",
+                    "type": "object" ,
+                    "properties": {
+                        "read": { "type": "array", "items": { "type": "string" } },
+                        "write": { "type": "array", "items": { "type": "string" } }
+                    },
+                    "additionalProperties": false,
+                    "required": [ "read", "write" ]
+                },
+                "ownership": {
+                    "description": "Name of app and user which own the object, as well as sharing mode.",
+                    "type": "object",
+                    "properties": {
+                        "owner": { "type": "string" },
+                        "app": { "type": "string" },
+                        "scope": { "enum": [ "private", "app", "system" ] }
+                    },
+                    "additionalProperties": false,
+                    "required": [ "owner", "app" ]
+                },
+                "attributes": {
+                    "description": "Attributes set as a result of the change. This includes both modified and not modified attributes",
+                    "type": "object"
+                }
+             },
+            "additionalProperties": false,
+            "required": [ "type", "name", "acl", "ownership", "attributes" ]
+        },
+        "previous_data": {
+            "description":"Previous values of attributes which were modified.",
+            "type": "object"
+        }
+    }
+
+}

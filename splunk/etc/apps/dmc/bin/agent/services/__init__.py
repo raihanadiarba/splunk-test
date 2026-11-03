@@ -1,0 +1,42 @@
+"""
+Module with services
+"""
+from agent.services.instances_service import InstancesService
+from agent.services.stanzas_service import StanzasService
+from agent.services.groups_service import GroupsService
+from agent.services.apps_service import AppsService
+from agent.services.tasks_service import TasksService
+from agent.services.commands_service import CommandsService
+from agent.services.topologies_service import TopologiesService
+from agent.services.deploy_service import DeployService
+from agent.services.progress_service import ProgressService
+from agent.services.changelog_service import ChangelogService
+from agent.services.licenser_service import LicenserService
+from agent.services.audit_service import AuditService
+from agent.services.secure_storage import SecureStorage
+from agent.services.forwarder_setup_service import ForwarderSetupService
+from agent.services.inputs_configuration_service import InputsConfigurationService
+from agent.services.outputs_configuration_service import OutputsConfigurationService
+from agent.services.cancel_pending_changes_service import CancelPendingChangesService
+from agent.services.slim_service import SlimService
+from agent.services.external_apps_service import ExternalAppsService
+from agent.services.packages_service import PackagesService
+assert StanzasService
+assert GroupsService
+assert AppsService
+assert CommandsService
+assert InstancesService
+assert TasksService
+assert TopologiesService
+assert ProgressService
+assert ChangelogService
+assert LicenserService
+assert AuditService
+assert SecureStorage
+assert ForwarderSetupService
+assert InputsConfigurationService
+assert OutputsConfigurationService
+assert CancelPendingChangesService
+assert SlimService
+assert ExternalAppsService
+assert PackagesService

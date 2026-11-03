@@ -1,0 +1,12 @@
+<endpoint name="modules" template="pages/system.html" showOnSearchHeadCluster="1">
+    <capabilities>
+        <read>(list_spl2_modules AND (edit_spl2_modules OR search))</read>
+    </capabilities>
+    <menu name="knowledge_configurations">
+        <label>Modules</label>
+        <url>/app/%(namespace)s/modules</url>
+        <description>Manage your SPL2 modules</description>
+        <order>80</order>
+        <id>modules</id>
+    </menu>
+</endpoint>

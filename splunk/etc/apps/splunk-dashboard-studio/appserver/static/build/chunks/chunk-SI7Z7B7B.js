@@ -1,0 +1,2 @@
+/*! splunk-dashboard-studio v1.28.5 | UNLICENSED */
+import{a as t}from"./chunk-JDPOYFAU.js";var s=/^[a-z]*([-+]\d{1,2}:?\d{1,2})?$/i,d=r=>{let u=r.split(" "),m="",e="";if(u.forEach(i=>{s.test(i)?e=`${e} ${i}`.trim():m=`${m} ${i}`.trim()}),!m||!e)return r;let n=t.getDefaultSplunkTimezone(),l="LLS";t.setDefaultSplunkTimezone(e);let a=t.newSplunkTime({time:m}),f=a.splunkFormat(l);if(t.setDefaultSplunkTimezone(n),Number.isNaN(a.valueOf()))return r;let o=e;return Number.isNaN(Number.parseInt(e))||(o=o.includes(":")?`GMT${e}`:`GMT${e}:00`),`${f} ${o}`.trim()},T=d;export{T as a};

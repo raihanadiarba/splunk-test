@@ -1,0 +1,6 @@
+
+The configuration settings here are applicable only if clustering is enabled and set up.
+
+On the manager, the contents of this directory will be pushed down to the peers. Place all the peer-specific configuration settings here.
+
+

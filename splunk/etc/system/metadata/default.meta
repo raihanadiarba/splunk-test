@@ -1,0 +1,86 @@
+
+# System permissions
+
+[]
+access = read : [ * ], write : [ admin ]
+
+### VIEWSTATES: even normal users should be able to create shared viewstates
+
+[viewstates]
+access = read : [ * ], write : [ * ]
+
+### JSON Web Tokens: should only be readable/writable by admin
+
+[collections/JsonWebTokensV1]
+access = read : [ admin ], write : [ admin ]
+
+### OAuth2 authorization codes: should only be readable/writable by admin
+
+[collections/OAuth2AuthorizationCodes]
+access = read : [ admin ], write : [ admin ]
+
+### SPL2Modules: should only be readable/writable by data orchestrator
+
+[collections/Spl2Modules]
+access = read : [ admin ], write : [ admin ]
+
+### Allow all users to write user role information for SAML users 
+
+[authentication/userToRoleMap_SAML]
+access = read : [ * ], write : [ * ]
+
+### Recently Viewed Knowledge Objects: every user should be able to read and write to this collection
+
+[collections/RecentlyViewedKO]
+access = read : [ * ], write : [ * ]
+
+### Per user search history records
+[collections/SearchHistory]
+access = read : [ * ], write : [ * ]
+
+### Home Page Configuration settings: every user should be able to read from this collection, only admins should be able to write to this collection
+[collections/HomePageAdminConfig]
+access = read : [ * ], write : [ admin ]
+
+### Per user custom resources with information for url, title, and opening context
+[collections/HomePage]
+access = read : [ * ], write : [ * ]
+
+### Per user information on email verification & TaC agreement for C3 eligibility
+[collections/C3Eligibility]
+access = read : [ * ], write : [ * ]
+
+[collections/Favorites]
+access = read : [ * ], write : [ * ]
+
+[collections/KOFavorites]
+access = read : [ * ], write : [ * ]
+
+### Distributed Leases collection
+[collections/DistributedLeases]
+access = read : [ * ], write : [ admin ]
+
+### Internal scheduler next-run map checkpoint state.
+[collections/SchedulerSearchState]
+access = read : [ admin ], write : [ admin ]
+
+### Internal scheduler summary search concurrency checkpoint state.
+[collections/SchedulerSummaryInProgressState]
+access = read : [ admin ], write : [ admin ]
+
+### Metadata Catalog collections: should only be readable/writeable by admin
+
+[collections/MDCPipelineCursor]
+access = read : [ admin ], write : [ admin ]
+
+[collections/MDCMetadataProgress]
+access = read : [ admin ], write : [ admin ]
+
+[collections/MDCSchemaProgress]
+access = read : [ admin ], write : [ admin ]
+
+[collections/MDCIndexDiscoveryState]
+access = read : [ admin ], write : [ admin ]
+
+[collections/MDCCommitGuard]
+access = read : [ admin ], write : [ admin ]

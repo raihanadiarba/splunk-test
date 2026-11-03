@@ -1,0 +1,8 @@
+Bundled license information:
+
+object-assign/index.js:
+  /*
+  object-assign
+  (c) Sindre Sorhus
+  @license MIT
+  */

@@ -1,0 +1,4 @@
+<nav color="#5CC05C">
+  <view name="apps" default="true" />
+  <view name="uploaded_apps" />
+</nav>

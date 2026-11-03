@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<endpoint name="saved/searches/advancededit" template="pages/page_with_flag.html" packageName="admin-user-xp">
+    <capabilities>
+        <read>schedule_search</read>
+    </capabilities>
+</endpoint>

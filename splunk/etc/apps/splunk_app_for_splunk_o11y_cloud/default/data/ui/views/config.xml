@@ -1,0 +1,4 @@
+<?xml version="1.0"?>
+<view template="splunk_app_for_splunk_o11y_cloud:/templates/start.html" type="html">
+    <label>Configuration</label>
+</view>

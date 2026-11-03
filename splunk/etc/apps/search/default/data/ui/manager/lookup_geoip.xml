@@ -1,0 +1,7 @@
+<endpoint name="lookup_geoip" template="pages/page_with_flag.html" showOnSearchHeadCluster="1" packageName="admin-user-xp">
+    <header>Lookup GeoIP</header>
+    <capabilities>
+        <read>upload_mmdb_files</read>
+    </capabilities>
+</endpoint>
+

@@ -1,0 +1,13 @@
+<endpoint name="splunkmobile" showOnSearchHeadCluster="1">
+  <capabilities>
+      <read>splunk_mobile_administration</read>
+  </capabilities>
+  <header></header>
+  <menu name="system_configurations">
+    <label>Mobile settings</label>
+    <url>/app/splunk_secure_gateway/administration#/</url>
+    <description>Customize your deployment to get the most out of Splunk Mobile.</description>
+    <order>999</order>
+    <id>mobile-settings</id>
+  </menu>
+</endpoint>

@@ -1,0 +1,89 @@
+# Application-level permissions
+[]
+
+access = read : [ * ], write : [ admin, sc_admin ]
+export = system
+owner = nobody
+[savedsearches]
+access = read : [ admin, sc_admin ], write : [ admin, sc_admin ]
+owner = admin
+[views/audit_trail_home_simple_xml]
+access = read : [*], write : [nobody]
+[]
+access = read : [admin, sc_admin], write : [admin]
+export = none
+
+[datamodels/ATv2_Data_Model]
+access = read : [ * ], write : [ admin, sc_admin ]
+export = none
+owner = nobody
+
+[models/ATv2_Data_Model]
+access = read : [ * ], write : [ admin, sc_admin ]
+export = none
+owner = nobody
+
+[props/audittrailv2/FIELDALIAS-cim]
+access = read : [ * ], write : [ admin, sc_admin ]
+export = system
+owner = nobody
+
+[props/audittrailv2/EVAL-object_attrs]
+access = read : [ * ], write : [ admin, sc_admin ]
+export = system
+owner = nobody
+
+[props/audittrailv2/EVAL-app]
+access = read : [ * ], write : [ admin, sc_admin ]
+export = system
+owner = nobody
+
+[props/audittrailv2/EVAL-vendor_product]
+access = read : [ * ], write : [ admin, sc_admin ]
+export = system
+owner = nobody
+
+[props/audittrailv2/EVAL-reason]
+access = read : [ * ], write : [ admin, sc_admin ]
+export = system
+owner = nobody
+
+[eventtypes/cim%3Aaudit_account]
+access = read : [ * ], write : [ admin, sc_admin ]
+export = system
+owner = nobody
+
+[eventtypes/cim%3Aaudit_system]
+access = read : [ * ], write : [ admin, sc_admin ]
+export = system
+owner = nobody
+
+[eventtypes/cim%3Aaudit_object]
+access = read : [ * ], write : [ admin, sc_admin ]
+export = system
+owner = nobody
+
+[eventtypes/cim%3Aauthentication]
+access = read : [ * ], write : [ admin, sc_admin ]
+export = system
+owner = nobody
+
+[tags/eventtype%3Dcim%253Aaudit_account]
+access = read : [ * ], write : [ admin, sc_admin ]
+export = system
+owner = nobody
+
+[tags/eventtype%3Dcim%253Aaudit_system]
+access = read : [ * ], write : [ admin, sc_admin ]
+export = system
+owner = nobody
+
+[tags/eventtype%3Dcim%253Aaudit_object]
+access = read : [ * ], write : [ admin, sc_admin ]
+export = system
+owner = nobody
+
+[tags/eventtype%3Dcim%253Aauthentication]
+access = read : [ * ], write : [ admin, sc_admin ]
+export = system
+owner = nobody

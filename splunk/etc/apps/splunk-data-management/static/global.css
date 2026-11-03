@@ -1,0 +1,31 @@
+@font-face {
+    font-family: 'Splunk Platform Sans';
+    src: url('splunkdatasans-regular.woff2') format('woff2');
+    font-style: normal;
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: 'Splunk Platform Mono';
+    src: url('inconsolata-regular.woff') format('woff');
+    font-style: normal;
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: 'Splunk Platform Sans';
+    src: url('splunkdatasans-bold.woff2') format('woff2');
+    font-style: normal;
+    font-weight: bold;
+}
+
+@font-face {
+    font-family: 'Splunk Platform Sans';
+    src: url('splunkdatasans-semibold.woff2') format('woff2');
+    font-style: normal;
+    font-weight: 500;
+}
+
+body {
+    margin: 0;
+}

@@ -1,0 +1,90 @@
+{
+  "datePatterns": [
+    {
+      "id": 1,
+      "pattern": "(?i)(?<![0-9])[0-2]?\\d/[0123]?\\d(?:/(?:19|20)?\\d{2})?(?![0-9a-z\\.])",
+      "examples": ["6/15/2021", "12/31/20", "1/1/2000", "01/01/2014"],
+      "description": "US date format MM/DD/YYYY (most common)"
+    },
+    {
+      "id": 2,
+      "pattern": "(?i)(?<![0-9])[01]\\d-[0123]\\d-(?:19|20)?\\d{2}(?![0-9])",
+      "examples": ["06-15-2021", "12-31-1999", "01-01-2014"],
+      "description": "Alternative US date format MM-DD-YYYY"
+    },
+    {
+      "id": 3,
+      "pattern": "(?i)(?:19|20)?\\d{2}-[01]\\d-[0123]\\d(?![0-9:])",
+      "examples": ["2021-06-15", "1999-12-31", "2000-01-01", "21-06-15"],
+      "description": "ISO date format YYYY-MM-DD"
+    },
+    {
+      "id": 4,
+      "pattern": "(?i)(?:19|20)\\d{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\\d|3[01])(?![0-9])",
+      "examples": ["20210615", "19991231", "20000101"],
+      "description": "Compact ISO date format YYYYMMDD"
+    },
+    {
+      "id": 5,
+      "pattern": "(?i)(?:(?:mon|tue|wed|thu|fri|sat|sun)[a-z]*,?\\s+)?(?:jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)[a-z]*[\\s,.]+[0123]?\\d(?:st|nd|rd|th)?[\\s,]*(?:19|20)?\\d{2}",
+      "examples": ["Jun 15th, 2021", "February 1, 2020", "Dec 31st 2014", "January 1st, 2000"],
+      "description": "Month Day, Year format"
+    },
+    {
+      "id": 6,
+      "pattern": "(?i)(?:(?:mon|tue|wed|thu|fri|sat|sun)[a-z]*,?\\s+)?[0123]?\\d(?:st|nd|rd|th)?[\\s,]+(?:jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)[a-z]*[\\s,]+(?:19|20)?\\d{2}",
+      "examples": ["Fri, 15 Jun 2021", "Tue 1st Jan 20", "Sun, 31 Dec 2014", "15 Jun 2021"],
+      "description": "Day Month Year format"
+    },
+    {
+      "id": 7,
+      "pattern": "(?i)[0123]?\\d\\.[01]?\\d\\.(?:19|20)?\\d{2}",
+      "examples": ["15.06.2021", "31.12.1999", "1.1.2014"],
+      "description": "European dot date format DD.MM.YYYY"
+    },
+    {
+      "id": 8,
+      "pattern": "(?i)(?:19|20)?\\d{2}\\.[01]?\\d\\.[0123]?\\d",
+      "examples": ["2021.06.15", "1999.12.31", "2014.1.1"],
+      "description": "Dot date format YYYY.MM.DD"
+    },
+    {
+      "id": 9,
+      "pattern": "(?i)[0123]?\\d[-/](?:jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)[a-z]*[-/](?:19|20)?\\d{2}",
+      "examples": ["15/Jun/2021", "1-Jan-2000", "31/Dec/2014"],
+      "description": "Day/Month/Year with literal month"
+    },
+    {
+      "id": 10,
+      "pattern": "(?i)(?:19|20)?\\d{2}[-/](?:jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)[a-z]*[-/][0123]?\\d",
+      "examples": ["2021/Jun/15", "99/Dec/31", "2000/Jan/01"],
+      "description": "Year/Month/Day with literal month"
+    },
+    {
+      "id": 11,
+      "pattern": "(?i)(?:(?:mon|tue|wed|thu|fri|sat|sun)[a-z]*,?\\s+)?(?:[0123]?\\d(?:st|nd|rd|th)?\\s+)?(?:jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)[a-z]*\\s+(?:19|20)?\\d{2}",
+      "examples": ["Friday 15th June 2021", "Monday 1st January 2000", "March 2021"],
+      "description": "Natural language date format"
+    }
+  ],
+  "timePatterns": [
+    {
+      "id": 1,
+      "pattern": "(?i)(?<![0-9])[012]?\\d:[0-5]\\d(?::[0-5]\\d(?:[.,]\\d{1,6})?)?\\s*(?:am|pm)?\\s*(?:[a-z]{3,4}|[+-]\\d{1,2}:?\\d{0,2})?(?![0-9])",
+      "examples": ["12:30 pm", "9:15 am PST", "1:23:45.678 pm UTC", "23:59:59", "08:30"],
+      "description": "Standard time format with optional AM/PM and timezone"
+    },
+    {
+      "id": 2,
+      "pattern": "(?i)(?<![0-9])[012]?\\d:[0-5]\\d:[0-5]\\d(?:[.,]\\d{1,6})?\\s*(?:[a-z]{3,4}|[+-]\\d{1,2}:?\\d{0,2})?(?![0-9])",
+      "examples": ["23:59:59", "00:00:00 UTC", "12:34:56 PST", "08:15:30.456789"],
+      "description": "Full time format with seconds"
+    },
+    {
+      "id": 3,
+      "pattern": "(?i)(?<![0-9])[012]?\\d\\.[0-5]\\d\\.[0-5]\\d(?:[.,]\\d{1,6})?\\s*(?:[a-z]{3,4}|[+-]\\d{1,2}:?\\d{0,2})?(?![0-9])",
+      "examples": ["12.30.45", "01.02.03 PST", "23.59.59 UTC", "10.15.30.789"],
+      "description": "Dot-separated time format"
+    }
+  ]
+}

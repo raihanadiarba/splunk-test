@@ -1,0 +1,4 @@
+<?xml version="1.0"?>
+<view template="splunk_monitoring_console:/template/smc_react/overview.html" type="html">
+▎ <label>Overview (Beta)</label>
+</view>

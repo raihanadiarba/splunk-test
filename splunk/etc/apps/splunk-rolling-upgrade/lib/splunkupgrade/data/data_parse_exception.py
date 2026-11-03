@@ -1,0 +1,2 @@
+class DataParseException(Exception):
+    pass

@@ -1,0 +1,12 @@
+"DEST_ACTION","ORIG_ACTION"
+create,create
+update,update
+update,updated
+update,edit
+delete,remove
+delete,delete
+update,disable
+update,enable
+create,new
+update,move
+update,acl

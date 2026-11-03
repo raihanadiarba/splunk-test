@@ -1,0 +1,4 @@
+# Application-level permissions
+[]
+access = read : [ admin, data_management_admin ], write : [ admin, data_management_admin ]
+export = none

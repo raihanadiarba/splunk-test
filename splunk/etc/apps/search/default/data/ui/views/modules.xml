@@ -1,0 +1,4 @@
+<?xml version="1.0"?>
+<view template="pages/page_from_package.html" type="html" isDashboard="False" packageName="end-user-xp">
+    <label>Modules</label>
+</view>

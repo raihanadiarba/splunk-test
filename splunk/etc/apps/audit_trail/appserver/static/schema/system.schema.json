@@ -1,0 +1,35 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",  
+    "$id": "https://cisco.com/splunk/audit/system.schema.json",  
+    "title": "System configuration change",  
+    "description": "A change to the system wide configuration.",
+    "$ref":"https://cisco.com/splunk/audit/event.schema.json",
+    "type": "object",
+    "properties": {
+        "data": {
+            "description":"System configuration change specific data.",
+            "type": "object",
+            "properties": {
+                "type": { 
+                    "description": "Type of the configuration changed. It is assumed that there are many instances per type. For example user roles.",
+                    "type": "string" 
+                },
+                "name": { 
+                    "description": "Name of the configuration instance changed. For example user role name.",
+                    "type": "string" 
+                },
+                "attributes": {
+                    "description": "Attributes set as a result of the change. This includes both modified and not modified attributes",
+                    "type": "object"
+                }
+             },
+            "additionalProperties": false,
+            "required": [ "type", "name", "attributes" ]
+        },
+        "previous_data": {
+            "description":"Previous values of attributes which were modified.",
+            "type": "object"
+        }
+    }
+
+}

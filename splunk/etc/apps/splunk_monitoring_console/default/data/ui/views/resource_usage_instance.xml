@@ -1,0 +1,3 @@
+<view template="splunk_monitoring_console:/template/smc_react/resource_usage_instance.html" type="html">
+  <label>Resource Usage: Instance</label>
+</view>

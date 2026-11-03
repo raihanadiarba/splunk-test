@@ -1,0 +1,8 @@
+<nav>
+    <view name="start" default="true" />
+    <view icon="cog" name="config" />
+    <collection icon="organizernotebook" label="Discover">
+        <view name = "home" />
+        <view name="usecases" />
+    </collection>
+</nav>

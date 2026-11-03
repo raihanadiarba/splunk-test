@@ -1,0 +1,489 @@
+<dashboard version="1.1" theme="dark" script="javascript/audit_trail_home.js">
+    <label>Audit Trail App</label>
+    <row>
+        <panel>
+            <html>
+                <style>
+                    .panel-container {
+                        #display: flex;
+                        #align-items: center; /* Vertically center */
+                        #justify-content: space-between;
+                        #padding: 1%;
+                        #width: 100%;
+                        display: flex;
+                        padding: spacingXLarge;
+                        align-items: center;
+                        gap: 0.25rem;
+                        align-self: stretch;
+                        border-radius: 0.25rem;
+                        background: backgroundColorDialog;
+                        padding: 0.5%;
+                        justify-content: center;
+                    }
+                    .text-left {
+                        #flex: 1; /* Take available space */
+                        #text-align: left;
+                        #font-size: 16px;
+                        #padding-right: 10px; /* Small gap between text and image */
+                        display: flex;
+                        justify-content: center; /* Centers children vertically */
+                        gap: 0.25rem;
+                        flex-direction: column;
+                        align-items: flex-start;
+                        #flex: 1 0 0;
+                        flex: 1 0 auto; /* or remove the flex property if not needed */
+                        max-width: 48%;
+                        padding-left: 1%;
+                        line-height: 0.5;
+                    }
+                    .header-title {
+                        display: flex;
+                        align-items: flex-start;
+                        color: contentColorActive;
+                        /* Title/title3 */
+                        font-family: "Splunk Platform Sans";
+                        font-size: 1.25rem;
+                        font-style: normal;
+                        font-weight: 700;
+                        line-height: 1.5rem; /* 120% */
+                        letter-spacing: -0.00625rem;
+                    }
+
+                    .header-label {
+                        display: flex; /* or block */
+                        width: 100%;
+                        align-self: stretch;
+                        color: #B5B5B5;
+                        /* Body/body */
+                        font-family: "Splunk Platform Sans";
+                        font-size: 0.875rem;
+                        font-style: normal;
+                        font-weight: 400;
+                        line-height: 1.25rem; /* 142.857% */
+
+                    }
+                    .image-right {
+                        flex: 1;
+                        display: flex;
+                        justify-content: center;
+                        #padding-left: 10px;
+                        padding-right: 1%;
+                    }
+                    .image-right img {
+                        height: auto;
+                        width: 97%;
+                    }
+                    .edit-btn {
+                        visibility: hidden;
+                    }
+                    .edit-other {
+                        visibility: hidden;
+                    }
+                    .edit-export {
+                        visibility: hidden;
+                    }
+                    .dashboard-favorite-container {
+                        visibility: hidden;
+                    }
+                    [class*="backdrop"]{
+                        background: linear-gradient(to bottom, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.5));
+                    }
+                    <!--[class*="carouselInner"]{ -->
+                    <!--  display: flex;-->
+                    <!--  justify-content: center;  /* Centers horizontally */-->
+                    <!--  align-items: center; -->
+                    <!--}-->
+                    <!--[class*="carouselImage"], [class^="splunk-"], [class$="-img"] img {-->
+                    <!--  width: auto !important;-->
+                    <!--  display: inline;-->
+                    <!--  max-width: 100% !important;-->
+                    <!--  max-height: 100% !important;-->
+                    <!--  object-fit: contain !important;-->
+                    <!--}-->
+                </style>
+
+                <div class="panel-container">
+                    <div class="text-left">
+                        <span class="header-title">Monitor your Splunk instance with ease</span> <br/>
+                        <span class="header-label">Splunk Audit Trail provides real-time visibility into user activity and knowledge object changes using data from the _audit index. Designed for security and compliance. Main purpose of this app is to improve auditors experience from compliance and operational perspectives. This app helps detect unauthorized changes, track admin modifications, and troubleshoot issues efficiently. Currently it provides two dashboards: User Activity Dashboard, which displays human users activities like: logins, searches, failed login attempts, and admin actions, and Knowledge Object Changes Dashboard, which monitors state mutations of saved searches, dashboards, reports, lookups, field extractions, etc. But this is just a start base. You can add your own dashboards with data which gives you most valuable data.</span>
+                    </div>
+                    <div class="image-right">
+                        <img data-static-app-path="/static/app/audit_trail/img/header_img.png" />
+                    </div>
+                </div>
+            </html>
+        </panel>
+    </row>
+    <row>
+        <panel>
+            <html>
+                <h2 style="font-size:24px; font-weight:bold; text-align:left;">
+                    The Dashboards
+                </h2>
+            </html>
+        </panel>
+    </row>
+    <row>
+        <panel>
+
+            <html>
+                <style>
+                    /* Main panel container to hold two sections side by side */
+                    .dashboard-panel-container {
+                        display: flex;
+                        #gap: 2px;
+                        justify-content: space-between;
+                        #justify-content: space-between; /* Space between sections */
+                        #padding: 20px;
+                        width: 100%;
+                        box-sizing: border-box; /* Prevents extra width from padding */
+                        overflow-x: hidden;
+                    }
+
+                    /* Each section (Large Image + Text + Buttons) */
+                    .section {
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                        width: 49.5%; /* Each section takes half the panel width */
+                        flex-shrink: 0;
+                    }
+
+                    /* Large Image */
+                    .large-image {
+                        max-width: 100%;
+                        height: auto;
+                    }
+
+                    /* Row containing Text and Buttons */
+                    .content-row {
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        width: 100%;
+                        margin-bottom: 20px;
+                    }
+
+                    /* Text on the left */
+                    .text-dashboard {
+                        text-align: left;
+                        font-family: "Splunk Platform Sans";
+                        line-height: 0.8;
+                        flex: 1;
+                        padding-left: 3%;
+                    }
+
+                    /* Buttons on the right */
+                    .buttons-right {
+                        display: flex;
+                        justify-content: flex-end;
+                        gap: 0px; /* No space between buttons */
+                        padding-right: 3%;
+                    }
+
+                    .buttons-right img {
+                        #width: 50px;
+                        #height: auto;
+                        #cursor: pointer; /* Make them clickable */
+                        #flex: 1; /* Ensures both buttons take equal space */
+                        #max-width: 80px; /* Set a fixed width */
+                        #height: 40px; /* Ensure buttons have a uniform height */
+                        width: 100%; /* Ensures both buttons take full available space */
+                        max-width: 100px; /* Adjust to match Figma design */
+                        height: auto;
+                        cursor: pointer;
+                    }
+
+                    .tutorial-link {
+                        display: flex;
+                    }
+                </style>
+                <div class="dashboard-panel-container">
+                    <!-- First Section -->
+                    <div class="section">
+                        <div class="content-row">
+                            <div class="text-dashboard">
+                                <span style="font-weight: bold; font-size: 16px;">Users activities dashboard</span>
+                                <br/>
+                                <span style="color: #B5B5B5; font-size: 14px">Presents actions performed by users in Splunk, monitoring user activity logs and interactions.
+                                </span>
+                            </div>
+                            <div class="buttons-right">
+                                <a href="?tour=activities_per_user_audit-tour" class="tutorial-link">
+                                    <img data-static-app-path="/static/app/audit_trail/img/tutorial.svg" alt="Button 1"/>
+                                </a>
+
+                                <a href="activities_per_user_audit" target="_blank">
+                                    <img data-static-app-path="/static/app/audit_trail/img/open.svg" alt="Button 2"/>
+                                </a>
+                            </div>
+                        </div>
+                        <img class="large-image" data-static-app-path="/static/app/audit_trail/img/users_dashboard.png" alt="Large Image"/>
+
+                    </div>
+
+                    <!-- Second Section (Duplicate) -->
+                    <div class="section">
+                        <div class="content-row">
+                            <div class="text-dashboard">
+                                <span style="font-weight: bold; font-size: 16px;">Objects modifications dashboard</span>
+                                <br/>
+                                <span style="color: #B5B5B5; font-size: 14px">Shows modifications made to Splunk objects, including Views, Panels, and Saved Searches, etc.
+                                </span>
+                            </div>
+                            <div class="buttons-right">
+                                <a href="?tour=knowledge_objects_audit-tour" class="tutorial-link">
+                                    <img data-static-app-path="/static/app/audit_trail/img/tutorial.svg" alt="Button 1"/>
+                                </a>
+                                <a href="knowledge_objects_audit" target="_blank">
+                                    <img data-static-app-path="/static/app/audit_trail/img/open.svg" alt="Button 2"/>
+                                </a>
+                            </div>
+                        </div>
+                        <img class="large-image" data-static-app-path="/static/app/audit_trail/img/objects_dashboard.png" alt="Large Image"/>
+                    </div>
+                </div>
+            </html>
+        </panel>
+    </row>
+    <row>
+        <panel>
+            <html>
+                <h2 style="font-size:24px; font-weight:bold; text-align:left;">
+                    Some Filters You Can Use
+                </h2>
+            </html>
+        </panel>
+    </row>
+    <row>
+        <panel>
+            <html>
+                <style>
+                    .panel-container {
+                        position: relative;
+                        height: 100%;  /* Full panel height */
+                        width: 100%;
+                    }
+                    .image-container {
+                        position: relative;
+                        height: 100%;  /* Panel takes full height */
+                        width: 100%;
+                        display: flex;
+                        justify-content: center;  /* Center horizontally */
+                        align-items: flex-start;
+                        padding-top: 5%; /* Push image down by 1/4 panel height */
+                        padding-bottom: 15%;
+                    }
+                    .image-container img {
+                        max-width: 50%;  /* Adjust image size */
+                        height: auto;
+                    }
+                    .text-container {
+                        line-height: 0.8;
+                        position: absolute;
+                        display: block;
+                        flex-direction: column !important;
+                        align-items: stretch !important;
+                        justify-content: stretch !important;
+                        min-height: auto !important;
+                        #justify-content: space-between;
+                        #display: inline-block;
+                        #vertical-align: top; /* Align containers by their top edge */
+                        position: relative;
+                        bottom: 10px;
+                        left: 10px;
+                        font-size: 14px;
+                        <!--animation: refreshFix 0.01s;-->
+                        #min-height: 1000px
+                        #padding-top: 20%; /* Push image down by 1/4 panel height */
+                    }
+                    .text-container span {
+                        display: flex;
+                    }
+
+                </style>
+                <!--div class="panel-container"-->
+                <div class="image-container">
+                    <img data-static-app-path="/static/app/audit_trail/img/nav-actions.png"/>
+                </div>
+                <div class="text-container">
+                    <b>Actions</b> <br/>
+                    <span style="color: #B5B5B5; margin-top: auto; margin-bottom: auto; flex-grow: 1 !important;;">The Actions filter exists in both dashboards. In the Audit Trail Users dashboard, the Actions dropdown contains all available values for actions performed by users. In the Audit Trail Objects dashboard, the Actions dropdown includes three values: Create, Update, and Delete. These values cover all CUD (Create, Update, Delete) actions related to specific objects.</span>
+                </div>
+                <!--/div-->
+            </html>
+        </panel>
+        <panel>
+            <html>
+                <div class="image-container">
+                    <img data-static-app-path="/static/app/audit_trail/img/types_filter.png"/>
+                </div>
+                <div class="text-container">
+                    <b>Types</b> <br/>
+                    <span style="color: #B5B5B5; margin-top: auto; margin-bottom: auto; flex-grow: 1 !important;;">The Types filter is an element of the Audit Trail Objects dashboard. It lists the types of modified objects. Possible values include: dashboard (for views and dashboards), prebuilt_panel, user, saved_search, etc.</span>
+                </div>
+            </html>
+        </panel>
+        <panel>
+            <html>
+                <div class="image-container">
+                    <img data-static-app-path="/static/app/audit_trail/img/nav-context.png"/>
+                </div>
+                <div class="text-container">
+                    <b>Context</b> <br/>
+                    <span style="color: #B5B5B5; margin-top: auto; margin-bottom: auto; flex-grow: 1 !important;">The Context filter is element of the Audit Trail Users dashboard. For each action, one attribute is chosen that best represents the context of that action. The best context value for the search action is the value of the 'provenance' attribute. For modifications of objects (such as views, users, saved searches, mapping groups, etc.), the best context value is the object's name.</span>
+                </div>
+            </html>
+        </panel>
+        <panel>
+            <html>
+                <div class="image-container">
+                    <img data-static-app-path="/static/app/audit_trail/img/nav-spl.png"/>
+                </div>
+                <div class="text-container">
+                    <span>
+                        <b>SPL conditions</b>
+                    </span>
+                    <br/>
+                    <span style="color: #B5B5B5; margin-top: auto; margin-bottom: auto; flex-grow: 1 !important;">The SPL conditions filter is element of both dashboards and in both dashboards it works in the same way. Using this input, the Auditor can provide a spl condition, which will be inserted into data retrieving query, changing data displayed in the dashboard. E.g "user = foo"</span>
+                </div>
+            </html>
+        </panel>
+    </row>
+    <row>
+        <panel>
+            <html>
+                <h2 style="font-size:24px; font-weight:bold; text-align:left;">
+                </h2>
+            </html>
+        </panel>
+    </row>
+    <row>
+        <panel>
+            <html>
+                <style>
+                    /* Main panel container */
+                    .footer-panel-container {
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        width: 100%;
+                    }
+
+
+                    .feedback {
+                        display: flex;
+                        align-items: center;
+                        justify-content: flex-start; /* Left stays on left, right on right */
+                        gap: 0.5rem;
+                    }
+
+                    /* Left Side: Nested SVG Icons */
+                    .footer-icon-container {
+                        position: relative;
+                        height: 80px;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        #width: 80%;
+                        flex-shrink: 0; /* Prevents shrinking */
+                    }
+
+                    .footer-big-icon {
+                        width: 80px; /* Bigger icon */
+                        height: 80px;
+                    }
+
+                    .footer-small-icon {
+                        position: absolute;
+                        width: 30px; /* Smaller icon inside */
+                        height: 30px;
+                    }
+
+                    /* Right Side: Text and Buttons Container */
+                    .footer-text-container {
+                        flex: 1;
+                        display: flex;
+                        flex-direction: column;
+                        align-items: flex-start;
+                        margin-left: 2%; /* Controls spacing between icons and text */
+                    }
+
+                    /* Bold Title */
+                    .footer-bold-text {
+                        font-weight: bold;
+                        font-size: 16px;
+                        font-family: "Splunk Platform Sans", sans-serif;
+                    }
+
+                    /* Normal Text Line */
+                    .footer-normal-text {
+                        font-size: 14px;
+                        font-family: "Splunk PLatform Sans", sans-serif;
+                        color: white;
+                        margin-bottom: 10px; /* Space before buttons */
+                    }
+
+                    /* Buttons Row */
+                    .footer-buttons-row {
+                        display: flex;
+                        gap: 10px; /* Space between buttons */
+                        margin-top: 10px;
+                    }
+
+                    /* Button Styles */
+                    .footer-button-alt {
+                        border: 1px solid white;
+                        border-radius: 4px;
+                        padding: 8px 16px;
+                        font-size: 14px;
+                        font-family: "Splunk Platform Sans", sans-serif;
+                        cursor: pointer;
+                        background-color: transparent;
+                        color: white;
+                        display: flex;
+                        align-items: center;
+                        high: 32px;
+                    }
+                    .footer-button-alt:hover {
+                        text-decoration: none;
+                    }
+
+                    /* Right Button - Includes Icon */
+                    .footer-button-right {
+                        display: flex;
+                        align-items: center;
+                    }
+
+                    .footer-button-icon {
+                        width: 16px;
+                        height: 16px;
+                        margin-left: 8px; /* Space between text and icon */
+                    }
+                </style>
+
+                <div class="footer-panel-container">
+                    <!-- Left: Nested SVG Icons -->
+                    <div class="feedback">
+                        <div class="footer-icon-container">
+                            <img class="footer-big-icon" data-static-app-path="/static/app/audit_trail/img/ellipse.svg" alt="Big Icon"/>
+                            <img class="footer-small-icon" data-static-app-path="/static/app/audit_trail/img/link_icon.svg" alt="Small Icon"/>
+                        </div>
+
+                        <!-- Right: Text and Buttons Container -->
+                        <div class="footer-text-container">
+                            <div class="footer-bold-text">Send us some feedback!</div>
+                            <div class="footer-normal-text">Do you have a suggestion? Did you find a bug? Let us know!</div>
+
+                            <!-- Buttons Row -->
+                            <div class="footer-buttons-row">
+                                <a href="https://ideas.splunk.com/" target="_blank" class="footer-button-alt">Go to Splunk Ideas</a>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </html>
+        </panel>
+    </row>
+</dashboard>

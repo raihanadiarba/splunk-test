@@ -1,0 +1,397 @@
+features:
+- essential: true
+  name: ipc_broker
+  supports:
+  - FIPS140-3
+- essential: true
+  name: nascent
+  requirements:
+    flags:
+    - expected_values:
+      - "false"
+      - "0"
+      file: server
+      key: disabled
+      stanza: shclustering
+    - expected_values:
+      - "false"
+      - "0"
+      file: server
+      key: disabled
+      stanza: cluster_state_server
+  supports:
+  - FIPS140-3
+- essential: true
+  name: spotlight-collector
+  supports:
+  - FIPS140-3
+- name: agent-manager
+  supports:
+  - FIPS140-3
+- name: cmp-orchestrator
+  requirements:
+    flags:
+    - expected_values:
+      - "false"
+      - "0"
+      - ""
+      file: server
+      key: disabled
+      stanza: data_orchestrator
+  supports:
+  - FIPS140-3
+- name: edge-processor-config
+  supports:
+  - FIPS140-3
+- name: identity
+  supports:
+  - FIPS140-3
+- name: kvstore-pdl
+  requirements:
+    flags:
+    - expected_values:
+      - "false"
+      - "0"
+      - ""
+      file: server
+      key: disabled
+      stanza: postgres
+    - expected_values:
+      - "false"
+      - "0"
+      - ""
+      file: server
+      key: disabled
+      stanza: kvstore
+    - expected_values:
+      - cohosted
+      - local
+      file: server
+      key: defaultKVStoreType
+      stanza: kvstore
+  supports:
+  - FIPS140-3
+- name: metadata-catalog
+  supports:
+  - FIPS140-3
+- name: opamp-svc
+  supports:
+  - FIPS140-3
+- name: postgres
+  requirements:
+    flags:
+    - expected_values:
+      - "false"
+      - "0"
+      - ""
+      file: server
+      key: disabled
+      stanza: postgres
+  supports:
+  - FIPS140-3
+- name: spl2-preview
+  supports:
+  - FIPS140-3
+- name: topology
+  supports:
+  - FIPS140-3
+packages:
+- feature: ipc_broker
+  file: ipc_broker-v1.28.10-204d75e4-20261010t021211.tar.gz
+  name: ipc_broker
+  signature: |
+    -----BEGIN PGP SIGNATURE-----
+
+    iQIzBAABCgAdFiEEWMMzELejVMEnnbZpXvoB7bPNRCAFAmrJo90ACgkQXvoB7bPN
+    RCBfrA//RO7vIHYLGeQcyUIoEU2bhesA4MFO+2VIbeo1/yuPnGL9VazQWT4fN0v8
+    2YB7CkH8A+n0SoiRaxOH/0FbEsy/vmel5kpno3yyRR61K+b25eIN/4Q/q47CxBqb
+    DbpNY8vPK2AdIOaYk70WrPLs2C8CnxyYrvz1CVcgGwY1cr5g03dNYXN9TjNr22dN
+    Aaosa8EQCBNYPSQWKzNCbaC/A44fSYauK6yhon81goHsbbM4p+cUQsdjrSoXyEis
+    ZFiNEoBSzKITWNIsC+s23KxZq3rLKX/cV0Xkxe0Ickvothx6A3czIbf7QLeOOCr9
+    i9at0Rm5FB4+aUlmTJt6iR2vwQRTS9Hzbt+Ovw32iPthAiT87OYMPAwMwBhJFdeJ
+    n3ObbkPSoZqS+Pg0/WAYhxWnDyfZnokOb68ems2iI70rwfFElTImzaPdyoWJUGrG
+    Y4Ki4855/kQUuQz+TZ61ltvCYkLRHYFYMHhPq/uIQmOem75In9adrtcJrLKPtXaS
+    nSFOXKPCDDyV4kJ2j58iC9ze77ZEOVs9CCpphtr2vKJxAlkIE3bOKm4xea7FH6B+
+    JJ2bJAcHAG4r16yY1foN3M9ez14JxqZCHvfRvO8lZxDBS4LuWg7NwVX3g4zhsFYK
+    fX1dK1SpG6PFNcSll2SUWNnwImz9Dj4ETzYbj1cBnJuEzoMNpig=
+    =w8HJ
+    -----END PGP SIGNATURE-----
+  version:
+    id: 204d75e4-20261010t021211
+    semver: v1.28.10
+- feature: nascent
+  file: nascent-v1.30.14-151b6bf3-20261010t084911.tar.gz
+  name: nascent
+  signature: |
+    -----BEGIN PGP SIGNATURE-----
+
+    iQIzBAABCgAdFiEEWMMzELejVMEnnbZpXvoB7bPNRCAFAmrKBAwACgkQXvoB7bPN
+    RCBumQ/+LyqwGTVzg144puDPwpWQ0v96kUSF2JL0BwL/8nuVTMSHfbqhoWiiBm2l
+    8KstgFuGjYG581hLra5n+azFV1DfKiikLPUnV25oqH4GxFXMcOt2KVVyFXQ5xk7h
+    Fft0sMCIId8SsAogCa60JQuV7UPZ01gN8xZBWvLHEESZNZCrAd1eRAbhDsB36Spq
+    L1bogJnSox3VatOmPal+tq1pENLvCW46qHHY6lrP7k9I+pR3rzQZMJhuBjZu7UqJ
+    2+kBzyIAwuaU0ha/daaSx6nIwuu89nuAjWFjJspiS4mKOhHsjm74HGj3cRLPX3iH
+    q3iwqIG+yHB4IS/obX9QTw4xwxoC56sIigmz0Z+VTSM6wz7UbibfYyrsJbGjedxs
+    zZq0qpZgLvBy0EY6YXdvHCgMqigQBolXPZY0g4bI/9EcKJbZDqKx5acFWRwbE7Gw
+    hm6kqLhf3qhnqaFI7/MKhptLNxLs1s43Jg+/rWJWu0MWomv6IXFi1WbFLI/Si45i
+    d+DedqUFEIK3HAIRHHTuT2RPit9JE+HMHvAEof7BQ8G0/VbK0TQeXWcC/VjHKiOF
+    5Ed0UAWO4TEhSP6LoAtyQHK3YyNbXJkXT9bhUCWxTSZ5g0GB0Ba+SufyjW+/1SrD
+    7bL0Zlv7GVx6dsw86FhQ4w3mhA1fVW/dJ2VdMPDftB+4XMUoEHA=
+    =VdxM
+    -----END PGP SIGNATURE-----
+  version:
+    id: 151b6bf3-20261010t084911
+    semver: v1.30.14
+- feature: spotlight-collector
+  file: spotlight-collector-v1.22.3-a5303096-20261009t101348.tar.gz
+  name: spotlight-collector
+  signature: |
+    -----BEGIN PGP SIGNATURE-----
+
+    iQIzBAABCgAdFiEEWMMzELejVMEnnbZpXvoB7bPNRCAFAmrIyXAACgkQXvoB7bPN
+    RCDJuBAArzyhJZHhbaspUCc+6ApKv9W8NqqxLNY9vWlGE+NG1l6cMqoFZ0O/+swX
+    1Odofkex7R5IlNzpHAh3G5JjC0jDowrY3/TQ3cXvQJv9xt/mQejHaUS13I3IEYX/
+    32cLGWfI6UV79L5ReLeYAm4mVpFIfaARNfuJlG0yZbzev6vz+8/dSmemsW3quyze
+    mw+/9G6TJACr7XUeGewlz6i53BfPcIcDmjXSHMVyA9Z+ty/eOC7mAGq3X6T3TzC1
+    mg77m9sZXAytdpAHV2uMmqrfXy7VjezdjSPRak1Pdz+Fzl/G4iBAmXr1UetPT68y
+    WnZD0tOJWcPBInNmGJgr6+1DT2LDKAM4v//1blflY11LZhSSndiJrqw3vSTrzoXP
+    afbuNQFLPJdagG9GUYtq99TLqtqFl4paCdTPEKltqTB0AXAvVS/MiqB9twmi/hdj
+    AkIdrhnMYY6JrCqQwYMu6bSqDG0V1FZaQuWm/hRO3k+z3TUXfdUZ/oxx9ChLozq7
+    lWeU/2tTd/SDE1eZdqLSkf35vG60e59Slnu7fOKxlHkDb6uFo+ntYlPe7K9xic+v
+    5BurpvS4GvRc9SHNcj2YWjr9p8d7h3baUyprzpCohpM+RUCZ2hAcGloLWNuaAc0m
+    KbO548Q9uATtsDATxXW3WzXd6mGbzDjSlCqVlpEiBGKeaG0iNkQ=
+    =HVXk
+    -----END PGP SIGNATURE-----
+  version:
+    id: a5303096-20261009t101348
+    semver: v1.22.3
+- feature: agent-manager
+  file: agent-manager-1.6.1+39974974.20260813t145425Z.88768285.tar.gz
+  name: agent-manager
+  signature: |
+    -----BEGIN PGP SIGNATURE-----
+
+    iQIzBAABCgAdFiEEWMMzELejVMEnnbZpXvoB7bPNRCAFAmp93JgACgkQXvoB7bPN
+    RCAl+A/+KuG6PlSKUxR1qyOZTSfBQYoWofTrB3CxJ0eJcfILtE4yjE7y13/OQKkT
+    qJwe1T8GZKggSFQQxZyylNZKu2b/kJqSfDB/fWwBLnh/RMm90WR5ApL/QVGEq+tM
+    OmCCAGl2BkiJG0x8f4XMU52SjzWKBctEWzfihodGWov18rJ6BVnZzz0QZ4/A7tJ9
+    oVznGUsJn6DdDN7EHrvRiUeV+EV2YFnI7xS0hnOZJ/+ZKpgZSh/PX1LNOriRv9aQ
+    kXsrcV/nGRrDL736LssXN1E1W71vt5BpZPlgDeMoZ49fFe6NwKq6dj87fpBrRHEN
+    xH00hxwLmFnb+6DnrA72q8gPfm2w6xev2n4BqJMFg7xthSOHlITZRJ/LXwkUZvpP
+    K2iKf9g59AB/vDkBjz43OMu8CgDHHN70o6JT4RPR2BvXKrDLAkarg9CjilXlMGeb
+    Roc5SZ8dMGGqyk11ouHrE+7qAcCGkOsOM2yw4e6cToaaKDlaPEMkYAWiYNy68c4Z
+    Jg8Zo1yUip8oKEOvwZF8oei8TcnQ15U6lrzRwZIm/OTCfWF5zg9YVf2jo522moJh
+    su5Ghcv0Me6iJcDaPhPhIuZBBIFoKWsHc1LtIKoL46zB1wHlqdlzliw2+c5S2aMS
+    vZoDzxoY/UXuLTIph2KDRPp0XMSPEKst0JjSMDP1yEFwdjroLW4=
+    =BokX
+    -----END PGP SIGNATURE-----
+  version:
+    id: 39974974.20260813t145425Z.88768285
+    semver: 1.6.1
+- feature: cmp-orchestrator
+  file: cmp-orchestrator-1.1439.13+312112ab-20261009t095422.tar.gz
+  name: cmp-orchestrator
+  signature: |
+    -----BEGIN PGP SIGNATURE-----
+
+    iQIzBAABCgAdFiEEWMMzELejVMEnnbZpXvoB7bPNRCAFAmrIuhgACgkQXvoB7bPN
+    RCC66RAAnZMwYBMFcdPwIGwW5d2DKPbuPOp7JWgw+23JxMb8Z5h8MWbJzYFPbMRl
+    Kfg4H0RLMiJ9UoFw2h+Atcuu0PdbOiuExxhahwg1xpUYNzXQmZBHhe0l2FMliKav
+    drDKV2looDsGKLbkgVVcFSxdYmJgfbdXxSoNM0j403BQ6SMOhsYbxFdLX01xHePC
+    uivKc76aSQc06GxxkQfTN3qjAmkgw53betjIj9sLDa2Gxa6Aaz2ja8RdmPbMx3LJ
+    JLyxAQ6RFo5KN5ReaffAekE0flse3J43SCdF5PX9qnzX/5edoOa6451yXt41UGHa
+    +iWGsjymI93GGYmrQjo6e7JxUJ0y0PqnKTw4ZHJCcEgt6+NlVQoB7zDfpMjvlhfr
+    32YgutKXvMjLArfBKi6W4/7PdwtxAzPlzEgtw6Jhpe3b+WxN277DTQQVnFsJOEOH
+    z5sc1ZUliu+C3iF51S+GkUpqClt+3clSlgckHe/PacIWL5LoqN6xZ9ibINVS9uwt
+    nxeVXUJw5CXMicTlOi+mzcm7Fc020igZv1X436prIIldv8Dy6lfZE/9zRMot3tf1
+    iJnHS8s7qWffhPQl4mKu4BEmr22XibCofcC1GJ8dggWFB4szq+RcBkO20mg3ncga
+    RZ+g3GSYZqAAbKDmUVeWi+MZu+UdxEyT0caFGwKaYArVlSBKF+8=
+    =vPho
+    -----END PGP SIGNATURE-----
+  version:
+    id: 312112ab-20261009t095422
+    semver: 1.1439.13
+- feature: edge-processor-config
+  file: edge-processor-config-v1.7.2-5b01ac77-20260911t011822.tar.gz
+  name: edge-processor-config
+  signature: |
+    -----BEGIN PGP SIGNATURE-----
+
+    iQIzBAABCgAdFiEEWMMzELejVMEnnbZpXvoB7bPNRCAFAmqjX5wACgkQXvoB7bPN
+    RCCIZxAAzsXzydJ/beTKk08zaNsITn5THqPvVVW1bgLi1QoXbo75fLvXaItP/efb
+    NqabIDY/eIHjwJKU6fRoxiOApczZC1/hgfu1xApmgDzqJ/LueYw9Agz02E3WmfHw
+    bFGGYDiHhJZ8YcL3mtrNTM+LpLdeoV0HKJEQSuzUdfl15JMT67Z9IfBWLl2WH58/
+    aZsmFB11dN+75HJc8nftseHVv542KKh8CR99iU5JWaAyaLAixPQPLbWqoyOILA3c
+    jPbz7Z3rNKtAJXAlz7v+QDW0w8c+j0dBjTesAHX3uTT6ngNu7kdUmsYtAR+SiKvF
+    QKy/D5mZXFWiENXRCaJEXkCsRSRRaAzhksj9S547Iq/9H2m7qu41NjcdId7i2LAG
+    keLEtPqoYoNeJ26A0/PwUsv6l4avitGpbuXNnJ0pLJOGKsnEXc8eduvEMTt7GUs5
+    5epHyAGjsLk1ld6r6P+eL4VTT62SWygfkrikUjIt4lh86xpZqaKoCxmuhEJ7IHMh
+    ud0z91asXGqYHSVOtFBiYF7na2884MNnJ8lW2uyRKa3zR2Z5Vhb9voZ0VmJXcFfQ
+    aDgkHvgDd/picWx9eTKdVlHmwMnCU6tXMJk0LFCqfd9bD+8rnv/rNu+DYR7P1VLJ
+    daZnmNtLu98Ilta88iQStATfTahmnxrRtu8+990V1GmTJLHM+zk=
+    =h59I
+    -----END PGP SIGNATURE-----
+  version:
+    id: 5b01ac77-20260911t011822
+    semver: v1.7.2
+- feature: identity
+  file: identity-1.8.0+7b1558a-20260602.tar.gz
+  name: identity
+  signature: |
+    -----BEGIN PGP SIGNATURE-----
+
+    iQIzBAABCgAdFiEEWMMzELejVMEnnbZpXvoB7bPNRCAFAmoeymUACgkQXvoB7bPN
+    RCCj0g/+J+hKP0Kw13s5lrLpDk8y+zuyz2oGvIhBQJB3B9pnQxpKVSCt4kHLGut9
+    rch+hxqSFVRQkOKBa5LctPAMdQiW/Yhdb3NyIbbWz5pYD2QoXPyqE+S1PpCDVQTN
+    QXHzezWoItDtnZZfo2YvwGh6dWgqKTCpfoWoUuaywg9K6quWJHbpHvcIoJJhHJqA
+    hI2j72+7BAkM8JTmXjPFmvp4ofjVzpqf417+T7wUotcjWrwwzvLe73ZPP5nUgFkB
+    OKYCw8ZT47MfGkgqwlelt1wQOHOFutZ/+6znkDr0Qx+KXpvYtB/6PacO2o0peuMv
+    FoAoKxLva2kXb6rKNkFetMPWhINRknF9iH9sCwcpaCl9EWa1Km0UBUPOj/sbl2eH
+    UZcX+89nmYO7fUdX3LcdyhP06zJpPF1PoZIoYvKNEJRkpuMMfG0NNlIOPBhRi2si
+    Kekx+epcUT4X10ckyeRugG4WEFVSq8b9RKcA6AFU9cxYQWXl/zwjWCxNCbDYH+yo
+    slpdXFmN+wWAuMmsnFRCGmMChPMw7sF9YKPrO5G7A+ICB32/2ZuW78C4O5+Zc2pd
+    hm0s7GOINEc6AMFoP4cszqMCAgIhHRNkDWKKG/jVW4rtzl8Xvn5t4xjvETNxJca9
+    HLjzv0yEJxkqSnldlXALAol7RsDhw2fn4PFtq4nguGzRUMx0gQU=
+    =73oM
+    -----END PGP SIGNATURE-----
+  version:
+    id: 1.8.0+7b1558a-20260602
+    semver: 1.8.0
+- feature: kvstore-pdl
+  file: kvstore-pdl-v0.0.1-31303f9d-20260918t123156.tar.gz
+  name: kvstore-pdl
+  signature: |
+    -----BEGIN PGP SIGNATURE-----
+
+    iQIzBAABCgAdFiEEWMMzELejVMEnnbZpXvoB7bPNRCAFAmqtMc8ACgkQXvoB7bPN
+    RCDoJBAAk4YQzrMtxVxWpuxtS/mdNrXAMRtjV6NtpqTmdfkI1aLuDCRaAwhjDdjY
+    HzvfXMlUj/6juiRyyhgLuqucIoAH1GU3pEQAlFiVx6bQ2wYqzOk7mNV0WFZ6dZZx
+    TwpNqwz8TsyCjdC6lAsFsPDRwfvAXpedrmJAEgy5Gcyu4sKPM2tNO/AyVWxyplP5
+    q8RPGNMPcNHyLfCqqo5OnXTVn9sSHSjn/zNybC3SisZaB3YFafJxWV7ybH/8QhS8
+    U40hQgS+b4/9BL9ZIj5H0aipXjE2BPAr5YNpPP8m+6vBshskd7bmmYO6J2qbhQPr
+    JtoLMaAkO6AgdkxYwcsm8fw/KilBWcUoxaENlL1+7C2mVygjpDF3c2h/m62J+kc7
+    NALuO28wWrdls3f7dicHR2KIQ0+Rg2tUU/PWC8I5p1dIMYNcoHY0pM3w7x/Hb84o
+    fQbnGA5FdgOk4XYWST1ZftoStSeiHJ6rkDQx53eq+abPE6SqN+03dAnBS8SXLtwH
+    qFvnX0WZ2tTr8/aK3GSs/8IGj3fDqX6NMlj/2b+uwkdT+1F0nO8k1HvvfTm5Fv7Z
+    +AR+3FnEHRlx0tCIot6mDkYRdOtxlB/aiH+o79sNuf+3cnr37epSQYfGoSBwUiXr
+    IUUlTs5AUtDHgpXv0l6SkwD4zuN/3cQ67FSfOOaItpnOUp+CnxE=
+    =Fyy2
+    -----END PGP SIGNATURE-----
+  version:
+    id: 31303f9d-20260918t123156
+    semver: v0.0.1
+- feature: metadata-catalog
+  file: metadata-catalog-1.400.0+9b9347a5-20260915t210841.tar.gz
+  name: metadata-catalog
+  signature: |
+    -----BEGIN PGP SIGNATURE-----
+
+    iQIzBAABCgAdFiEEWMMzELejVMEnnbZpXvoB7bPNRCAFAmqptFgACgkQXvoB7bPN
+    RCAHvw/8ChgVE8do5jo12LEbYcwtRTSPhAcmi85ZpGrYwomjDauJ+iwSjlcjkqHO
+    wigix6dCXEwRD1YariGJ4AzgU2CGlqNOg91CnmRC5lW9mfJS7HBRi1LGpWY8Zx1m
+    5uASTH0lYLzbszoUodR2qIjfMSsgrwEu8cgHcSZF7VywVd3uRe7i9Amqktd5TuOw
+    mNOqHIBEm6O0Nip09x5sIZG/cRz5SJvlKTaKmd0hBYTQ38HCQWMtlcIjqX2FUBx/
+    zVm/UJDB0nqRiyPSD9adF6KYRBPRP6YFW+95mHsRscgQXmjG1MOk7JH362ySXCjp
+    y9JAyABL2Jzeic7BIDghMJe5Wcm47VM5X9lbAm+rRJym0CvpHhP0axCTmT9t9Oxn
+    dSu6BrHweG2T0lrWIelhLB8yiLblXL/zsA/FgyYvNEo3mQYJeNunBqK9ohaMtIMd
+    7NmihNVvYJOwWdDwtvIBeJqUOEShAem0LABGQ8k9L3oLMzuH3+vCb85J0QUluAsb
+    q8RTjplw0HcNvwPCFqJkC1ZDlZC12AK2z8zLvltq0G+WwAGrtDcIuwHDlxzsZBc7
+    jDgHEegv/2L6Hr7w8qqP50qGglPCnVArNnD5MKUWwBrk/7cEo+JHMBGM12tcH/13
+    YMrQvC0BZvgF/JLoECXWT9Jv3q0XN0DyHa1czrPXWCFIQQx6k8M=
+    =nBzk
+    -----END PGP SIGNATURE-----
+  version:
+    id: 9b9347a5-20260915t210841
+    semver: 1.400.0
+- feature: opamp-svc
+  file: opamp-svc-v1.97.2-4008ddc0-20261005t103945.tar.gz
+  name: opamp-svc
+  signature: |
+    -----BEGIN PGP SIGNATURE-----
+
+    iQIzBAABCgAdFiEEWMMzELejVMEnnbZpXvoB7bPNRCAFAmrDf0AACgkQXvoB7bPN
+    RCBIwxAAyDb4zUKpFrGpekT8H+aSC+dkGFSnR2ZmV/6K4VOcCT3wWOENiDIXrJRb
+    UFCpERg5omeUEWAQf+ruWJZIeZX8CtNm1fTuBw4+iHls29q3oPryyUnftsBt90Yl
+    nqd+yBN+2sAk8paJ1JGj6xyz4MlrHJv2XCzgvL7KDH8MXSws/8d7/geoCAZpxZo+
+    cI2Crj0iceyxenz5Tva2piQTi9F457yCqHYysci50VZzQDWuePeHgggEOgO8AQtV
+    3yOrFxFqLR/5854lET0QwZp3kHGvOthmP6HNmUX7IM+gMPRKzmi9XAZnCHbzqmF2
+    jzNMqep9bnqD4Pp1syK3kA9yw0GzCUOFP8RkJ3Yk4aZPvDNd8vZ+GGS9N+9Joj0n
+    GTiqURP0dlO4rDuzCJgDS6fuQy2a+zL+9tnliuBYm0CJb6qCZ3lkGUprt6LcB/LM
+    oQ0BBuvaT0j6SVIEEZfUWB6RMY2upC+G/poj5VuOGwRvovwZUYchcf8UWtOvyBZF
+    tho3Uy8KIQnvSNBrmtaTC3CY/K0nThFIJEae2KsvWnNzYs+wmbtHrSudyY6IKzz8
+    yH2T9cfOKEXEjjtcZRZYsg9RHb0YJoEq5gWo5Ibjz7We4Brbd3dO5fQzz1Vl0kIC
+    FfNrJYXrxbL1jVS6HZa/BeFQ4uResFtym9lWb4cCt6odQs0cj3Y=
+    =jRPm
+    -----END PGP SIGNATURE-----
+  version:
+    id: 4008ddc0-20261005t103945
+    semver: v1.97.2
+- feature: postgres
+  file: postgres-1.1.2-c9e88261-20260918t130751.tar.gz
+  name: postgres
+  signature: |
+    -----BEGIN PGP SIGNATURE-----
+
+    iQIzBAABCgAdFiEEWMMzELejVMEnnbZpXvoB7bPNRCAFAmqtPT4ACgkQXvoB7bPN
+    RCBQChAAw7HG20zfZqkDrnX+37EG0Q+VOd05zlQDluy0j0hLt1a3UE5prOdAsICh
+    xchxfYsbAx55eouQ1fhU+xKg3/3mEZxEMo+XZKESeXdGWvDjSpOr6cdZORRlGQBw
+    3xQZx3HAu6MWL2cRaPqwKqHVyvT6OiazlDcad88WcnrUKzOh4PZdsOj+wvnHCCzx
+    fF4t8oJJvyXO3MdZAoPywPbAiAKQjKh97LpneP3zasejnXzCOwTDwGK0D+uw10WH
+    HhVqMUzkRsoQ2JXmpvPWeHxRUVviAhM/XJMzzZVg48x3NQ3/72+V0yYMyZOod9zW
+    L+BhP8j+sqfrv1ZTA6ih3j+rFxmsC011TNoFk8gBpsuk3opW7HiULHqkEmL4brJK
+    W7he3YpYwJ/ZbpA6xyrpg6NE9Jl99qPiOMOs7maPzG34xLwak2dJCjDk7vbgPPql
+    UL6wDiOZ7P296XypQqlDTorqRD8s1Y376bnypduJH55z6JJUX3e9VV7TOdQoD8p5
+    dStQgHnYODWQ3njNA9hMWVv/EELcBkTVGjHrOCYEZAdg4mAnQ4/JKiPCoQ2qiU8h
+    rVrGHlW1ygq2GMX/P3tqNYFnJYUNDGcP97TYx7fYPbXKYmubIC6G19yw3xXZbXmG
+    RgKSxzQp0d/lI1c2Us1AjqZ/HLBWMqaUgkU/bfR3Udv2XjhXNkM=
+    =hfvW
+    -----END PGP SIGNATURE-----
+  version:
+    id: c9e88261-20260918t130751
+    semver: 1.1.2
+- feature: spl2-preview
+  file: spl2-preview-v1.1.1-7aaf7a03-20260825t172613.tar.gz
+  name: spl2-preview
+  signature: |
+    -----BEGIN PGP SIGNATURE-----
+
+    iQIzBAABCgAdFiEEWMMzELejVMEnnbZpXvoB7bPNRCAFAmqN0tgACgkQXvoB7bPN
+    RCB91Q//emGF3XWkiS5OkI7DWWpHb735+Yl4L92/9aQhMF+sQWc10E2tGj7PmbEd
+    Vy55QbCOqjMEQYAJFx3CcFJD+I0Q9AsyELdG5PQ3LLS0BkLUN2Se1PJwl903s1Uf
+    /QEzMqKMO/iTSz94ZA9Oh8PBV8q0vZIAmA1Rr3g1ZgWRhcdSabNWbtPH0Hg3xwNc
+    aaRRDhPBI+4dwHWPW/7fXQF76v9pWnZU/0bkaZzrZLget8EmvgkgyCXH+iK8js97
+    ebCNjgO+iLxXIXTZaOfROqlwUYWV7CZbXUAWgNQf/K9+255vZKAjJ6YW8fjTKVNk
+    fbFVUM1jjAMN72KFQvKofRSEzeDBrtKmglgBf2GlLzTak46WiiiQEg0S7vW+bTmu
+    MdmVSNxHuezvuI8dlSIdGPtGwXfwuyJqPeDlfNMG8yvIgGaDsu0qsOIXEMxpT/kg
+    V4OVhnuX8fxA98L//zzWWtm7e8FJM2oujxDE/sV/SAbVpftEcKcG1XCPCMy3zgaP
+    tTNIDy77I43melSghY2rYmhIonEwKT2KIy7tPTpZ+1UFCXEue1fxDQbPZF/3jqjC
+    uXTFx/agII6EestU9JHwZFrzfn8oS3yDVeKnN573IOlw7pe1+XbXEki6nqQj0lb2
+    pPI1J7VHYUXT5cMGCRG2GXa/Aqg6DZMBezgIlvlWOJNTagV0wz4=
+    =32XZ
+    -----END PGP SIGNATURE-----
+  version:
+    id: 7aaf7a03-20260825t172613
+    semver: v1.1.1
+- feature: topology
+  file: topology-v1.4.9-89c25b8f-20260806t091324.tar.gz
+  name: topology
+  signature: |
+    -----BEGIN PGP SIGNATURE-----
+
+    iQIzBAABCgAdFiEEWMMzELejVMEnnbZpXvoB7bPNRCAFAmp0Vu4ACgkQXvoB7bPN
+    RCCCKA//Riq1ZLOyGg+GtcVTPNs73EK749HawUMgt7GAUS7kqUdi4GIpBtt93tnH
+    jLkIqVxLKAppuABq4Gu2q4wWPKBbwR0V5lWoksJgDgbsFWsMIWepK+71lxNYOc+H
+    asEVAMceE7/TMc9FyNMehV+EvP1EdK8oXhoYiIszW4u4g49MHgiEKeZQznFgDb4F
+    lvSC97jTFrz5oY/EOtXBh/4mTK9FY0CvUy3/L3IfHH7Sv9H0K4TeyR8wuKgOOHyW
+    ehnVctwL8an+9pAh+qBUa9KxiGvU4Ss+mZbs9WbOGV+S1+UdV6WH7KmzYVIMH8R7
+    Zjkg/WTIeAU21nwq6l5O3eWxJzLvKzIDM/hseN+q1mEH0QGkNrhqfVwoZrZt9lx/
+    PYqpAN+C3Pqc0PjINUVCY16h1TFbqIV2PbUfqWqDlRrMtaFJZbJkuc5fLHvAm3gu
+    O+jsZS0J1em2GZuQ/2Eld7zoquM25yyxwbzAsO/8dENwr8Nzo8YJxtZosjA2yYDb
+    89PqZmrzEkf2I0J5Uewkf20PTCnH8FXnYUQGyocAdryD/tYXzJvlG8oA+w1HSKr1
+    8cTGcd74RvziNT5N4HqHERE/sqWyuNFbgmvzwe+yoeMDm1t58/n1hBmS5AP0P1oO
+    KveeVAEfzX4mSeFM8DurfoMqrTkTFi3k8Un9ya+I5nfdS7xjsIY=
+    =xEt6
+    -----END PGP SIGNATURE-----
+  version:
+    id: 89c25b8f-20260806t091324
+    semver: v1.4.9

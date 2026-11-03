@@ -1,0 +1,136 @@
+"""
+Module with defined commands
+"""
+
+from agent.commands.executor import Executor
+from agent.commands.command_base import CommandBase, CommandResult, DelayCommandResult
+from agent.commands.rest_command_base import RestCommandBase
+from agent.commands.remote_rest_command_base import RemoteRestCommandBase
+from agent.commands.dmc_rest_command_base import DMCRestCommandBase
+from agent.commands.ssh_command_base import SSHCommandBase
+from agent.commands.ssh_service import SSHService, SSHClient, SSHResult
+
+from agent.commands.uname_command import UnameCommand
+from agent.commands.get_splunk_version_command import GetSplunkVersionCommand
+from agent.commands.start_splunk_command import StartSplunkCommand
+from agent.commands.get_splunk_management_port_command \
+    import GetSplunkManagementPortCommand
+from agent.commands.verify_splunk_management_uri_command \
+    import VerifySplunkManagementUriCommand
+from agent.commands.enable_distributed_management_command  \
+    import EnableDistributedManagementCommand
+from agent.commands.deploy_conf_command import DeployConfCommand
+from agent.commands.reload_ds_conf_command \
+    import ReloadDSConfCommand
+from agent.commands.reload_master_apps_conf_command \
+    import ReloadMasterAppsConfCommand
+from agent.commands.reload_sh_cluster_conf_command \
+    import ReloadShClusterConfCommand
+from agent.commands.setup_deployment_conf_client_command \
+    import SetupDeploymentConfClientCommand
+from agent.commands.stop_splunk_command import StopSplunkCommand
+from agent.commands.restart_splunk_command import RestartSplunkCommand
+from agent.commands.splunk_offline_command import SplunkOfflineCommand
+from agent.commands.verify_connection_command \
+    import VerifyConnectionCommand
+from agent.commands.verify_deployment_client_command \
+    import VerifyDeploymentClientCommand
+from agent.commands.set_instance_id_command import SetInstanceIdCommand
+from agent.commands.change_user_password_command \
+    import ChangeUserPasswordCommand
+from agent.commands.update_group_command import UpdateGroupCommand
+from agent.commands.get_all_distributed_groups_command import GetAllDistributedGroupsCommand
+from agent.commands.stage_sh_deployer_command import StageSHDeployerCommand
+from agent.commands.verify_peers_added_command import VerifyPeersAdded
+from agent.commands.update_conf_properties_command import UpdateConfProperties
+from agent.commands.run_saved_search_command import RunSavedSearchCommands
+from agent.commands.verify_instance_id_command import VerifyInstanceIdCommand
+from agent.commands.discover_topology_command import DiscoverTopologyCommand
+from agent.commands.set_general_passkey_command import SetGeneralPassKeyCommand
+from agent.commands.get_cluster_config_command import GetClusterConfigCommand
+from agent.commands.remove_client_from_deployment_server_command import RemoveClientFromDeploymentServerCommand
+from agent.commands.update_dmc_configuration_command import UpdateDMCConfigurationCommand
+from agent.commands.update_dmc_app_configuration_command import UpdateDMCAppConfigurationCommand
+from agent.commands.initialize_dmc_server_command import InitializeDMCServerCommand
+from agent.commands.update_stanza_command import UpdateStanzaCommand
+from agent.commands.get_deployment_server_settings_command import GetDeploymentServerSettingsCommand
+from agent.commands.restore_repository_changes_command import RestoreRepositoryChangesCommand
+from agent.commands.restore_disk_changes_command import RestoreDiskChangesCommand
+from agent.commands.get_deployment_server_migration_objects_command import GetDeploymentServerMigrationObjectsCommand
+from agent.commands.set_deployment_server_passkey_command import SetDeploymentServerPassKeyCommand
+from agent.commands.set_deployment_server_require_authentication_command import \
+    SetDeploymentServerRequireAuthenticationCommand
+from agent.commands.sync_dc_command import SyncDeploymentClientCommand
+from agent.commands.discover_external_apps_command import DiscoverExternalAppsCommand
+from agent.commands.appinspect_validate_command import AppInspectValidateCommand
+from agent.commands.validate_app_compatibility_command import ValidateAppCompatibilityCommand
+from agent.commands.version_check_command import VersionCheckCommand
+from agent.commands.symlink_check_command import SymlinkCheckCommand
+from agent.commands.post_notification_command import PostNotificationCommand
+from agent.commands.wait_for_notifications_command import WaitForNotificationsCommand
+
+assert Executor
+assert CommandBase
+assert RemoteRestCommandBase
+assert RestCommandBase
+assert CommandResult
+assert SSHCommandBase
+assert SSHService
+assert SSHClient
+assert SSHResult
+
+assert UnameCommand
+assert GetSplunkVersionCommand
+assert StartSplunkCommand
+assert GetSplunkManagementPortCommand
+assert VerifySplunkManagementUriCommand
+assert EnableDistributedManagementCommand
+assert DeployConfCommand
+assert ReloadDSConfCommand
+assert ReloadMasterAppsConfCommand
+assert ReloadShClusterConfCommand
+assert SetupDeploymentConfClientCommand
+assert GetClusterConfigCommand
+
+assert StopSplunkCommand
+assert RestartSplunkCommand
+
+assert SplunkOfflineCommand
+
+assert VerifyConnectionCommand
+assert ChangeUserPasswordCommand
+assert VerifyDeploymentClientCommand
+assert SetInstanceIdCommand
+
+assert UpdateGroupCommand
+assert GetAllDistributedGroupsCommand
+assert StageSHDeployerCommand
+assert VerifyPeersAdded
+assert UpdateConfProperties
+assert RunSavedSearchCommands
+assert VerifyInstanceIdCommand
+assert DiscoverTopologyCommand
+assert SetGeneralPassKeyCommand
+assert RemoveClientFromDeploymentServerCommand
+assert DMCRestCommandBase
+assert UpdateDMCConfigurationCommand
+assert UpdateDMCAppConfigurationCommand
+assert InitializeDMCServerCommand
+assert UpdateStanzaCommand
+assert DelayCommandResult
+assert GetDeploymentServerSettingsCommand
+assert RestoreRepositoryChangesCommand
+assert RestoreDiskChangesCommand
+assert GetDeploymentServerMigrationObjectsCommand
+assert SetDeploymentServerPassKeyCommand
+assert SetDeploymentServerRequireAuthenticationCommand
+assert SyncDeploymentClientCommand
+assert DiscoverExternalAppsCommand
+
+assert AppInspectValidateCommand
+assert ValidateAppCompatibilityCommand
+assert VersionCheckCommand
+assert SymlinkCheckCommand
+
+assert PostNotificationCommand
+assert WaitForNotificationsCommand

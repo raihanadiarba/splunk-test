@@ -1,0 +1,4 @@
+Bundled license information:
+
+@splunk/moment/index.js:
+  /*! For license information please see index.js.LICENSE.txt */
