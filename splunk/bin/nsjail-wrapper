@@ -1,0 +1,3 @@
+#!/bin/sh
+$SPLUNK_HOME/bin/nsjail --log $SPLUNK_HOME/var/log/nsjail/nsjail.log --config $SPLUNK_HOME/etc/auth/nsjail/splunk-nsjail.cfg -- "$@"
+

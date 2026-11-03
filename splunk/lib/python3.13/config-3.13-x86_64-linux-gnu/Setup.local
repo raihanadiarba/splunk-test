@@ -1,0 +1,12 @@
+*disabled*
+
+_curses
+_curses_panel
+_tkinter
+_lsprof
+grp
+syslog
+readline
+_dbm
+_gdbm
+_lzma
